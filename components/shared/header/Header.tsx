@@ -1,4 +1,5 @@
 import { ASSETS } from "@/constants/assets";
+import { useAuth } from "@/hooks/useAuth";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useState } from "react";
@@ -6,6 +7,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Button, Divider, Menu } from "react-native-paper";
 
 export default function Header() {
+  const { isAuthenticated, onLogout } = useAuth();
   const [showDrawer, setShowDrawer] = useState(false);
 
   const handleMenuPress = () => {
@@ -64,6 +66,13 @@ export default function Header() {
         >
           <Text style={styles.menuItemText}>For Parents</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.menuItem}
+          onPress={() => handleNavigation("/(profile)")}
+        >
+          <Text style={styles.menuItemText}>Profile</Text>
+        </TouchableOpacity>
       </View>
 
       <Divider style={styles.divider} />
@@ -102,14 +111,25 @@ export default function Header() {
 
       {/* Login Button */}
       <View style={styles.section}>
-        <Button
-          mode="contained"
-          onPress={handleLogin}
-          style={styles.loginButton}
-          labelStyle={styles.loginButtonText}
-        >
-          Login
-        </Button>
+        {isAuthenticated ? (
+          <Button
+            mode="contained"
+            onPress={onLogout}
+            className="!bg-red-600 !rounded-md py-1"
+            labelStyle={styles.loginButtonText}
+          >
+            Logout
+          </Button>
+        ) : (
+          <Button
+            mode="contained"
+            onPress={handleLogin}
+            style={styles.loginButton}
+            labelStyle={styles.loginButtonText}
+          >
+            Login
+          </Button>
+        )}
       </View>
     </View>
   );

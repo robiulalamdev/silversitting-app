@@ -1,9 +1,11 @@
 // route.tsx
 
+import { useAuth } from "@/hooks/useAuth";
 import { Stack } from "expo-router";
 import React from "react";
 
 const Route: React.FC = () => {
+  const { isAuthenticated } = useAuth();
   return (
     <Stack
       initialRouteName="index"
@@ -23,6 +25,14 @@ const Route: React.FC = () => {
           headerShown: false,
         }}
       />
+      <Stack.Protected guard={isAuthenticated}>
+        <Stack.Screen
+          name="(profile)"
+          options={{
+            headerShown: false,
+          }}
+        />
+      </Stack.Protected>
     </Stack>
   );
 };
