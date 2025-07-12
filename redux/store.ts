@@ -5,11 +5,13 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import { combineReducers } from "redux";
 import { persistReducer, persistStore } from "redux-persist";
 import { api } from "./api/api"; // Assuming you have an api defined
+import registerReducer from "./features/register/registerSlice";
 import userReducer from "./features/user/userSlice";
 
 // Reducers to persist
 const persistedReducers = combineReducers({
   user: userReducer,
+  register: registerReducer,
   [api.reducerPath]: api.reducer,
 });
 

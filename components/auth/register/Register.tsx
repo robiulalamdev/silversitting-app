@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useLocalSearchParams } from "expo-router";
+import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import {
   ActivityIndicator,
@@ -35,6 +36,8 @@ interface RegisterState {
 }
 
 export default function Register() {
+  const { role = "" } = useLocalSearchParams();
+
   const toast = useToast();
   const [registerState, setRegisterState] = useState<RegisterState>({
     step: 1,
@@ -65,6 +68,15 @@ export default function Register() {
       privacy: false,
     },
   });
+
+  useEffect(() => {
+    if (role === "childcarer" || role === "parents") {
+      setRegisterState({
+        step: 2,
+        role: role,
+      });
+    }
+  }, [role]);
 
   const password = watch("password");
 
