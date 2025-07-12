@@ -7,8 +7,7 @@ export const api = createApi({
   refetchOnFocus: true,
   refetchOnReconnect: true,
   baseQuery: fetchBaseQuery({
-    // baseUrl: "http://192.168.0.109:8000/api/v1",
-    baseUrl: "http://192.168.226.26:8000/api/v1",
+    baseUrl: "https://silversitting.eu/api",
     prepareHeaders: async (headers) => {
       const token = `Bearer ${await USER_CONFIG.GET_FROM_STORAGE(
         USER_CONFIG.TOKEN_NAME
@@ -19,6 +18,14 @@ export const api = createApi({
       return headers;
     },
   }),
-  tagTypes: ["users", "friends", "chats", "messages", "notifications"],
+  tagTypes: [
+    "User",
+    "Messages",
+    "Blogs",
+    "BlogDetails",
+    "Feedbacks",
+    "ContactUs",
+    "Users",
+  ],
   endpoints: () => ({}),
 });
