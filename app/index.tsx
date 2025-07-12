@@ -1,14 +1,20 @@
 import Banner from "@/components/home/banner/Banner";
+import HomeAbout from "@/components/home/HomeAbout";
+import Known from "@/components/home/Known";
 import Header from "@/components/shared/header/Header";
 import React from "react";
-import { SafeAreaView, StyleSheet } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 
 const HomeScreen = () => {
   return (
-    <SafeAreaView style={styles.container}>
+    <ScrollView style={styles.container}>
       <Header />
       <Banner />
-    </SafeAreaView>
+      <View className="py-8">
+        <Known />
+      </View>
+      <HomeAbout />
+    </ScrollView>
   );
 };
 

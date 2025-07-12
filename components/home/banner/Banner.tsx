@@ -156,10 +156,11 @@ export default function Banner() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     position: "relative",
     justifyContent: "center", // Center the card vertically
     alignItems: "center", // Center the card horizontally
+    height: 650,
+    maxHeight: 650,
   },
   background: {
     position: "absolute",
@@ -168,7 +169,8 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     width: "100%",
-    height: "100%",
+    height: 650,
+    maxHeight: 650,
   },
   card: {
     width: "90%", // Adjust width as needed

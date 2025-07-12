@@ -33,6 +33,27 @@ const Route: React.FC = () => {
           }}
         />
       </Stack.Protected>
+
+      <Stack.Screen
+        name="who-we-are/index"
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="blogs/index"
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="children-provider-faq/index"
+        options={{
+          headerShown: false,
+        }}
+      />
     </Stack>
   );
 };
