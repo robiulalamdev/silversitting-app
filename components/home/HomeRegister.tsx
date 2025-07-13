@@ -6,19 +6,19 @@ interface RegisterCardProps {
   iconSource: any; // Use 'any' for require() or specify ImageSourcePropType
   title: string;
   buttonText: string;
-  buttonRoute: string;
+  role: "parents" | "childcarer";
 }
 
 function RegisterCard({
   iconSource,
   title,
   buttonText,
-  buttonRoute,
+  role,
 }: RegisterCardProps) {
   const router = useRouter();
 
   const handleButtonPress = () => {
-    router.push(buttonRoute);
+    router.push({ pathname: "/(auth)/register", params: { role: role } });
   };
 
   return (
@@ -60,13 +60,13 @@ export default function HomeRegister() {
         iconSource={require("../../assets/images/home/register/register-childcare.png")} // Placeholder for childcare worker icon
         title="Register as a childcare worker"
         buttonText="Register now"
-        buttonRoute="/(auth)/register?role=childcarer" // Example route with role parameter
+        role="childcarer"
       />
       <RegisterCard
         iconSource={require("../../assets/images/home/register/register-parent.png")} // Placeholder for childcare worker icon
         title="Register as a parent"
         buttonText="Register now"
-        buttonRoute="/(auth)/register?role=parent" // Example route with role parameter
+        role="parents"
       />
     </View>
   );

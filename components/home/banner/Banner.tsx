@@ -1,3 +1,4 @@
+import { COLORS } from "@/constants/theme";
 import { MaterialIcons } from "@expo/vector-icons"; // Using for placeholder icons
 import { useRouter } from "expo-router";
 import { useState } from "react";
@@ -117,8 +118,8 @@ export default function Banner() {
                 style={styles.textInput}
                 outlineStyle={styles.inputOutline}
                 contentStyle={styles.inputContent}
-                textColor="#000000"
-                placeholderTextColor="#999999"
+                textColor="black"
+                placeholderTextColor="black"
               />
             </View>
 
@@ -240,12 +241,12 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   textInput: {
-    backgroundColor: "white",
+    backgroundColor: "transparent",
     fontSize: 16,
     height: 40, // Explicitly set height for TextInput root
   },
   inputOutline: {
-    borderColor: "#e5e7eb",
+    borderColor: COLORS.primary,
     borderWidth: 1,
     borderRadius: 8,
   },
