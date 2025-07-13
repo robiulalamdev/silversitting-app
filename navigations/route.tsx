@@ -56,6 +56,20 @@ const Route: React.FC = () => {
           headerShown: false,
         }}
       />
+
+      <Stack.Screen
+        name="child-care/index"
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="child-care/message/[id]"
+        options={{
+          headerShown: false,
+        }}
+      />
     </Stack>
   );
 };

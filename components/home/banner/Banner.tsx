@@ -40,7 +40,16 @@ export default function Banner() {
     });
   };
 
-  const handleFindNow = () => {};
+  const handleFindNow = () => {
+    if (careAddress) {
+      router.push({
+        pathname: "/child-care",
+        params: {
+          location: careAddress,
+        },
+      });
+    }
+  };
 
   const handleLearnMore = () => {};
 

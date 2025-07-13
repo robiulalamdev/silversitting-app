@@ -1,7 +1,8 @@
+import { IUser } from "@/lib/types/user.type";
 import { createSlice } from "@reduxjs/toolkit";
 
 interface IInitialState {
-  user: object | null;
+  user: IUser | null;
   registerPage: {
     step: number;
     heading: boolean;
@@ -20,11 +21,11 @@ const userSlice = createSlice({
   name: "user slice",
   initialState,
   reducers: {
-    setUser: (state, action) => {
+    setUser: (state, action: { payload: IUser }) => {
       state.user = action.payload;
     },
 
-    setStepControl: (state, action) => {
+    setStepControl: (state, action: { payload: string }) => {
       if (action.payload === "childcarer") {
         state.registerPage.step = 2;
         state.registerPage.heading = true;
