@@ -1,7 +1,10 @@
 "use client";
 
+import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "expo-router";
+import { useCallback, useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import LoginModal from "../common/modals/LoginModal";
 
 interface SearchResultCardProps {
   index: number;
@@ -19,6 +22,26 @@ interface SearchResultCardProps {
 
 export default function SearchResultCard({ item }: SearchResultCardProps) {
   const router = useRouter();
+  const { isAuthenticated } = useAuth();
+
+  const [showLogin, setShowLogin] = useState<boolean>(false);
+
+  const handleContact = useCallback(
+    (id: string) => {
+      if (!isAuthenticated) {
+        setShowLogin(true);
+        return;
+      }
+
+      if (id) {
+        router.push({
+          pathname: "/child-care/message/[id]",
+          params: { id: id },
+        });
+      }
+    },
+    [isAuthenticated, router]
+  );
 
   return (
     <View className="bg-white rounded-lg p-4 mb-4 border border-primary">
@@ -54,12 +77,7 @@ export default function SearchResultCard({ item }: SearchResultCardProps) {
 
       <View className="">
         <TouchableOpacity
-          onPress={() =>
-            router.push({
-              pathname: "/child-care/message/[id]",
-              params: { id: item?._id },
-            })
-          }
+          onPress={() => handleContact(item?._id)}
           className="bg-primary rounded-lg py-3 px-6 mx-auto mt-4"
         >
           <Text className="text-white text-base font-semibold">Contact</Text>
@@ -88,6 +106,8 @@ export default function SearchResultCard({ item }: SearchResultCardProps) {
           )}
         </View>
       </View>
+
+      <LoginModal visible={showLogin} setVisible={setShowLogin} />
     </View>
   );
 }

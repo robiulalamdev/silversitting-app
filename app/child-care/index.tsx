@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
-  Image,
   ScrollView,
   StyleSheet,
   Text,
@@ -413,13 +412,6 @@ export default function ChildCare() {
                 Search Again
               </Text>
             </TouchableOpacity>
-          </View>
-          <View className="items-center mt-8">
-            <Image
-              source={require("../../assets/images/child-care/child-login.png")}
-              className="max-w-[80%] mt-5 h-52"
-              resizeMode="contain"
-            />
           </View>
         </View>
       )}

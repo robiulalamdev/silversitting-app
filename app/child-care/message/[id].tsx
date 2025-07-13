@@ -1,14 +1,14 @@
+import ChattingScreen from "@/components/child-care/message/Chatting";
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
-import { Text, View } from "react-native";
 
 const MessageScreen = () => {
-  const { id } = useLocalSearchParams();
-  return (
-    <View>
-      <Text>ID: {id}</Text>
-    </View>
-  );
+  const params = useLocalSearchParams();
+  let id = params.id ?? "";
+  if (Array.isArray(id)) {
+    id = id[0] ?? "";
+  }
+  return <ChattingScreen receiverId={id} />;
 };
 
 export default MessageScreen;

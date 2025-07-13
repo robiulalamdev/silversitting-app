@@ -24,9 +24,12 @@ interface LoginFormData {
   password: string;
 }
 
-type IProps = {};
+type IProps = {
+  isPopup?: boolean;
+  onHide?: () => void;
+};
 
-export default function Login({}: IProps) {
+export default function Login({ isPopup = false, onHide = () => {} }: IProps) {
   const router = useRouter();
   const toast = useToast();
   const [errors, setErrors] = useState("");
@@ -79,7 +82,11 @@ export default function Login({}: IProps) {
 
       if (response.data?.accessToken) {
         toast.show("Login successful!", { type: "success" });
-        router.push("/");
+        if (isPopup) {
+          onHide();
+        } else {
+          router.back();
+        }
       } else if (response.error) {
         const errorMessage = response.error.data?.message;
 
@@ -194,7 +201,10 @@ export default function Login({}: IProps) {
 
       {/* Forgot Password Link */}
       <TouchableOpacity
-        onPress={() => router.push("/(auth)/forgot-password")}
+        onPress={() => {
+          router.push("/(auth)/forgot-password");
+          onHide();
+        }}
         className="mb-8"
       >
         <Text className="text-blue-500 text-base font-bold">
@@ -254,7 +264,12 @@ export default function Login({}: IProps) {
         <Text className="text-gray-700 text-base">
           New Here? Click here to{" "}
         </Text>
-        <TouchableOpacity onPress={() => router.push("/(auth)/register")}>
+        <TouchableOpacity
+          onPress={() => {
+            router.push("/(auth)/register");
+            onHide();
+          }}
+        >
           <Text className="text-purple-600 text-base font-medium">
             Register
           </Text>

@@ -5,6 +5,7 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import { combineReducers } from "redux";
 import { persistReducer, persistStore } from "redux-persist";
 import { api } from "./api/api"; // Assuming you have an api defined
+import chatReducer from "./features/chat/chatSlice";
 import childCareSearchReducer from "./features/childCareSearch/childCareSearchSlice";
 import registerReducer from "./features/register/registerSlice";
 import userReducer from "./features/user/userSlice";
@@ -14,6 +15,7 @@ const persistedReducers = combineReducers({
   user: userReducer,
   register: registerReducer,
   childCarerFilter: childCareSearchReducer,
+  chat: chatReducer,
   [api.reducerPath]: api.reducer,
 });
 
