@@ -19,20 +19,22 @@ const Route: React.FC = () => {
           headerShown: false,
         }}
       />
-      <Stack.Screen
-        name="(auth)"
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Protected guard={isAuthenticated}>
+
+      <Stack.Protected guard={!isAuthenticated}>
         <Stack.Screen
-          name="(profile)"
+          name="(auth)"
           options={{
             headerShown: false,
           }}
         />
       </Stack.Protected>
+
+      <Stack.Screen
+        name="(profile)"
+        options={{
+          headerShown: false,
+        }}
+      />
 
       <Stack.Screen
         name="who-we-are/index"
