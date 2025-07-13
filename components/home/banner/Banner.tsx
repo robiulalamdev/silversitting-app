@@ -1,5 +1,6 @@
 import { COLORS } from "@/constants/theme";
 import { MaterialIcons } from "@expo/vector-icons"; // Using for placeholder icons
+import { BlurView } from "expo-blur";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
@@ -64,7 +65,12 @@ export default function Banner() {
 
       {/* Content Card */}
 
-      <View style={styles.card}>
+      <BlurView
+        intensity={100}
+        tint="default"
+        style={styles.card}
+        className="border border-primary"
+      >
         {/* Title */}
         <Text style={styles.title}>Seniors take care of children</Text>
 
@@ -159,7 +165,7 @@ export default function Banner() {
             </TouchableOpacity>
           </>
         )}
-      </View>
+      </BlurView>
     </View>
   );
 }
@@ -216,11 +222,10 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 20,
     alignItems: "center",
-    borderWidth: 2, // Add border for selection
+    borderWidth: 1, // Add border for selection
     borderColor: "white", // Default transparent
   },
   selectedActionButton: {
-    borderColor: "#8b3888", // Purple border when selected
     backgroundColor: "white",
   },
   iconContainer: {
