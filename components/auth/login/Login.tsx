@@ -109,7 +109,7 @@ export default function Login({ isPopup = false, onHide = () => {} }: IProps) {
   return (
     <View className="flex-1 bg-white px-6 py-8 justify-center">
       {/* Title */}
-      <Text className="text-3xl font-bold text-purple-600 text-center mb-12">
+      <Text className="text-3xl font-bold text-primary text-center mb-12">
         Log in
       </Text>
 
@@ -226,7 +226,7 @@ export default function Login({ isPopup = false, onHide = () => {} }: IProps) {
               onPress={handleResendLink}
               disabled={sendingEmail}
             >
-              <Text className="text-purple-600 font-semibold">
+              <Text className="text-primary font-semibold">
                 {sendingEmail ? "Sending..." : "Resend Email"}
               </Text>
             </TouchableOpacity>
@@ -241,7 +241,7 @@ export default function Login({ isPopup = false, onHide = () => {} }: IProps) {
       {/* Login Button */}
       <TouchableRipple
         onPress={handleSubmit(onSubmit)}
-        className="bg-purple-600 rounded-lg h-14 justify-center items-center mb-8"
+        className="bg-primary rounded-lg h-14 justify-center items-center mb-8"
         disabled={isLoading}
         style={[styles.loginButton, isLoading && styles.loginButtonDisabled]}
       >
@@ -270,9 +270,7 @@ export default function Login({ isPopup = false, onHide = () => {} }: IProps) {
             onHide();
           }}
         >
-          <Text className="text-purple-600 text-base font-medium">
-            Register
-          </Text>
+          <Text className="text-primary text-base font-medium">Register</Text>
         </TouchableOpacity>
       </View>
     </View>
