@@ -343,7 +343,7 @@ export default function ChildCare() {
             <TouchableOpacity
               onPress={handleSearchFormSubmit}
               disabled={isLoading}
-              className={`bg-primary rounded-lg py-4 max-w-[150px] mx-auto w-full ${isLoading ? "opacity-50" : ""}`}
+              className={`bg-primary rounded-lg py-4 px-6 max-w-[140px] mx-auto w-full ${isLoading ? "opacity-50" : ""}`}
               style={styles.searchButton}
             >
               {isLoading ? (
@@ -360,18 +360,18 @@ export default function ChildCare() {
               )}
             </TouchableOpacity>
             {/* Info Bubble */}
-            <View className="absolute right-0 bottom-0 rounded-full rounded-br-none w-32 h-32 bg-primary justify-center items-center p-2">
-              <MaterialIcons
-                name="lightbulb-outline"
-                size={24}
-                color="white"
-                className="mb-1"
-              />
-              <Text className="text-white text-xs text-center">
-                If you do not make any restrictions in your search criteria, you
-                will be shown all registered supervisors nearby
-              </Text>
-            </View>
+          </View>
+          <View className="absolute right-0 bottom-0 rounded-full rounded-br-none max-w-[130px] w-fit h-fit bg-primary justify-center items-center p-4">
+            <MaterialIcons
+              name="lightbulb-outline"
+              size={20}
+              color="white"
+              className="mb-1"
+            />
+            <Text className="text-white text-[10px] text-center">
+              If you do not make any restrictions in your search criteria, you
+              will be shown all registered supervisors nearby
+            </Text>
           </View>
         </View>
       )}

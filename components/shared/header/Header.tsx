@@ -2,25 +2,44 @@ import { ASSETS } from "@/constants/assets";
 import { useAuth } from "@/hooks/useAuth";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { useState } from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React, { useRef, useState } from "react";
+import {
+  Animated,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { Button, Divider, Menu } from "react-native-paper";
 
 export default function Header() {
   const { isAuthenticated, onLogout } = useAuth();
   const [showDrawer, setShowDrawer] = useState(false);
-
-  const handleMenuPress = () => {
-    setShowDrawer(true);
-  };
-
-  const handleCloseDrawer = () => {
-    setShowDrawer(false);
-  };
+  const drawerAnim = useRef(new Animated.Value(300)).current;
 
   const router = useRouter();
   const [languageMenuVisible, setLanguageMenuVisible] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState("ENG");
+
+  const handleMenuPress = () => {
+    setShowDrawer(true);
+    Animated.timing(drawerAnim, {
+      toValue: 0,
+      duration: 300,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const handleCloseDrawer = () => {
+    Animated.timing(drawerAnim, {
+      toValue: 300,
+      duration: 300,
+      useNativeDriver: false,
+    }).start(() => {
+      setShowDrawer(false);
+    });
+  };
 
   const handleLanguageSelect = (language: string) => {
     setSelectedLanguage(language);
@@ -29,12 +48,12 @@ export default function Header() {
 
   const handleLogin = () => {
     router.push("/(auth)/login");
-    handleCloseDrawer?.();
+    handleCloseDrawer();
   };
 
   const handleNavigation = (route: any) => {
     router.push(route);
-    handleCloseDrawer?.();
+    handleCloseDrawer();
   };
 
   const DrawerContent = () => (
@@ -67,12 +86,14 @@ export default function Header() {
           <Text style={styles.menuItemText}>For Parents</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.menuItem}
-          onPress={() => handleNavigation("/(profile)")}
-        >
-          <Text style={styles.menuItemText}>Profile</Text>
-        </TouchableOpacity>
+        {isAuthenticated && (
+          <TouchableOpacity
+            style={styles.menuItem}
+            onPress={() => handleNavigation("/(profile)")}
+          >
+            <Text style={styles.menuItemText}>Profile</Text>
+          </TouchableOpacity>
+        )}
       </View>
 
       <Divider style={styles.divider} />
@@ -138,9 +159,8 @@ export default function Header() {
     <>
       {/* Header */}
       <View style={styles.header}>
-        {/* Left side - Menu and Logo */}
+        {/* Left side - Logo */}
         <View style={styles.leftSection}>
-          {/* Logo - You can replace this with your actual logo */}
           <View style={styles.logoContainer}>
             <Image
               source={ASSETS.Logo}
@@ -150,7 +170,7 @@ export default function Header() {
           </View>
         </View>
 
-        {/* Right side - could add additional items here */}
+        {/* Right side - Menu */}
         <View style={styles.rightSection}>
           <TouchableOpacity onPress={handleMenuPress}>
             <MaterialIcons name="menu" size={24} color="#8b3888" />
@@ -168,10 +188,12 @@ export default function Header() {
             activeOpacity={1}
           />
 
-          {/* Drawer */}
-          <View style={styles.drawer}>
+          {/* Animated Drawer */}
+          <Animated.View
+            style={[styles.drawer, { transform: [{ translateX: drawerAnim }] }]}
+          >
             <DrawerContent />
-          </View>
+          </Animated.View>
         </>
       )}
     </>
@@ -200,33 +222,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
-
   logoContainer: {
     flexDirection: "row",
     alignItems: "center",
-  },
-  logoIcon: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    backgroundColor: "#8b3888",
-    justifyContent: "center",
-    alignItems: "center",
-    marginRight: 8,
-  },
-  logoIconText: {
-    color: "white",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  logoText: {
-    fontSize: 18,
-    color: "#666",
-    fontWeight: "400",
-  },
-  logoTextBold: {
-    fontWeight: "bold",
-    color: "#8b3888",
   },
   backdrop: {
     position: "absolute",
@@ -239,8 +237,8 @@ const styles = StyleSheet.create({
   },
   drawer: {
     position: "absolute",
-    top: 0,
-    left: 0,
+    top: -40,
+    right: 0,
     bottom: 0,
     width: 280,
     backgroundColor: "white",
@@ -256,7 +254,7 @@ const styles = StyleSheet.create({
   },
   drawerContent: {
     flex: 1,
-    paddingTop: 60, // Account for status bar
+    paddingTop: 60,
   },
   drawerHeader: {
     flexDirection: "row",
