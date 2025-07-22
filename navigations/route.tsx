@@ -20,14 +20,12 @@ const Route: React.FC = () => {
         }}
       />
 
-      <Stack.Protected guard={!isAuthenticated}>
-        <Stack.Screen
-          name="(auth)"
-          options={{
-            headerShown: false,
-          }}
-        />
-      </Stack.Protected>
+      <Stack.Screen
+        name="(auth)"
+        options={{
+          headerShown: false,
+        }}
+      />
 
       <Stack.Screen
         name="(profile)"

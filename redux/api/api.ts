@@ -7,7 +7,7 @@ export const api = createApi({
   refetchOnFocus: true,
   refetchOnReconnect: true,
   baseQuery: fetchBaseQuery({
-    baseUrl: BASE_URL,
+    baseUrl: `${BASE_URL}/api`,
     prepareHeaders: async (headers) => {
       const token = `Bearer ${await USER_CONFIG.GET_FROM_STORAGE(
         USER_CONFIG.TOKEN_NAME

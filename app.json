@@ -4,7 +4,7 @@
     "slug": "silversitting",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/brand/logo.png",
     "scheme": "silversitting",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -16,7 +16,12 @@
         "foregroundImage": "./assets/brand/splash.png",
         "backgroundColor": "#8b3888"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.robiulalamdx.silversitting",
+      "build": {
+        "minify": true,
+        "shrinkResources": true
+      }
     },
     "web": {
       "bundler": "metro",
@@ -31,10 +36,17 @@
           "image": "./assets/brand/splash.png",
           "backgroundColor": "#8b3888"
         }
-      ]
+      ],
+      "expo-image-picker"
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "d895ebb6-0d75-48ed-bc8f-d842476252b7"
+      }
     }
   }
 }

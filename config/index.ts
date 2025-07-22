@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const TOKEN_NAME = "silversitting";
-export const BASE_URL = "https://silversitting.eu/api";
+export const BASE_URL = "https://silversitting.eu";
 
 /**
  * Save data to AsyncStorage

@@ -2,7 +2,7 @@ import Header from "@/components/shared/header/Header";
 import { useAuth } from "@/hooks/useAuth";
 import { Redirect, Stack } from "expo-router";
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 
 const ProfileLayout = () => {
   const { isAuthenticated } = useAuth();
@@ -12,7 +12,7 @@ const ProfileLayout = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <View className="flex-1 bg-white pt-[30px]">
       <Header />
       <Stack
         initialRouteName="index"
@@ -40,14 +40,3 @@ const ProfileLayout = () => {
 };
 
 export default ProfileLayout;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "white",
-    paddingTop: 30,
-  },
-  content: {
-    flex: 1,
-  },
-});
