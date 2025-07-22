@@ -252,7 +252,7 @@ export default function ChildCareProfile({ user }: IProps) {
           </View>
 
           {/* Input Fields */}
-          <View className="space-y-6">
+          <View className="gap-y-6">
             <View>
               <Text className="text-gray-700 text-base mb-2">
                 First Name <Text className="text-red-500">*</Text>
@@ -353,7 +353,7 @@ export default function ChildCareProfile({ user }: IProps) {
               <Text className="text-gray-700 text-base mb-2">
                 Gender <Text className="text-red-500">*</Text>
               </Text>
-              <View className="flex-row space-x-8">
+              <View className="flex-row gap-8">
                 <TouchableOpacity
                   onPress={() => setGender("Male")}
                   className="flex-row items-center"
@@ -467,13 +467,13 @@ export default function ChildCareProfile({ user }: IProps) {
               opportunity to write a few words about yourself so that the
               parents get a good first impression of you.
             </Text>
-            <View className="flex-row justify-between items-center mb-2">
+            <View className="mb-2">
               <Text className="text-gray-700 text-sm">
                 <Text className="font-semibold">NOTE:</Text> Please only provide
                 information that is publicly viewable{" "}
+                <Text className="text-gray-600 text-sm">({charCount}/500)</Text>{" "}
                 <Text className="text-red-500">*</Text>
               </Text>
-              <Text className="text-gray-600 text-sm">({charCount}/500)</Text>
             </View>
             <TextInput
               mode="outlined"
