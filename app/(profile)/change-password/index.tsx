@@ -1,12 +1,8 @@
+import ChangePassword from "@/components/profile/ChangePassword";
 import React from "react";
-import { Text, View } from "react-native";
 
-const ChangePassword = () => {
-  return (
-    <View>
-      <Text>Change Password screen</Text>
-    </View>
-  );
+const ChangePasswordScreen = () => {
+  return <ChangePassword />;
 };
 
-export default ChangePassword;
+export default ChangePasswordScreen;

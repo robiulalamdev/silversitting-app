@@ -37,7 +37,16 @@
           "backgroundColor": "#8b3888"
         }
       ],
-      "expo-image-picker"
+      "expo-image-picker",
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/brand/logo.png",
+          "color": "#8b3888",
+          "defaultChannel": "default",
+          "enableBackgroundRemoteNotifications": false
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
