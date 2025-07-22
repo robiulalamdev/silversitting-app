@@ -17,7 +17,12 @@ const ProfileLayout = () => {
       <Header />
       <Tabs
         tabs={[
-          { id: 1, label: "P.O Box", route: "/", slug: "/po-box" },
+          {
+            id: 1,
+            label: "P.O Box",
+            route: "/(profile)/pro-box",
+            slug: "/pro-box",
+          },
           { id: 2, label: "Profile", route: "/(profile)", slug: "/" },
           {
             id: 3,

@@ -1,4 +1,4 @@
-export type UserRole = "childcarer" | "parents";
+export type UserRole = "childcarer" | "parents" | "admin";
 
 export type IUser = {
   _id: string;

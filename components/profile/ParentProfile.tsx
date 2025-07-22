@@ -162,8 +162,6 @@ export default function ParentProfile({ user }: IProps) {
     );
   }
 
-  console.log(selectedImage);
-
   return isSuccess ? (
     <KeyboardAvoidingView
       style={{ flex: 1 }}

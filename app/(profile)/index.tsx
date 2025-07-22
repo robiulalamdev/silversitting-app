@@ -10,6 +10,7 @@ const ProfileScreen = () => {
     <View className="flex-1">
       {user?.role === "parents" && <ParentProfile user={user} />}
       {user?.role === "childcarer" && <ChildCareProfile user={user} />}
+      {user?.role === "admin" && <ParentProfile user={user} />}
     </View>
   );
 };

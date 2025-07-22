@@ -37,7 +37,6 @@ interface IProps {
 }
 
 export default function ChattingScreen({ receiverId }: IProps) {
-  console.log("receiverId: ", receiverId);
   const dispatch = useDispatch();
   const { user } = useAuth();
   const { conversationId = "" } = useSelector((state: RootState) => state.chat);
