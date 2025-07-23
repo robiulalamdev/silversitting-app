@@ -1,43 +1,37 @@
 import { ASSETS } from "@/constants/assets";
+import { COLORS } from "@/constants/theme";
 import { useGlobal } from "@/hooks/useGlobal";
 import { MaterialIcons } from "@expo/vector-icons";
-import React, { useRef, useState } from "react";
-import {
-  Animated,
-  Image,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import React from "react";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 
 export default function Header() {
   const { handleShowMenu } = useGlobal();
 
-  const [showSearch, setShowSearch] = useState(false);
-  const searchWidth = useRef(new Animated.Value(0)).current;
-  const [searchText, setSearchText] = useState("");
+  // const [showSearch, setShowSearch] = useState(false);
+  // const searchWidth = useRef(new Animated.Value(0)).current;
+  // const [searchText, setSearchText] = useState("");
 
-  const handleSearchToggle = () => {
-    if (showSearch) {
-      Animated.timing(searchWidth, {
-        toValue: 0,
-        duration: 300,
-        useNativeDriver: false,
-      }).start(() => setShowSearch(false));
-    } else {
-      setShowSearch(true);
-      Animated.timing(searchWidth, {
-        toValue: 200,
-        duration: 300,
-        useNativeDriver: false,
-      }).start();
-    }
-  };
+  // const handleSearchToggle = () => {
+  //   if (showSearch) {
+  //     Animated.timing(searchWidth, {
+  //       toValue: 0,
+  //       duration: 300,
+  //       useNativeDriver: false,
+  //     }).start(() => setShowSearch(false));
+  //   } else {
+  //     setShowSearch(true);
+  //     Animated.timing(searchWidth, {
+  //       toValue: 200,
+  //       duration: 300,
+  //       useNativeDriver: false,
+  //     }).start();
+  //   }
+  // };
 
-  const handleSearch = (text: string) => {
-    setSearchText(text);
-  };
+  // const handleSearch = (text: string) => {
+  //   setSearchText(text);
+  // };
 
   return (
     <>
@@ -53,7 +47,7 @@ export default function Header() {
         </View>
 
         <View style={styles.rightSection}>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={handleSearchToggle}
             style={{ marginRight: 10 }}
           >
@@ -79,10 +73,13 @@ export default function Header() {
                 )}
               </View>
             </Animated.View>
-          )}
+          )} */}
+          <TouchableOpacity style={{ marginRight: 20 }}>
+            <MaterialIcons name="message" size={24} color={COLORS.primary} />
+          </TouchableOpacity>
 
           <TouchableOpacity onPress={() => handleShowMenu(true)}>
-            <MaterialIcons name="menu" size={24} color="#8b3888" />
+            <MaterialIcons name="menu" size={24} color={COLORS.primary} />
           </TouchableOpacity>
         </View>
       </View>

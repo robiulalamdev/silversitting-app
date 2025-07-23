@@ -7,75 +7,37 @@ import React from "react";
 const Route: React.FC = () => {
   return (
     <Stack
-      initialRouteName="index"
+      initialRouteName="(tabs)"
       screenOptions={{
         header: () => <Header />,
       }}
     >
+      <Stack.Screen name="index" />
+
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+
       <Stack.Screen
-        name="index"
+        name="(auth)"
         options={{
-          headerShown: true,
+          headerShown: false,
         }}
       />
 
-      <Stack.Screen name="(auth)" />
+      <Stack.Screen name="(profile)" />
 
-      <Stack.Screen
-        name="(profile)"
-        options={{
-          headerShown: true,
-        }}
-      />
+      <Stack.Screen name="who-we-are/index" />
 
-      <Stack.Screen
-        name="who-we-are/index"
-        options={{
-          headerShown: true,
-        }}
-      />
+      <Stack.Screen name="blogs/index" />
 
-      <Stack.Screen
-        name="blogs/index"
-        options={{
-          headerShown: true,
-        }}
-      />
+      <Stack.Screen name="children-provider-faq/index" />
 
-      <Stack.Screen
-        name="children-provider-faq/index"
-        options={{
-          headerShown: true,
-        }}
-      />
+      <Stack.Screen name="insights/index" />
 
-      <Stack.Screen
-        name="insights/index"
-        options={{
-          headerShown: true,
-        }}
-      />
+      <Stack.Screen name="legal/index" />
 
-      <Stack.Screen
-        name="legal/index"
-        options={{
-          headerShown: true,
-        }}
-      />
+      <Stack.Screen name="child-care/index" />
 
-      <Stack.Screen
-        name="child-care/index"
-        options={{
-          headerShown: true,
-        }}
-      />
-
-      <Stack.Screen
-        name="child-care/message/[id]"
-        options={{
-          headerShown: true,
-        }}
-      />
+      <Stack.Screen name="child-care/message/[id]" />
     </Stack>
   );
 };

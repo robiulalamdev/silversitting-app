@@ -12,6 +12,7 @@ interface TabItem {
   label: string;
   route: string;
   slug: string;
+  subSlug?: string;
 }
 
 interface TabsProps {
@@ -34,7 +35,7 @@ export default function Tabs({ tabs }: TabsProps) {
         contentContainerStyle={styles.scrollContainer}
       >
         {tabs.map((tab) => {
-          const isActive = pathname === tab.slug;
+          const isActive = pathname === tab.slug || pathname === tab?.subSlug;
           return (
             <TouchableOpacity
               key={tab.id}
