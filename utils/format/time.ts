@@ -17,3 +17,49 @@ export function formatMessageTime(timestamp: number | string): string {
     return date.toLocaleDateString(); // Fallback for older messages
   }
 }
+
+// Placeholder for translation hook if not provided in context
+// In a real app, you'd import your actual useGetTranslation hook
+const useGetTranslation = () => {
+  const translations: { [key: string]: string } = {
+    January: "January",
+    February: "February",
+    March: "March",
+    April: "April",
+    May: "May",
+    June: "June",
+    July: "July",
+    August: "August",
+    September: "September",
+    October: "October",
+    November: "November",
+    December: "December",
+  };
+  return (key: string) => translations[key] || key;
+};
+
+export function formatDate(
+  timestamp: string | number,
+  trans: ReturnType<typeof useGetTranslation>
+): [string, string] {
+  const date = new Date(timestamp);
+  const day = date.getDate().toString().padStart(2, "0");
+  const year = date.getFullYear();
+  const monthNames = [
+    trans("January"),
+    trans("February"),
+    trans("March"),
+    trans("April"),
+    trans("May"),
+    trans("June"),
+    trans("July"),
+    trans("August"),
+    trans("September"),
+    trans("October"),
+    trans("November"),
+    trans("December"),
+  ];
+  const month = monthNames[date.getMonth()];
+
+  return [day, `${month} ${year}`];
+}
