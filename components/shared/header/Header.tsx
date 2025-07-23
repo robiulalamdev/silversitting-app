@@ -2,11 +2,13 @@ import { ASSETS } from "@/constants/assets";
 import { COLORS } from "@/constants/theme";
 import { useGlobal } from "@/hooks/useGlobal";
 import { MaterialIcons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import React from "react";
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 
 export default function Header() {
   const { handleShowMenu } = useGlobal();
+  const router = useRouter();
 
   // const [showSearch, setShowSearch] = useState(false);
   // const searchWidth = useRef(new Animated.Value(0)).current;
@@ -74,7 +76,10 @@ export default function Header() {
               </View>
             </Animated.View>
           )} */}
-          <TouchableOpacity style={{ marginRight: 20 }}>
+          <TouchableOpacity
+            onPress={() => router.push("/(profile)/pro-box")}
+            style={{ marginRight: 20 }}
+          >
             <MaterialIcons name="message" size={24} color={COLORS.primary} />
           </TouchableOpacity>
 

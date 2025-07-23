@@ -6,7 +6,7 @@ import { ScrollView, StyleSheet } from "react-native";
 
 const TabsScreen = () => {
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <Banner />
       <HowItWorks />
       <HomeRegister />

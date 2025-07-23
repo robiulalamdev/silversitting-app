@@ -4,12 +4,17 @@
     "slug": "silversitting",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/brand/logo.png",
+    "icon": "./assets/brand/icon.png",
     "scheme": "silversitting",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true
+    },
+    "splash": {
+      "image": "./assets/brand/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#8b3888"
     },
     "android": {
       "adaptiveIcon": {
