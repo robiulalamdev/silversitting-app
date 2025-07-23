@@ -1,3 +1,4 @@
+import LanguageSelector from "@/components/common/languages/LanguageSelector";
 import { ASSETS } from "@/constants/assets";
 import { useAuth } from "@/hooks/useAuth";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -11,7 +12,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Button, Divider, Menu } from "react-native-paper";
+import { Button, Divider } from "react-native-paper";
 
 export default function Header() {
   const { isAuthenticated, onLogout } = useAuth();
@@ -98,35 +99,7 @@ export default function Header() {
 
       <Divider style={styles.divider} />
 
-      {/* Language Selector */}
-      <View style={styles.section}>
-        <Menu
-          visible={languageMenuVisible}
-          onDismiss={() => setLanguageMenuVisible(false)}
-          anchor={
-            <TouchableOpacity
-              style={styles.languageSelector}
-              onPress={() => setLanguageMenuVisible(true)}
-            >
-              <Text style={styles.languageText}>{selectedLanguage}</Text>
-              <MaterialIcons
-                name="keyboard-arrow-down"
-                size={20}
-                color="#666"
-              />
-            </TouchableOpacity>
-          }
-        >
-          <Menu.Item
-            onPress={() => handleLanguageSelect("ENG")}
-            title="English"
-          />
-          <Menu.Item
-            onPress={() => handleLanguageSelect("DE")}
-            title="Deutsch"
-          />
-        </Menu>
-      </View>
+      <LanguageSelector />
 
       <Divider style={styles.divider} />
 
