@@ -135,8 +135,11 @@ const HeaderDrawer = () => {
                   <Button
                     mode="contained"
                     onPress={onLogout}
-                    className="!bg-primary !rounded-md py-1"
+                    className="!bg-primary !rounded-md py-1 flex-row justify-center items-center"
                     labelStyle={styles.loginButtonText}
+                    icon={({ size, color }) => (
+                      <MaterialIcons name="logout" size={size} color={color} />
+                    )}
                   >
                     Logout
                   </Button>
@@ -144,8 +147,11 @@ const HeaderDrawer = () => {
                   <Button
                     mode="contained"
                     onPress={handleLogin}
-                    style={styles.loginButton}
+                    className="!bg-primary !rounded-md py-1 flex-row justify-center items-center"
                     labelStyle={styles.loginButtonText}
+                    icon={({ size, color }) => (
+                      <MaterialIcons name="login" size={size} color={color} />
+                    )}
                   >
                     Login
                   </Button>
@@ -238,7 +244,6 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
   loginButton: {
-    backgroundColor: "#8b3888",
     borderRadius: 8,
     paddingVertical: 4,
   },

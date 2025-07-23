@@ -2,11 +2,17 @@ import Tabs from "@/components/common/tabs/Tabs";
 import ChildCareProfile from "@/components/profile/ChildCareProfile";
 import ParentProfile from "@/components/profile/ParentProfile";
 import { useAuth } from "@/hooks/useAuth";
+import { Redirect } from "expo-router";
 import React from "react";
 import { View } from "react-native";
 
 const ProfileScreen = () => {
-  const { user } = useAuth();
+  const { user, isAuthenticated } = useAuth();
+
+  if (!isAuthenticated) {
+    return <Redirect href="/(auth)/login" withAnchor={false} />;
+  }
+
   return (
     <View className="flex-1">
       <Tabs
