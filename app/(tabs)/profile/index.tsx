@@ -10,7 +10,7 @@ const ProfileScreen = () => {
   const { user, isAuthenticated } = useAuth();
 
   if (!isAuthenticated) {
-    return <Redirect href="/(auth)/login" withAnchor={false} />;
+    return <Redirect href="/(auth)/login" withAnchor={true} />;
   }
 
   return (
