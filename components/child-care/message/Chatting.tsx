@@ -28,6 +28,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useGetSingleUserQuery } from "@/redux/features/user/userApi";
 import { RootState } from "@/redux/store";
 import { skipToken } from "@reduxjs/toolkit/query";
+import { Redirect } from "expo-router";
 import MessageBubble from "./MessageBubble";
 
 const SOCKET_URL = "wss://silversitting.eu:8443"; // Your WebSocket URL
@@ -38,7 +39,7 @@ interface IProps {
 
 export default function ChattingScreen({ receiverId }: IProps) {
   const dispatch = useDispatch();
-  const { user } = useAuth();
+  const { user, isAuthenticated } = useAuth();
   const { conversationId = "" } = useSelector((state: RootState) => state.chat);
 
   const [inputMessage, setInputMessage] = useState("");
@@ -105,7 +106,6 @@ export default function ChattingScreen({ receiverId }: IProps) {
 
   // WebSocket connection and listeners
   const reconnectWebSocket = () => {
-    console.log("Reconnecting WebSocket...");
     if (socket.current) {
       socket.current.disconnect();
     }
@@ -171,6 +171,10 @@ export default function ChattingScreen({ receiverId }: IProps) {
       scrollToBottom();
     }
   }, [messages]);
+
+  if (!isAuthenticated) {
+    return <Redirect href="/(auth)/login" withAnchor={false} />;
+  }
 
   const isReceiverOnline = (id: string) => {
     return onlineUsers.some((u) => u.userId === id);
@@ -280,7 +284,7 @@ export default function ChattingScreen({ receiverId }: IProps) {
   };
 
   return (
-    <View className="flex-1 pt-[30px] bg-white">
+    <View className="flex-1 bg-white">
       {/* Main Chat Container */}
 
       {/* Chat Header (Profile Info) */}
