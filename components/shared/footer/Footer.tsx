@@ -1,13 +1,6 @@
 import useGetTranslation from "@/hooks/useGetTranslation";
 import { useRouter } from "expo-router";
-import {
-  Image,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 
 export default function Footer() {
   const router = useRouter();
@@ -210,10 +203,3 @@ export default function Footer() {
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  sslBadge: {
-    width: 80,
-    height: 80,
-  },
-});
