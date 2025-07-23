@@ -61,6 +61,7 @@ export default function Banner() {
       <ImageBackground
         source={backgroundImage}
         style={styles.background}
+        resizeMode="stretch"
       ></ImageBackground>
 
       {/* Content Card */}

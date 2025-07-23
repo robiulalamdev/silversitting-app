@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { persistor, store } from "../redux/store";
 import "../styles/global.css";
 
+import HeaderDrawer from "@/components/shared/header/HeaderDrawer";
 import i18n, { initializeI18n } from "@/lib/i18n"; // Import the async initialization function
 import Route from "@/navigations/route";
 import React, { useEffect, useState } from "react"; // Import useEffect and useState
@@ -67,6 +68,7 @@ export default function RootLayout() {
           <I18nextProvider i18n={i18n}>
             <PaperProvider>
               <Route />
+              <HeaderDrawer />
             </PaperProvider>
           </I18nextProvider>
         </PersistGate>

@@ -7,11 +7,13 @@ import { persistReducer, persistStore } from "redux-persist";
 import { api } from "./api/api"; // Assuming you have an api defined
 import chatReducer from "./features/chat/chatSlice";
 import childCareSearchReducer from "./features/childCareSearch/childCareSearchSlice";
+import globalReducer from "./features/global/globalSlice";
 import registerReducer from "./features/register/registerSlice";
 import userReducer from "./features/user/userSlice";
 
 // Reducers to persist
 const persistedReducers = combineReducers({
+  global: globalReducer,
   user: userReducer,
   register: registerReducer,
   childCarerFilter: childCareSearchReducer,

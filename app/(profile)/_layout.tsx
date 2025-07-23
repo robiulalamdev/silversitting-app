@@ -1,5 +1,4 @@
 import Tabs from "@/components/common/tabs/Tabs";
-import Header from "@/components/shared/header/Header";
 import { useAuth } from "@/hooks/useAuth";
 import { Redirect, Stack } from "expo-router";
 import React from "react";
@@ -13,8 +12,7 @@ const ProfileLayout = () => {
   }
 
   return (
-    <View className="flex-1 bg-white pt-[30px]">
-      <Header />
+    <View className="flex-1 bg-white">
       <Tabs
         tabs={[
           {

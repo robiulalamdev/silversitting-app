@@ -49,8 +49,6 @@ export default function ChattingScreen({ receiverId }: IProps) {
   const flatListRef = useRef<FlatList>(null);
 
   const [loginModalShow, setLoginModalShow] = useState(false);
-  const [registerModalShow, setRegisterModalShow] = useState(false);
-  const [resetModalShow, setResetModalShow] = useState(false);
 
   // RTK Query hooks
   //   const {
@@ -280,14 +278,6 @@ export default function ChattingScreen({ receiverId }: IProps) {
       );
     }
   };
-
-  const handleKeyDown = (event: any) => {
-    // For web, this handles Enter key. For RN, TextInput's onSubmitEditing can be used.
-    // This function might not be directly applicable in RN TextInput without custom handling.
-    // We'll rely on the send button for simplicity.
-  };
-
-  //   const quoteImage = require("../../assets/images/chat-quote_en.png"); // Using English quote image
 
   return (
     <View className="flex-1 pt-[30px] bg-white">

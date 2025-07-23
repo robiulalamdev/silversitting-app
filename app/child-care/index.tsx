@@ -17,7 +17,6 @@ import ChildCareSearchError from "@/components/child-care/ChildCareSearchError";
 import SearchResult from "@/components/child-care/SearchResult";
 
 import Footer from "@/components/shared/footer/Footer";
-import Header from "@/components/shared/header/Header";
 import { useAuth } from "@/hooks/useAuth";
 import { useGetSearchedChildCarerMutation } from "@/redux/features/childCareSearch/childCareSearchApi";
 import {
@@ -195,9 +194,8 @@ export default function ChildCare() {
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
-      className="flex-1 pt-[30px] bg-white"
+      className="flex-1 bg-white"
     >
-      <Header />
       {/* Banner */}
       <View className="bg-[#faf6fb] py-12 items-center justify-center mt-5">
         {step === 0 && (
