@@ -85,7 +85,11 @@ export default function Login({ isPopup = false, onHide = () => {} }: IProps) {
         if (isPopup) {
           onHide();
         } else {
-          router.back();
+          if (router.canGoBack()) {
+            router.back();
+          } else {
+            router.replace("/(tabs)");
+          }
         }
       } else if (response.error) {
         const errorMessage = response.error.data?.message;
