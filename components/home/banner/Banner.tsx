@@ -53,8 +53,6 @@ export default function Banner() {
     }
   };
 
-  const handleLearnMore = () => {};
-
   return (
     <View style={styles.container}>
       {/* Background with blur */}
@@ -157,10 +155,7 @@ export default function Banner() {
             </TouchableOpacity>
 
             {/* Learn More Link */}
-            <TouchableOpacity
-              style={styles.learnMoreContainer}
-              onPress={handleLearnMore}
-            >
+            <TouchableOpacity style={styles.learnMoreContainer}>
               <Text style={styles.learnMoreText}>Learn more</Text>
               <MaterialIcons name="arrow-forward" size={16} color="#666" />
             </TouchableOpacity>

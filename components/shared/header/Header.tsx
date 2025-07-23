@@ -1,12 +1,20 @@
 import { ASSETS } from "@/constants/assets";
 import { COLORS } from "@/constants/theme";
+import { useAuth } from "@/hooks/useAuth";
 import { useGlobal } from "@/hooks/useGlobal";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React from "react";
-import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
+import {
+  Image,
+  Pressable,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 export default function Header() {
+  const { isAuthenticated } = useAuth();
   const { handleShowMenu } = useGlobal();
   const router = useRouter();
 
@@ -39,13 +47,16 @@ export default function Header() {
     <>
       <View style={styles.header}>
         <View style={styles.leftSection}>
-          <View style={styles.logoContainer}>
+          <Pressable
+            onPress={() => router.push("/(tabs)")}
+            style={styles.logoContainer}
+          >
             <Image
               source={ASSETS.Logo}
               className="w-[100px] h-[50px]"
               resizeMode="contain"
             />
-          </View>
+          </Pressable>
         </View>
 
         <View style={styles.rightSection}>
@@ -76,12 +87,15 @@ export default function Header() {
               </View>
             </Animated.View>
           )} */}
-          <TouchableOpacity
-            onPress={() => router.push("/(profile)/pro-box")}
-            style={{ marginRight: 20 }}
-          >
-            <MaterialIcons name="message" size={24} color={COLORS.primary} />
-          </TouchableOpacity>
+
+          {isAuthenticated && (
+            <TouchableOpacity
+              onPress={() => router.push("/(profile)/pro-box")}
+              style={{ marginRight: 20 }}
+            >
+              <MaterialIcons name="message" size={24} color={COLORS.primary} />
+            </TouchableOpacity>
+          )}
 
           <TouchableOpacity onPress={() => handleShowMenu(true)}>
             <MaterialIcons name="menu" size={24} color={COLORS.primary} />
