@@ -12,9 +12,9 @@ const Route: React.FC = () => {
         header: () => <Header />,
       }}
     >
-      <Stack.Screen name="index" />
-
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+
+      {/* <Stack.Screen name="index" /> */}
 
       <Stack.Screen
         name="(auth)"
@@ -27,7 +27,7 @@ const Route: React.FC = () => {
 
       <Stack.Screen name="who-we-are/index" />
 
-      <Stack.Screen name="blogs/index" />
+      <Stack.Screen name="blogs/[id]" />
 
       <Stack.Screen name="children-provider-faq/index" />
 

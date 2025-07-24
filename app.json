@@ -1,11 +1,11 @@
 {
   "expo": {
     "name": "silversitting",
-    "slug": "silversitting",
+    "slug": "silverapp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/brand/icon.png",
-    "scheme": "silversitting",
+    "scheme": "silverapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -26,7 +26,10 @@
       "build": {
         "minify": true,
         "shrinkResources": true
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "bundler": "metro",
@@ -59,7 +62,7 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "d895ebb6-0d75-48ed-bc8f-d842476252b7"
+        "projectId": "a10d23f1-2e94-4793-9e91-87a2c861d005"
       }
     }
   }
