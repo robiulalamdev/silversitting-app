@@ -9,7 +9,11 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.robiulalamdx.silversitting",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "splash": {
       "image": "./assets/brand/splash.png",
@@ -18,9 +22,10 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/brand/splash.png",
+        "foregroundImage": "./assets/brand/icon.png",
         "backgroundColor": "#8b3888"
       },
+      "icon": "./assets/brand/icon.png",
       "edgeToEdgeEnabled": true,
       "package": "com.robiulalamdx.silversitting",
       "build": {
@@ -34,22 +39,15 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/brand/splash.png"
+      "favicon": "./assets/brand/icon.png"
     },
     "plugins": [
       "expo-router",
-      [
-        "expo-splash-screen",
-        {
-          "image": "./assets/brand/splash.png",
-          "backgroundColor": "#8b3888"
-        }
-      ],
       "expo-image-picker",
       [
         "expo-notifications",
         {
-          "icon": "./assets/brand/logo.png",
+          "icon": "./assets/brand/icon.png",
           "color": "#8b3888",
           "defaultChannel": "default",
           "enableBackgroundRemoteNotifications": false
@@ -64,6 +62,12 @@
       "eas": {
         "projectId": "a10d23f1-2e94-4793-9e91-87a2c861d005"
       }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/a10d23f1-2e94-4793-9e91-87a2c861d005"
     }
   }
 }
