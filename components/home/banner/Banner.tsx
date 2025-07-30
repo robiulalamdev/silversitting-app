@@ -1,4 +1,5 @@
 import { COLORS } from "@/constants/theme";
+import { DIMENSIONS } from "@/utils/getDimensions";
 import { MaterialIcons } from "@expo/vector-icons"; // Using for placeholder icons
 import { BlurView } from "expo-blur";
 import { useRouter } from "expo-router";
@@ -65,7 +66,7 @@ export default function Banner() {
       {/* Content Card */}
 
       <BlurView
-        intensity={100}
+        intensity={0}
         tint="default"
         style={styles.card}
         className="border border-primary"
@@ -171,8 +172,8 @@ const styles = StyleSheet.create({
     position: "relative",
     justifyContent: "center", // Center the card vertically
     alignItems: "center", // Center the card horizontally
-    height: 650,
-    maxHeight: 650,
+    height: DIMENSIONS.HEIGHT,
+    maxHeight: DIMENSIONS.HEIGHT,
   },
   background: {
     position: "absolute",
@@ -181,14 +182,14 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     width: "100%",
-    height: 650,
-    maxHeight: 650,
+    height: DIMENSIONS.HEIGHT,
+    maxHeight: DIMENSIONS.HEIGHT,
   },
   card: {
     width: "90%", // Adjust width as needed
     maxWidth: 400, // Max width for larger screens
-    backgroundColor: "rgba(255, 255, 255, 0.65)",
-    borderRadius: 16,
+    backgroundColor: "rgba(255, 255, 255, 0.85)",
+    borderRadius: 10,
     padding: 24,
     shadowColor: "#000",
     shadowOffset: {

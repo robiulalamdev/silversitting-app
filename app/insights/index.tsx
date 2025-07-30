@@ -1,4 +1,6 @@
 import HomeAbout from "@/components/home/HomeAbout";
+import HomeRegister from "@/components/home/HomeRegister";
+import HowItWorks from "@/components/home/HowItWorks";
 import Known from "@/components/home/Known";
 import React from "react";
 import { SafeAreaView, ScrollView, View } from "react-native";
@@ -11,6 +13,8 @@ const InsightsScreen = () => {
           <Known />
         </View>
         <HomeAbout />
+        <HowItWorks />
+        <HomeRegister />
       </ScrollView>
     </SafeAreaView>
   );

@@ -1,19 +1,20 @@
 // RootLayout.tsx
-import { useFonts } from "expo-font";
-import "react-native-reanimated";
-import { Provider } from "react-redux";
-import { persistor, store } from "../redux/store";
-import "../styles/global.css";
-
 import HeaderDrawer from "@/components/shared/header/HeaderDrawer";
+import { COLORS } from "@/constants/theme";
 import i18n, { initializeI18n } from "@/lib/i18n"; // Import the async initialization function
 import Route from "@/navigations/route";
+import { useFonts } from "expo-font";
+import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react"; // Import useEffect and useState
 import { I18nextProvider } from "react-i18next";
 import { ActivityIndicator, Text, View } from "react-native"; // Import ActivityIndicator for loading
 import { PaperProvider } from "react-native-paper";
+import "react-native-reanimated";
 import { ToastProvider } from "react-native-toast-notifications";
+import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
+import { persistor, store } from "../redux/store";
+import "../styles/global.css";
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
@@ -28,7 +29,7 @@ export default function RootLayout() {
         await initializeI18n();
         setI18nInitialized(true);
       } catch (error) {
-        console.error("Failed to initialize i18n:", error);
+        // console.error("Failed to initialize i18n:", error);
         // Handle error, maybe show an error message to the user
       }
     };
@@ -39,7 +40,7 @@ export default function RootLayout() {
     // Show a loading indicator while fonts and i18n are loading
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color={COLORS.primary} />
         <Text>Loading application...</Text>
       </View>
     );
@@ -67,6 +68,7 @@ export default function RootLayout() {
               but it doesn't hurt and ensures context is available. */}
           <I18nextProvider i18n={i18n}>
             <PaperProvider>
+              <StatusBar style="auto" />
               <Route />
               <HeaderDrawer />
             </PaperProvider>

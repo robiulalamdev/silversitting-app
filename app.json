@@ -16,14 +16,14 @@
       }
     },
     "splash": {
-      "image": "./assets/brand/splash.png",
-      "resizeMode": "cover",
-      "backgroundColor": "#8b3888"
+      "image": "./assets/brand/logo.png",
+      "resizeMode": "native",
+      "backgroundColor": "#FFFFFF"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/brand/icon.png",
-        "backgroundColor": "#8b3888"
+        "backgroundColor": "#FFFFFF"
       },
       "icon": "./assets/brand/icon.png",
       "edgeToEdgeEnabled": true,
@@ -48,7 +48,7 @@
         "expo-notifications",
         {
           "icon": "./assets/brand/icon.png",
-          "color": "#8b3888",
+          "color": "#FFFFFF",
           "defaultChannel": "default",
           "enableBackgroundRemoteNotifications": false
         }

@@ -1,6 +1,5 @@
 import { ASSETS } from "@/constants/assets";
 import { COLORS } from "@/constants/theme";
-import { useAuth } from "@/hooks/useAuth";
 import { useGlobal } from "@/hooks/useGlobal";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
@@ -14,7 +13,6 @@ import {
 } from "react-native";
 
 export default function Header() {
-  const { isAuthenticated } = useAuth();
   const { handleShowMenu } = useGlobal();
   const router = useRouter();
 
@@ -88,14 +86,12 @@ export default function Header() {
             </Animated.View>
           )} */}
 
-          {isAuthenticated && (
-            <TouchableOpacity
-              onPress={() => router.push("/(profile)/pro-box")}
-              style={{ marginRight: 20 }}
-            >
-              <MaterialIcons name="message" size={24} color={COLORS.primary} />
-            </TouchableOpacity>
-          )}
+          <TouchableOpacity
+            onPress={() => router.push("/(profile)/pro-box")}
+            style={{ marginRight: 20 }}
+          >
+            <MaterialIcons name="message" size={24} color={COLORS.primary} />
+          </TouchableOpacity>
 
           <TouchableOpacity onPress={() => handleShowMenu(true)}>
             <MaterialIcons name="menu" size={24} color={COLORS.primary} />
