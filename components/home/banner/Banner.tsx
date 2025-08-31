@@ -172,8 +172,8 @@ const styles = StyleSheet.create({
     position: "relative",
     justifyContent: "center", // Center the card vertically
     alignItems: "center", // Center the card horizontally
-    height: DIMENSIONS.HEIGHT,
-    maxHeight: DIMENSIONS.HEIGHT,
+    height: DIMENSIONS.HEIGHT - 106,
+    maxHeight: DIMENSIONS.HEIGHT - 106,
   },
   background: {
     position: "absolute",
@@ -182,8 +182,8 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     width: "100%",
-    height: DIMENSIONS.HEIGHT,
-    maxHeight: DIMENSIONS.HEIGHT,
+    height: DIMENSIONS.HEIGHT - 106,
+    maxHeight: DIMENSIONS.HEIGHT - 106,
   },
   card: {
     width: "90%", // Adjust width as needed

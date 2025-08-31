@@ -15,11 +15,6 @@
         "ITSAppUsesNonExemptEncryption": false
       }
     },
-    "splash": {
-      "image": "./assets/brand/logo.png",
-      "resizeMode": "native",
-      "backgroundColor": "#FFFFFF"
-    },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/brand/icon.png",
@@ -51,6 +46,17 @@
           "color": "#FFFFFF",
           "defaultChannel": "default",
           "enableBackgroundRemoteNotifications": false
+        }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#FFFFFF",
+          "image": "./assets/brand/logo.png",
+          "imageWidth": 200,
+          "android": {
+            "backgroundColor": "#FFFFFF"
+          }
         }
       ]
     ],

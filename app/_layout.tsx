@@ -4,6 +4,7 @@ import { COLORS } from "@/constants/theme";
 import i18n, { initializeI18n } from "@/lib/i18n"; // Import the async initialization function
 import Route from "@/navigations/route";
 import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react"; // Import useEffect and useState
 import { I18nextProvider } from "react-i18next";
@@ -15,6 +16,15 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistor, store } from "../redux/store";
 import "../styles/global.css";
+
+// Keep the splash screen visible while we fetch resources
+SplashScreen.preventAutoHideAsync();
+
+// Set the animation options. This is optional.
+SplashScreen.setOptions({
+  duration: 500,
+  fade: true,
+});
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
@@ -44,6 +54,8 @@ export default function RootLayout() {
         <Text>Loading application...</Text>
       </View>
     );
+  } else {
+    SplashScreen.hide();
   }
 
   return (
