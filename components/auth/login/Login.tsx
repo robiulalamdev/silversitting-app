@@ -1,5 +1,3 @@
-"use client";
-
 import { KeyboardAvoidingScrollView } from "@/components/keyboard/KeyboardAvoidingScrollView";
 import {
   useLoginMutation,
@@ -18,7 +16,8 @@ import {
 import { TextInput, TouchableRipple } from "react-native-paper";
 import { useToast } from "react-native-toast-notifications";
 
-// Redux hooks - you can import these from your actual Redux setup
+// ✅ Import translation hook
+import useGetTranslation from "@/hooks/useGetTranslation";
 
 interface LoginFormData {
   email: string;
@@ -37,6 +36,9 @@ export default function Login({ isPopup = false, onHide = () => {} }: IProps) {
   const [resendErrors, setResendErrors] = useState("");
   const [resendEmail, setResendEmail] = useState("");
   const [isResendAllowed, setIsResendAllowed] = useState(true);
+
+  // ✅ Translation hook usage
+  const trans = useGetTranslation();
 
   // Redux mutations
   const [login, { isLoading }] = useLoginMutation();
@@ -58,16 +60,14 @@ export default function Login({ isPopup = false, onHide = () => {} }: IProps) {
     try {
       const response: any = await sendResendEmail({ email: resendEmail });
       if (response?.data?.success) {
-        toast.show("Activation link sent successfully!", { type: "success" });
+        toast.show(trans("activationLinkSent"), { type: "success" });
         setIsResendAllowed(false);
         setResendErrors("");
       } else {
-        toast.show("Something went wrong. Please try again.", {
-          type: "danger",
-        });
+        toast.show(trans("somethingWentWrong"), { type: "danger" });
       }
     } catch (error) {
-      toast.show("Failed to send activation link", { type: "danger" });
+      toast.show(trans("somethingWentWrong"), { type: "danger" });
     }
   };
 
@@ -82,7 +82,7 @@ export default function Login({ isPopup = false, onHide = () => {} }: IProps) {
       });
 
       if (response.data?.accessToken) {
-        toast.show("Login successful!", { type: "success" });
+        toast.show(trans("loginSuccessful"), { type: "success" });
         if (isPopup) {
           onHide();
         } else {
@@ -95,19 +95,19 @@ export default function Login({ isPopup = false, onHide = () => {} }: IProps) {
       } else if (response.error) {
         const errorMessage = response.error.data?.message;
 
-        if (errorMessage === "Please verify your email") {
+        if (errorMessage === trans("pleaseVerifyYourEmail")) {
           setResendErrors(errorMessage);
           setResendEmail(data.email);
         } else {
-          setErrors(errorMessage || "Something went wrong");
+          setErrors(errorMessage || trans("somethingWentWrong"));
         }
       } else {
-        setErrors("Something went wrong");
+        setErrors(trans("somethingWentWrong"));
       }
     } catch (error) {
       console.error("Login error:", error);
-      setErrors("Something went wrong");
-      toast.show("Login failed. Please try again.", { type: "danger" });
+      setErrors(trans("somethingWentWrong"));
+      toast.show(trans("loginFailed"), { type: "danger" });
     }
   };
 
@@ -116,22 +116,22 @@ export default function Login({ isPopup = false, onHide = () => {} }: IProps) {
       <View className="flex-1 bg-white px-6 py-8 justify-center">
         {/* Title */}
         <Text className="text-3xl font-bold text-primary text-center mb-12">
-          Log in
+          {trans("logIn")}
         </Text>
 
         {/* Email Address Field */}
         <View className="mb-6">
           <Text className="text-gray-700 text-base mb-2">
-            Email Address <Text className="text-red-500">*</Text>
+            {trans("emailAddress")} <Text className="text-red-500">*</Text>
           </Text>
           <Controller
             control={control}
             name="email"
             rules={{
-              required: "Email is required",
+              required: trans("emailRequired"),
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "Please enter a valid email address",
+                message: trans("invalidEmail"),
               },
             }}
             render={({ field: { onChange, onBlur, value } }) => (
@@ -165,16 +165,16 @@ export default function Login({ isPopup = false, onHide = () => {} }: IProps) {
         {/* Password Field */}
         <View className="mb-4">
           <Text className="text-gray-700 text-base mb-2">
-            Password <Text className="text-red-500">*</Text>
+            {trans("password")} <Text className="text-red-500">*</Text>
           </Text>
           <Controller
             control={control}
             name="password"
             rules={{
-              required: "Password is required",
+              required: trans("passwordRequired"),
               minLength: {
                 value: 6,
-                message: "Password must be at least 6 characters",
+                message: trans("passwordMinLength"),
               },
             }}
             render={({ field: { onChange, onBlur, value } }) => (
@@ -214,7 +214,7 @@ export default function Login({ isPopup = false, onHide = () => {} }: IProps) {
           className="mb-8"
         >
           <Text className="text-blue-500 text-base font-bold">
-            Forgot Password?
+            {trans("forgotPassword")}
           </Text>
         </TouchableOpacity>
 
@@ -235,12 +235,12 @@ export default function Login({ isPopup = false, onHide = () => {} }: IProps) {
                 disabled={sendingEmail}
               >
                 <Text className="text-primary font-semibold">
-                  {sendingEmail ? "Sending..." : "Resend Email"}
+                  {sendingEmail ? trans("sending") : trans("resendEmail")}
                 </Text>
               </TouchableOpacity>
             ) : (
               <Text className="text-green-600 text-sm">
-                Verification link sent!
+                {trans("verificationLinkSent")}
               </Text>
             )}
           </View>
@@ -262,25 +262,23 @@ export default function Login({ isPopup = false, onHide = () => {} }: IProps) {
               />
             )}
             <Text className="text-white text-lg font-semibold text-center">
-              {isLoading ? "Logging in..." : "Log in"}
+              {isLoading ? trans("loggingIn") : trans("logIn")}
             </Text>
           </View>
         </TouchableRipple>
 
-        {/* <KeyboardSpacer reduceHeight={60} /> */}
-
         {/* Register Link */}
         <View className="flex-row justify-center">
-          <Text className="text-gray-700 text-base">
-            New Here? Click here to{" "}
-          </Text>
+          <Text className="text-gray-700 text-base">{trans("newHere")} </Text>
           <TouchableOpacity
             onPress={() => {
               router.push("/(auth)/register");
               onHide();
             }}
           >
-            <Text className="text-primary text-base font-medium">Register</Text>
+            <Text className="text-primary text-base font-medium">
+              {trans("register")}
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
