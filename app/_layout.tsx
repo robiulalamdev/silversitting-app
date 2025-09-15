@@ -71,7 +71,6 @@ export default function RootLayout() {
               }}
             >
               <ActivityIndicator size="large" color="#0000ff" />
-              <Text>Loading Redux state...</Text>
             </View>
           }
           persistor={persistor}

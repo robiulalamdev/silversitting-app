@@ -87,7 +87,7 @@ export default function Header() {
           )} */}
 
           <TouchableOpacity
-            onPress={() => router.push("/(profile)/pro-box")}
+            onPress={() => router.push("/(tabs)/pro-box")}
             style={{ marginRight: 20 }}
           >
             <MaterialIcons name="message" size={24} color={COLORS.primary} />

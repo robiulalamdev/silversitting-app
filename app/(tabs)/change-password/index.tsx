@@ -1,20 +1,11 @@
 import Tabs from "@/components/common/tabs/Tabs";
-import ChildCareProfile from "@/components/profile/ChildCareProfile";
-import ParentProfile from "@/components/profile/ParentProfile";
-import { useAuth } from "@/hooks/useAuth";
+import ChangePassword from "@/components/profile/ChangePassword";
 import useGetTranslation from "@/hooks/useGetTranslation";
-import { Redirect } from "expo-router";
 import React from "react";
 import { View } from "react-native";
 
-const ProfileScreen = () => {
+const ChangePasswordScreen = () => {
   const trans = useGetTranslation();
-  const { user, isAuthenticated } = useAuth();
-
-  if (!isAuthenticated) {
-    return <Redirect href="/(auth)/login" withAnchor={true} />;
-  }
-
   return (
     <View className="flex-1">
       <Tabs
@@ -46,11 +37,9 @@ const ProfileScreen = () => {
           },
         ]}
       />
-      {user?.role === "parents" && <ParentProfile user={user} />}
-      {user?.role === "childcarer" && <ChildCareProfile user={user} />}
-      {user?.role === "admin" && <ParentProfile user={user} />}
+      <ChangePassword />;
     </View>
   );
 };
 
-export default ProfileScreen;
+export default ChangePasswordScreen;

@@ -1,21 +1,101 @@
 // A simple utility to format message time for React Native
-export function formatMessageTime(timestamp: number | string): string {
-  const date = new Date(timestamp);
-  const now = new Date();
+export function formatMessageTime(
+  timestamp: number | string,
+  trans: any
+): string {
+  // const date = new Date(timestamp);
+  // const now = new Date();
 
-  const diffTime = Math.abs(now.getTime() - date.getTime());
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  const diffMonths = Math.ceil(diffDays / 30);
+  // const diffTime = Math.abs(now.getTime() - date.getTime());
+  // const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  // const diffMonths = Math.ceil(diffDays / 30);
 
-  if (diffDays <= 1) {
-    return "Today";
-  } else if (diffDays <= 7) {
-    return `${diffDays} days ago`;
-  } else if (diffMonths < 12) {
-    return `${diffMonths} months ago`;
-  } else {
-    return date.toLocaleDateString(); // Fallback for older messages
+  // if (diffDays <= 1) {
+  //   return "Today";
+  // } else if (diffDays <= 7) {
+  //   return `${diffDays} days ago`;
+  // } else if (diffMonths < 12) {
+  //   return `${diffMonths} months ago`;
+  // } else {
+  //   return date.toLocaleDateString(); // Fallback for older messages
+  // }
+
+  if (typeof trans !== "function") {
+    return "...";
   }
+
+  let time;
+
+  const parsedTimestamp = new Date(timestamp);
+  const currentTime = new Date();
+  const timeDifference = currentTime.getTime() - parsedTimestamp.getTime();
+
+  // console.log("Time difference in ms:", timeDifference);
+
+  const seconds = Math.floor(timeDifference / 1000);
+  if (seconds < 60) {
+    if (seconds === 1) {
+      time = trans("secondAgo", { count: seconds });
+    } else {
+      time = trans("secondsAgo", { count: seconds });
+    }
+    // console.log("Formatted time (seconds):", time);
+    return time;
+  }
+
+  const minutes = Math.floor(timeDifference / (1000 * 60));
+  if (minutes < 60) {
+    if (minutes === 1) {
+      time = trans("minuteAgo", { count: minutes });
+    } else {
+      time = trans("minutesAgo", { count: minutes });
+    }
+    // console.log("Formatted time (minutes):", time);
+    return time;
+  }
+
+  const hours = Math.floor(timeDifference / (1000 * 60 * 60));
+  if (hours < 24) {
+    if (hours === 1) {
+      time = trans("hourAgo", { count: hours });
+    } else {
+      time = trans("hoursAgo", { count: hours });
+    }
+    // console.log("Formatted time (hours):", time);
+    return time;
+  }
+
+  const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+  if (days < 30) {
+    if (days === 1) {
+      time = trans("dayAgo", { count: days });
+    } else {
+      time = trans("daysAgo", { count: days });
+    }
+    // console.log("Formatted time (days):", time);
+    return time;
+  }
+
+  const months = Math.floor(timeDifference / (1000 * 60 * 60 * 24 * 30));
+  if (months < 12) {
+    if (months === 1) {
+      time = trans("monthAgo", { count: months });
+    } else {
+      time = trans("monthsAgo", { count: months });
+    }
+    // console.log("Formatted time (months):", time);
+    return time;
+  }
+
+  const years = Math.floor(timeDifference / (1000 * 60 * 60 * 24 * 365));
+  if (years === 1) {
+    time = trans("yearAgo", { count: years });
+  } else {
+    time = trans("yearsAgo", { count: years });
+  }
+  // console.log("Formatted time (years):", time);
+
+  return time;
 }
 
 // Placeholder for translation hook if not provided in context

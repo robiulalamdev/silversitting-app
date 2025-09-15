@@ -1,3 +1,4 @@
+import useGetTranslation from "@/hooks/useGetTranslation";
 import { StyleSheet, Text, View } from "react-native";
 
 interface StepCardProps {
@@ -22,25 +23,23 @@ function StepCard({ stepNumber, description }: StepCardProps) {
 }
 
 export default function HowItWorks() {
+  const trans = useGetTranslation();
   return (
     <View className="flex-1 bg-[#cc8cdc] py-12 px-6 items-center">
       <Text className="text-3xl font-bold text-white text-center mb-10">
-        Here&apos;s how it works
+        {trans("howitworks")}
       </Text>
 
       <View className="w-full max-w-md">
         <StepCard
           stepNumber={1}
-          description="Seniors aged 55 and over register as childcare workers"
+          description={trans("SeniorsRegisterAsChildcareWorkers")}
         />
         <StepCard
           stepNumber={2}
-          description="With the proximity search, parents can find suitable childcare providers in the vicinity"
+          description={trans("ProximitySearchForChildcare")}
         />
-        <StepCard
-          stepNumber={3}
-          description="Parents get in touch and after getting to know each other personally, we can start!"
-        />
+        <StepCard stepNumber={3} description={trans("ParentsGetInTouch")} />
       </View>
     </View>
   );

@@ -1,14 +1,5 @@
+import useGetTranslation from "@/hooks/useGetTranslation";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-
-// Placeholder for translation hook
-const useGetTranslation = () => {
-  const translations: { [key: string]: string } = {
-    HealthWellbeingCategory: "Health & Wellbeing",
-    PsychologyCategory: "Psychology",
-    UpbringingCategory: "Upbringing",
-  };
-  return (key: string) => translations[key] || key;
-};
 
 interface BlogShareProps {
   blogDetails: {

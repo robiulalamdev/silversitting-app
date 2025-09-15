@@ -1,5 +1,3 @@
-"use client";
-
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import {
@@ -12,6 +10,7 @@ import {
 } from "react-native";
 
 import { useAuth } from "@/hooks/useAuth";
+import useGetTranslation from "@/hooks/useGetTranslation";
 import {
   useGetMessageByConversationQuery,
   usePutMessageSeenMutation,
@@ -27,6 +26,8 @@ export default function ChatItemCard({
   members,
   conversationId,
 }: ChatItemCardProps) {
+  const trans = useGetTranslation();
+
   const router = useRouter();
   const { user } = useAuth();
   const [userInfo, setUserInfo] = useState<any>(null);
@@ -100,7 +101,7 @@ export default function ChatItemCard({
         className="rounded-full mb-4"
       />
       <Text className="text-base font-semibold text-primary mb-1">
-        Conversation with
+        {trans("Conversationwith")}
       </Text>
       {userInfo && (
         <Text className="text-lg font-bold text-gray-800 text-center mb-6">
@@ -116,7 +117,7 @@ export default function ChatItemCard({
         {unreadMessagesCount > 0 && (
           <View className="absolute -top-2 -right-2 bg-red-500 rounded-full w-6 h-6 justify-center items-center">
             <Text className="text-white text-xs font-bold">
-              {unreadMessagesCount}
+              {unreadMessagesCount} {trans("unreadmessages")}
             </Text>
           </View>
         )}

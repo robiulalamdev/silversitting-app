@@ -9,7 +9,7 @@ export default function useGetTranslation() {
 
   const translate = (key: TranslationKeys, params: Params = {}) => {
     const lang = i18n.language === "de" ? "de" : "en";
-    const translation = translations[lang][key];
+    const translation: any = translations[lang][key];
 
     if (!translation) {
       console.error(`Missing translation for key: "${key}" in "${lang}"`);

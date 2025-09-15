@@ -1,4 +1,5 @@
 import BlogItem from "@/components/blogs/BlogItem";
+import useGetTranslation from "@/hooks/useGetTranslation";
 import { useGetAllBlogsQuery } from "@/redux/features/blog/blogApi";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next"; // Assuming you have react-i18next setup
@@ -11,18 +12,6 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-
-// Placeholder for translation hook
-const useGetTranslation = () => {
-  const translations: { [key: string]: string } = {
-    AllPosts: "All Posts",
-    HealthWellbeing: "Health & Wellbeing",
-    Psychology: "Psychology",
-    Upbringing: "Upbringing",
-    NoBlogsFound: "No Blogs Found",
-  };
-  return (key: string) => translations[key] || key;
-};
 
 interface BlogItem {
   _id: string;

@@ -1,6 +1,7 @@
 import Header from "@/components/shared/header/Header";
 import { COLORS } from "@/constants/theme";
 import { useAuth } from "@/hooks/useAuth";
+import useGetTranslation from "@/hooks/useGetTranslation";
 import { Feather, MaterialIcons } from "@expo/vector-icons";
 import { Tabs, useRouter } from "expo-router";
 import { useColorScheme, View, ViewStyle } from "react-native";
@@ -12,6 +13,8 @@ export default function TabsLayout() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const colorScheme = useColorScheme(); // 'light' | 'dark'
+
+  const trans = useGetTranslation();
 
   return (
     <View
@@ -45,7 +48,7 @@ export default function TabsLayout() {
         <Tabs.Screen
           name="index"
           options={{
-            title: "Start",
+            title: trans("startTab"),
             tabBarIcon: ({ color }) => (
               <MaterialIcons name="home" size={30} color={color} />
             ),
@@ -55,7 +58,7 @@ export default function TabsLayout() {
         <Tabs.Screen
           name="profile/index"
           options={{
-            title: "Profile",
+            title: trans("profileTab"),
             tabBarIcon: ({ color }: { color: string }) => (
               <MaterialIcons name="person" size={30} color={color} />
             ),
@@ -83,7 +86,7 @@ export default function TabsLayout() {
         <Tabs.Screen
           name="search/index"
           options={{
-            title: "Search",
+            title: trans("searchTab"),
             tabBarIcon: ({ color }) => (
               <Feather name="search" size={25} color={color} />
             ),
@@ -92,7 +95,7 @@ export default function TabsLayout() {
         <Tabs.Screen
           name="blogs/index"
           options={{
-            title: "Blogs",
+            title: trans("blogTab"),
             tabBarIcon: ({ color }) => (
               <MaterialIcons name="article" size={28} color={color} />
             ),
@@ -101,6 +104,26 @@ export default function TabsLayout() {
 
         <Tabs.Screen
           name="blogs/[id]"
+          options={{
+            href: null,
+          }}
+        />
+
+        <Tabs.Screen
+          name="pro-box/index"
+          options={{
+            href: null,
+          }}
+        />
+
+        <Tabs.Screen
+          name="settings/index"
+          options={{
+            href: null,
+          }}
+        />
+        <Tabs.Screen
+          name="change-password/index"
           options={{
             href: null,
           }}

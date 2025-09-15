@@ -1,3 +1,4 @@
+import useGetTranslation from "@/hooks/useGetTranslation";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -54,18 +55,19 @@ function RegisterCard({
 }
 
 export default function HomeRegister() {
+  const trans = useGetTranslation();
   return (
     <View className="flex-1 bg-white mt-12">
       <RegisterCard
         iconSource={require("../../assets/images/home/register/register-childcare.png")} // Placeholder for childcare worker icon
-        title="Register as a childcare worker"
-        buttonText="Register now"
+        title={trans("RegisterAsChildcareWorker")}
+        buttonText={trans("RegisterNow")}
         role="childcarer"
       />
       <RegisterCard
         iconSource={require("../../assets/images/home/register/register-parent.png")} // Placeholder for childcare worker icon
-        title="Register as a parent"
-        buttonText="Register now"
+        title={trans("RegisterAsParent")}
+        buttonText={trans("RegisterNow")}
         role="parents"
       />
     </View>

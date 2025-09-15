@@ -1,5 +1,6 @@
 import LanguageSelector from "@/components/common/languages/LanguageSelector";
 import { useAuth } from "@/hooks/useAuth";
+import useGetTranslation from "@/hooks/useGetTranslation";
 import { useGlobal } from "@/hooks/useGlobal";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
@@ -14,6 +15,8 @@ import {
 import { Button, Divider } from "react-native-paper";
 
 const HeaderDrawer = () => {
+  const trans = useGetTranslation();
+
   const { showMenu, handleShowMenu } = useGlobal();
   const { isAuthenticated, onLogout } = useAuth();
   const drawerAnim = useRef(new Animated.Value(300)).current;
@@ -75,20 +78,22 @@ const HeaderDrawer = () => {
               </View>
 
               <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Company</Text>
+                <Text style={styles.sectionTitle}>{trans("company")}</Text>
 
                 <TouchableOpacity
                   style={styles.menuItem}
                   onPress={() => handleNavigation("/")}
                 >
-                  <Text style={styles.menuItemText}>For Child Carer</Text>
+                  <Text style={styles.menuItemText}>
+                    {trans("forChildCarer")}
+                  </Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
                   style={styles.menuItem}
                   onPress={() => handleNavigation("/")}
                 >
-                  <Text style={styles.menuItemText}>For Parents</Text>
+                  <Text style={styles.menuItemText}>{trans("forParents")}</Text>
                 </TouchableOpacity>
 
                 {isAuthenticated && (
@@ -96,7 +101,7 @@ const HeaderDrawer = () => {
                     style={styles.menuItem}
                     onPress={() => handleNavigation("/(tabs)/profile")}
                   >
-                    <Text style={styles.menuItemText}>Profile</Text>
+                    <Text style={styles.menuItemText}>{trans("profile")}</Text>
                   </TouchableOpacity>
                 )}
 
@@ -104,7 +109,7 @@ const HeaderDrawer = () => {
                   style={styles.menuItem}
                   onPress={() => handleNavigation("/(tabs)/insights")}
                 >
-                  <Text style={styles.menuItemText}>Insights</Text>
+                  <Text style={styles.menuItemText}>{trans("insights")}</Text>
                 </TouchableOpacity>
 
                 {isAuthenticated && (
@@ -112,7 +117,7 @@ const HeaderDrawer = () => {
                     style={styles.menuItem}
                     onPress={() => handleNavigation("/settings")}
                   >
-                    <Text style={styles.menuItemText}>Settings</Text>
+                    <Text style={styles.menuItemText}>{trans("settings")}</Text>
                   </TouchableOpacity>
                 )}
 
@@ -120,7 +125,7 @@ const HeaderDrawer = () => {
                   style={styles.menuItem}
                   onPress={() => handleNavigation("/(tabs)/legal")}
                 >
-                  <Text style={styles.menuItemText}>Legal</Text>
+                  <Text style={styles.menuItemText}>{trans("legal")}</Text>
                 </TouchableOpacity>
               </View>
 
@@ -141,7 +146,7 @@ const HeaderDrawer = () => {
                       <MaterialIcons name="logout" size={size} color={color} />
                     )}
                   >
-                    Logout
+                    {trans("logout")}
                   </Button>
                 ) : (
                   <Button
@@ -153,7 +158,7 @@ const HeaderDrawer = () => {
                       <MaterialIcons name="login" size={size} color={color} />
                     )}
                   >
-                    Login
+                    {trans("login")}
                   </Button>
                 )}
               </View>

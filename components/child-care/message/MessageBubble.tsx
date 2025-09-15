@@ -1,3 +1,4 @@
+import useGetTranslation from "@/hooks/useGetTranslation";
 import { formatMessageTime } from "@/utils/format/time";
 import { Image, StyleSheet, Text, View } from "react-native";
 
@@ -16,6 +17,7 @@ export default function MessageBubble({
   isOwnMessage,
   senderProfileImage,
 }: MessageBubbleProps) {
+  const trans = useGetTranslation();
   return (
     <View
       className={`flex-row items-end mb-6 ${isOwnMessage ? "justify-end" : "justify-start"}`}
@@ -44,7 +46,7 @@ export default function MessageBubble({
             isOwnMessage ? "text-right" : "text-left"
           }`}
         >
-          {formatMessageTime(message.createdAt)}
+          {formatMessageTime(message.createdAt, trans)}
         </Text>
       </View>
     </View>

@@ -1,13 +1,6 @@
+import useGetTranslation from "@/hooks/useGetTranslation";
 import { MaterialIcons } from "@expo/vector-icons"; // For share icon
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-
-// Placeholder for translation hook
-const useGetTranslation = () => {
-  const translations: { [key: string]: string } = {
-    Share: "Share",
-  };
-  return (key: string) => translations[key] || key;
-};
 
 interface BlogDetailsBannerProps {
   blogDetails: {

@@ -18,11 +18,13 @@ import { useToast } from "react-native-toast-notifications";
 
 // Redux RTK Query imports
 import { BASE_URL } from "@/config"; // Assuming BASE_URL is defined here
+import useGetTranslation from "@/hooks/useGetTranslation";
 import { IUser } from "@/lib/types/user.type";
 import {
   useEditUserMutation,
   useGetSingleUserQuery,
 } from "../../redux/features/user/userApi";
+import { KeyboardSpacer } from "../keyboard/KeyboardSpacer";
 
 // Define types for Redux state
 interface IProps {
@@ -30,6 +32,7 @@ interface IProps {
 }
 
 export default function ChildCareProfile({ user }: IProps) {
+  const trans = useGetTranslation();
   const toast = useToast();
 
   const {
@@ -208,21 +211,19 @@ export default function ChildCareProfile({ user }: IProps) {
           style={styles.cardShadow}
         >
           <Text className="text-2xl font-bold text-primary text-center mb-4">
-            Information About You
+            {trans("informationAboutYou")}
           </Text>
           <Text className="text-gray-700 text-base text-center mb-6">
-            In order to be found by parents as a childcare worker, some
-            information about you is required. This information is the only way
-            to ensure that care is provided that meets your expectations.
+            {trans("description")}
           </Text>
 
           <View className="bg-purple-100 rounded-lg p-4 mb-6">
             <Text className="text-gray-700 text-base">
-              You are registered on SilverSitting with this email address:{" "}
+              {trans("registeredEmail")}{" "}
               <Text className="font-semibold">{user?.email}</Text>
             </Text>
             <Text className="text-gray-600 text-sm mt-1">
-              Please always use this email address when registering.
+              {trans("useThisEmail")}
             </Text>
           </View>
 
@@ -258,7 +259,7 @@ export default function ChildCareProfile({ user }: IProps) {
           <View className="grid grid-cols-1 gap-y-6">
             <View>
               <Text className="text-gray-700 text-base mb-2">
-                First Name <Text className="text-red-500">*</Text>
+                {trans("firstName")} <Text className="text-red-500">*</Text>
               </Text>
               <TextInput
                 mode="outlined"
@@ -273,7 +274,7 @@ export default function ChildCareProfile({ user }: IProps) {
 
             <View>
               <Text className="text-gray-700 text-base mb-2">
-                Last Name <Text className="text-red-500">*</Text>
+                {trans("lastName")} <Text className="text-red-500">*</Text>
               </Text>
               <TextInput
                 mode="outlined"
@@ -287,7 +288,9 @@ export default function ChildCareProfile({ user }: IProps) {
             </View>
 
             <View>
-              <Text className="text-gray-700 text-base mb-2">Phone Number</Text>
+              <Text className="text-gray-700 text-base mb-2">
+                {trans("phoneNumber")}
+              </Text>
               <TextInput
                 mode="outlined"
                 value={phoneNumber}
@@ -301,7 +304,9 @@ export default function ChildCareProfile({ user }: IProps) {
             </View>
 
             <View>
-              <Text className="text-gray-700 text-base mb-2">Street, No</Text>
+              <Text className="text-gray-700 text-base mb-2">
+                {trans("streetNo")}
+              </Text>
               <TextInput
                 mode="outlined"
                 value={streetOrHouseNumber}
@@ -315,7 +320,7 @@ export default function ChildCareProfile({ user }: IProps) {
 
             <View>
               <Text className="text-gray-700 text-base mb-2">
-                Post Code <Text className="text-red-500">*</Text>
+                {trans("postCode")} <Text className="text-red-500">*</Text>
               </Text>
               <TextInput
                 mode="outlined"
@@ -331,7 +336,7 @@ export default function ChildCareProfile({ user }: IProps) {
 
             <View>
               <Text className="text-gray-700 text-base mb-2">
-                Location <Text className="text-red-500">*</Text>
+                {trans("location")} <Text className="text-red-500">*</Text>
               </Text>
               <TextInput
                 mode="outlined"
@@ -348,13 +353,12 @@ export default function ChildCareProfile({ user }: IProps) {
           {/* Checkbox and Radio Input Fields */}
           <View className="mt-8">
             <Text className="text-lg font-semibold text-gray-800 mb-4">
-              Please fill out carefully to ensure an optimal match with the
-              parents
+              {trans("fillOutCarefully")}
             </Text>
 
             <View className="mb-4">
               <Text className="text-gray-700 text-base mb-2">
-                Gender <Text className="text-red-500">*</Text>
+                {trans("gender")} <Text className="text-red-500">*</Text>
               </Text>
               <View className="flex-row gap-8">
                 <TouchableOpacity
@@ -372,7 +376,7 @@ export default function ChildCareProfile({ user }: IProps) {
                       <View className="w-2 h-2 bg-white rounded-full self-center mt-0.5" />
                     )}
                   </View>
-                  <Text className="text-gray-700">Male</Text>
+                  <Text className="text-gray-700">{trans("male")}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => setGender("Female")}
@@ -389,72 +393,82 @@ export default function ChildCareProfile({ user }: IProps) {
                       <View className="w-2 h-2 bg-white rounded-full self-center mt-0.5" />
                     )}
                   </View>
-                  <Text className="text-gray-700">Female</Text>
+                  <Text className="text-gray-700">{trans("female")}</Text>
                 </TouchableOpacity>
               </View>
             </View>
 
             <View className="mb-4">
               <Text className="text-gray-700 text-base mb-2">
-                Availability for childcare services{" "}
-                <Text className="text-red-500">*</Text>
+                {trans("availability")} <Text className="text-red-500">*</Text>
               </Text>
+
               {[
-                "During the day",
-                "In the morning",
-                "In the evening",
-                "At the weekend",
+                { value: trans("duringTheDay"), label: trans("duringTheDay") },
+                { value: trans("inTheMorning"), label: trans("inTheMorning") },
+                { value: trans("inTheEvening"), label: trans("inTheEvening") },
+                { value: trans("atTheWeekend"), label: trans("atTheWeekend") },
               ].map((item, index) => (
                 <TouchableOpacity
                   key={index}
-                  onPress={() => handleAvailabilityValue(item)}
+                  onPress={() => handleAvailabilityValue(item.value)}
                   className="flex-row items-center py-2"
                 >
                   <View
                     className={`w-5 h-5 border-2 rounded mr-2 ${
-                      availabilities.includes(item)
+                      availabilities.includes(item.value)
                         ? "bg-primary border-primary"
                         : "border-gray-400"
                     }`}
                   >
-                    {availabilities.includes(item) && (
+                    {availabilities.includes(item.value) && (
                       <Text className="text-white text-xs text-center">✓</Text>
                     )}
                   </View>
-                  <Text className="text-gray-700 text-base">{item}</Text>
+                  <Text className="text-gray-700 text-base">{item.label}</Text>
                 </TouchableOpacity>
               ))}
             </View>
 
             <View className="mb-4">
               <Text className="text-gray-700 text-base mb-2">
-                You Offer <Text className="text-red-500">*</Text>
+                {trans("youOffer")} <Text className="text-red-500">*</Text>
               </Text>
+
               {[
-                "Classic babysitting for children from 1 year",
-                "Child care for children from 3 years on",
-                "Pick-up and delivery services",
-                "Baking/cooking (for the child and with the child)",
-                "Homework help classes 1 - 4",
-                "Homework help classes 5 - 7",
+                {
+                  value: trans("classicBabysitting"),
+                  label: trans("classicBabysitting"),
+                },
+                { value: trans("childCare"), label: trans("childCare") },
+                { value: trans("pickUp"), label: trans("pickUp") },
+                { value: trans("cooking"), label: trans("cooking") },
+                {
+                  value: trans("homeworkHelp1To4"),
+                  label: trans("homeworkHelp1To4"),
+                },
+                {
+                  value: trans("homeworkHelp5To7"),
+                  label: trans("homeworkHelp5To7"),
+                },
               ].map((item, index) => (
                 <TouchableOpacity
                   key={index}
-                  onPress={() => handleOfferProvideValue(item)}
+                  onPress={() => handleOfferProvideValue(item.value)}
                   className="flex-row items-center py-2"
                 >
                   <View
                     className={`w-5 h-5 border-2 rounded mr-2 ${
-                      offers.includes(item)
+                      offers.includes(item.value)
                         ? "bg-primary border-primary"
                         : "border-gray-400"
                     }`}
                   >
-                    {offers.includes(item) && (
+                    {offers.includes(item.value) && (
                       <Text className="text-white text-xs text-center">✓</Text>
                     )}
                   </View>
-                  <Text className="text-gray-700 text-base">{item}</Text>
+                  <Text className="text-gray-700 text-base">{item.label}</Text>
                 </TouchableOpacity>
               ))}
             </View>
@@ -463,17 +477,15 @@ export default function ChildCareProfile({ user }: IProps) {
           {/* Short About You */}
           <View className="mt-8">
             <Text className="text-lg font-semibold text-gray-800 mb-2">
-              Short About You
+              {trans("shortAboutYou")}
             </Text>
             <Text className="text-gray-600 text-sm leading-relaxed mb-4">
-              This text is displayed in the hit list for the parents. Take the
-              opportunity to write a few words about yourself so that the
-              parents get a good first impression of you.
+              {trans("hitListText")}
             </Text>
             <View className="mb-2">
               <Text className="text-gray-700 text-sm">
-                <Text className="font-semibold">NOTE:</Text> Please only provide
-                information that is publicly viewable{" "}
+                <Text className="font-semibold">{trans("note")}</Text>{" "}
+                {trans("publicInfo")}{" "}
                 <Text className="text-gray-600 text-sm">({charCount}/500)</Text>{" "}
                 <Text className="text-red-500">*</Text>
               </Text>
@@ -482,7 +494,7 @@ export default function ChildCareProfile({ user }: IProps) {
               mode="outlined"
               value={aboutMe}
               onChangeText={handleAboutMeChange}
-              placeholder="Write here...."
+              placeholder={trans("writeHere")}
               multiline
               maxLength={500}
               style={styles.textAreaInput}
@@ -503,16 +515,17 @@ export default function ChildCareProfile({ user }: IProps) {
               <View className="flex-row items-center justify-center">
                 <ActivityIndicator color="white" size="small" />
                 <Text className="text-white text-lg font-semibold ml-2">
-                  Saving...
+                  {trans("save")}...
                 </Text>
               </View>
             ) : (
               <Text className="text-white text-lg font-semibold text-center">
-                Save
+                {trans("save")}
               </Text>
             )}
           </TouchableOpacity>
         </View>
+        <KeyboardSpacer reduceHeight={220} />
       </ScrollView>
     </KeyboardAvoidingView>
   ) : (

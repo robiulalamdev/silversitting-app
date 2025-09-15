@@ -14,9 +14,11 @@ import { TextInput } from "react-native-paper";
 import { useToast } from "react-native-toast-notifications";
 
 import { useAuth } from "@/hooks/useAuth";
+import useGetTranslation from "@/hooks/useGetTranslation";
 import { useChangePasswordMutation } from "../../redux/features/user/userApi";
 
 export default function ChangePassword() {
+  const trans = useGetTranslation();
   const { user, onLogout } = useAuth();
 
   const toast = useToast();
@@ -36,21 +38,16 @@ export default function ChangePassword() {
 
     const isValid = passwordRegex.test(password);
     if (!isValid) {
-      setPasswordError(
-        "Password must contain at least 8 characters with a lowercase letter and a number."
-      );
-      toast.show(
-        "Password must contain at least 8 characters with a lowercase letter and a number.",
-        {
-          type: "danger",
-        }
-      );
+      setPasswordError(trans("passwordRequirement"));
+      toast.show(trans("passwordRequirement"), {
+        type: "danger",
+      });
       return;
     }
 
     if (password !== confirmPassword) {
-      setConfirmPasswordError("Passwords do not match.");
-      toast.show("Passwords do not match.", { type: "danger" });
+      setConfirmPasswordError(trans("passwordMismatch"));
+      toast.show(trans("passwordMismatch"), { type: "danger" });
       return;
     }
 
@@ -69,20 +66,20 @@ export default function ChangePassword() {
     try {
       const response: any = await changePassword(data);
       if (response?.data?.success) {
-        toast.show("Password changed successfully!", { type: "success" });
+        toast.show(trans("passwordChangeSuccess"), { type: "success" });
         onLogout();
         // In React Native, you might clear AsyncStorage or other persistent storage here
         // AsyncStorage.removeItem("silverSittingAuth");
         router.push("/(auth)/login");
       } else {
         toast.show(
-          response?.error?.data?.message || "Failed to change password.",
+          response?.error?.data?.message || trans("somethingWentWrong"),
           { type: "danger" }
         );
       }
     } catch (error) {
       console.error("Change password error:", error);
-      toast.show("An unexpected error occurred. Please try again.", {
+      toast.show(trans("somethingWentWrong"), {
         type: "danger",
       });
     }
@@ -104,12 +101,12 @@ export default function ChangePassword() {
             style={styles.formCardShadow}
           >
             <Text className="text-2xl font-bold text-primary text-center mb-8">
-              Change password
+              {trans("changePassword")}
             </Text>
 
             <View className="mb-6">
               <Text className="text-gray-700 text-base mb-2">
-                Enter your new password
+                {trans("enterNewPassword")}
               </Text>
               <TextInput
                 mode="outlined"
@@ -138,7 +135,7 @@ export default function ChangePassword() {
 
             <View className="mb-8">
               <Text className="text-gray-700 text-base mb-2">
-                Re-enter password
+                {trans("reEnterPassword")}
               </Text>
               <TextInput
                 mode="outlined"
@@ -175,12 +172,12 @@ export default function ChangePassword() {
                 <View className="flex-row items-center justify-center">
                   <ActivityIndicator color="white" size="small" />
                   <Text className="text-white text-lg font-semibold ml-2">
-                    Changing...
+                    {trans("changing")}
                   </Text>
                 </View>
               ) : (
                 <Text className="text-white text-lg font-semibold text-center">
-                  Change
+                  {trans("change")}
                 </Text>
               )}
             </TouchableOpacity>
