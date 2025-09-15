@@ -711,12 +711,16 @@
 //   },
 // });
 
+import { KeyboardSpacer } from "@/components/keyboard/KeyboardSpacer";
 import { useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import {
   ActivityIndicator,
   Image,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
   ScrollView,
   StyleSheet,
   Text,
@@ -1493,14 +1497,21 @@ export default function Register() {
     </View>
   );
 
-  console.log("registerPage: ", registerState);
-
   return (
-    <View className="flex-1">
-      {registerState.step === 1 && renderStepOne()}
-      {registerState.step === 2 && renderStepTwo()}
-      {registerState.step === 3 && renderStepThree()}
-    </View>
+    <KeyboardAvoidingView
+      style={[{ flex: 1, backgroundColor: "white" }]}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={
+        Platform.OS === "ios" ? 90 : Keyboard.isVisible?.() ? 40 : -90
+      }
+    >
+      <View className="flex-1">
+        {registerState.step === 1 && renderStepOne()}
+        {registerState.step === 2 && renderStepTwo()}
+        {registerState.step === 3 && renderStepThree()}
+      </View>
+      <KeyboardSpacer reduceHeight={60} />
+    </KeyboardAvoidingView>
   );
 }
 

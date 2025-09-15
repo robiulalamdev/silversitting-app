@@ -14,8 +14,6 @@ const Route: React.FC = () => {
     >
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
 
-      {/* <Stack.Screen name="index" /> */}
-
       <Stack.Screen
         name="(auth)"
         options={{
@@ -24,20 +22,6 @@ const Route: React.FC = () => {
       />
 
       <Stack.Screen name="(profile)" />
-
-      <Stack.Screen name="who-we-are/index" />
-
-      <Stack.Screen name="blogs/[id]" />
-
-      <Stack.Screen name="children-provider-faq/index" />
-
-      <Stack.Screen name="insights/index" />
-
-      <Stack.Screen name="legal/index" />
-
-      <Stack.Screen name="child-care/index" />
-
-      <Stack.Screen name="child-care/message/[id]" />
     </Stack>
   );
 };

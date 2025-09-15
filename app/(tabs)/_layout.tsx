@@ -52,16 +52,6 @@ export default function TabsLayout() {
           }}
         />
 
-        {/* <Tabs.Screen
-        name="profile/index"
-        options={{
-          title: "Profile",
-          tabBarIcon: ({ color }) => (
-            <MaterialIcons name="person" size={30} color={color} />
-            ),
-            }}
-            /> */}
-
         <Tabs.Screen
           name="profile/index"
           options={{
@@ -106,6 +96,54 @@ export default function TabsLayout() {
             tabBarIcon: ({ color }) => (
               <MaterialIcons name="article" size={28} color={color} />
             ),
+          }}
+        />
+
+        <Tabs.Screen
+          name="blogs/[id]"
+          options={{
+            href: null,
+          }}
+        />
+
+        <Tabs.Screen
+          name="insights/index"
+          options={{
+            href: null,
+          }}
+        />
+        <Tabs.Screen
+          name="who-we-are/index"
+          options={{
+            href: null,
+          }}
+        />
+
+        <Tabs.Screen
+          name="children-provider-faq/index"
+          options={{
+            href: null,
+          }}
+        />
+
+        <Tabs.Screen
+          name="legal/index"
+          options={{
+            href: null,
+          }}
+        />
+
+        <Tabs.Screen
+          name="child-care/index"
+          options={{
+            href: null,
+          }}
+        />
+
+        <Tabs.Screen
+          name="child-care/message/[id]"
+          options={{
+            href: null,
           }}
         />
       </Tabs>

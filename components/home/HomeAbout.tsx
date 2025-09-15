@@ -9,9 +9,9 @@ interface InfoCardProps {
   description: string;
   linkText: string;
   linkRoute:
-    | "/children-provider-faq/index"
-    | "/who-we-are/index"
-    | "/blogs/index";
+    | "/(tabs)/children-provider-faq/index"
+    | "/(tabs)/who-we-are/index"
+    | "/(tabs)/blogs/index";
   backgroundColor: string;
   iconColor: string;
 }
@@ -70,7 +70,7 @@ export default function HomeAbout() {
         title="About us"
         description="Find out where the idea for Silver Sitting came from and what drives us."
         linkText="Learn more..."
-        linkRoute="/who-we-are/index"
+        linkRoute="/(tabs)/who-we-are/index"
         backgroundColor="#FCE7F3" // Light pink
         iconColor="#EC4899" // Pink
       />
@@ -79,7 +79,7 @@ export default function HomeAbout() {
         title="News"
         description="News, information about childcare, and more."
         linkText="To the news"
-        linkRoute="/blogs/index"
+        linkRoute="/(tabs)/blogs/index"
         backgroundColor="#EDE9FE" // Light purple
         iconColor="#8B5CF6" // Purple
       />
@@ -88,7 +88,7 @@ export default function HomeAbout() {
         title="Security"
         description="Your safety is important to us!"
         linkText="Take care of children safely"
-        linkRoute="/children-provider-faq/index"
+        linkRoute="/(tabs)/children-provider-faq/index"
         backgroundColor="#E0F7FA" // Light blue/cyan
         iconColor="#00BCD4" // Cyan
       />

@@ -94,7 +94,7 @@ const HeaderDrawer = () => {
                 {isAuthenticated && (
                   <TouchableOpacity
                     style={styles.menuItem}
-                    onPress={() => handleNavigation("/(profile)")}
+                    onPress={() => handleNavigation("/(tabs)/profile")}
                   >
                     <Text style={styles.menuItemText}>Profile</Text>
                   </TouchableOpacity>
@@ -102,7 +102,7 @@ const HeaderDrawer = () => {
 
                 <TouchableOpacity
                   style={styles.menuItem}
-                  onPress={() => handleNavigation("/insights")}
+                  onPress={() => handleNavigation("/(tabs)/insights")}
                 >
                   <Text style={styles.menuItemText}>Insights</Text>
                 </TouchableOpacity>
@@ -118,7 +118,7 @@ const HeaderDrawer = () => {
 
                 <TouchableOpacity
                   style={styles.menuItem}
-                  onPress={() => handleNavigation("/legal")}
+                  onPress={() => handleNavigation("/(tabs)/legal")}
                 >
                   <Text style={styles.menuItemText}>Legal</Text>
                 </TouchableOpacity>

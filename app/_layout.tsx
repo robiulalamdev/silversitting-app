@@ -60,7 +60,7 @@ export default function RootLayout() {
 
   return (
     <Provider store={store}>
-      <ToastProvider>
+      <ToastProvider placement="top">
         <PersistGate
           loading={
             <View

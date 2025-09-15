@@ -35,7 +35,7 @@ export default function SearchResultCard({ item }: SearchResultCardProps) {
 
       if (id) {
         router.push({
-          pathname: "/child-care/message/[id]",
+          pathname: "/(tabs)/child-care/message/[id]",
           params: { id: id },
         });
       }

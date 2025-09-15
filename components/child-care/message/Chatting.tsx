@@ -23,6 +23,7 @@ import {
 import { setConversationId } from "@/redux/features/chat/chatSlice";
 
 // Local components and utilities
+import { KeyboardSpacer } from "@/components/keyboard/KeyboardSpacer";
 import { BASE_URL } from "@/config";
 import { useAuth } from "@/hooks/useAuth";
 import { useGetSingleUserQuery } from "@/redux/features/user/userApi";
@@ -369,6 +370,7 @@ export default function ChattingScreen({ receiverId }: IProps) {
           )}
         </TouchableOpacity>
       </View>
+      <KeyboardSpacer reduceHeight={60} />
     </View>
   );
 }

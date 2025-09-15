@@ -228,7 +228,10 @@ export default function ChildCareProfile({ user }: IProps) {
 
           {/* Image Input */}
           <View className="items-center mb-8">
-            <View className="relative w-32 h-32 rounded-full border-2 border-primary justify-center items-center overflow-hidden">
+            <TouchableOpacity
+              onLongPress={handleImagePick}
+              className="relative w-32 h-32 rounded-full border-2 border-primary justify-center items-center overflow-hidden"
+            >
               <Image
                 className="w-full h-full object-cover"
                 source={
@@ -239,7 +242,7 @@ export default function ChildCareProfile({ user }: IProps) {
                 alt="User Profile"
               />
               <TouchableOpacity
-                onPress={handleImagePick}
+                onLongPress={handleImagePick}
                 className="absolute bottom-0 right-0 bg-primary rounded-full p-2"
                 style={styles.cameraIconContainer}
               >
@@ -248,11 +251,11 @@ export default function ChildCareProfile({ user }: IProps) {
                   style={styles.cameraIcon}
                 />
               </TouchableOpacity>
-            </View>
+            </TouchableOpacity>
           </View>
 
           {/* Input Fields */}
-          <View className="gap-y-6">
+          <View className="grid grid-cols-1 gap-y-6">
             <View>
               <Text className="text-gray-700 text-base mb-2">
                 First Name <Text className="text-red-500">*</Text>
