@@ -98,8 +98,10 @@ export default function Login({ isPopup = false, onHide = () => {} }: IProps) {
         if (errorMessage === trans("pleaseVerifyYourEmail")) {
           setResendErrors(errorMessage);
           setResendEmail(data.email);
+        } else if (errorMessage === "Ungültiger Benutzer oder Passwort") {
+          setErrors(trans("invalidAcPass"));
         } else {
-          setErrors(errorMessage || trans("somethingWentWrong"));
+          setErrors(trans("somethingWentWrong"));
         }
       } else {
         setErrors(trans("somethingWentWrong"));

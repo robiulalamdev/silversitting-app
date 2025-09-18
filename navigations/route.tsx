@@ -22,6 +22,9 @@ const Route: React.FC = () => {
       />
 
       <Stack.Screen name="(profile)" />
+
+      <Stack.Screen name="privacy-statement/index" />
+      <Stack.Screen name="terms-and-conditions/index" />
     </Stack>
   );
 };

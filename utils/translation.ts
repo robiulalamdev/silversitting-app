@@ -966,6 +966,20 @@ const translations = {
     interestingForSeniorsDescription:
       "Wege aus der Einsamkeit eV ist ein bundesweit tätiger Verein, der sich für die Verbesserung der Lebensbedingungen älterer Menschen und ihrer Stellung in der Gesellschaft einsetzt.",
     interestingForSeniorsLinkText: "Wege aus der Einsamkeit eV",
+
+    // for login
+    emailRequired: "E-Mail ist erforderlich",
+    invalidEmail: "Ungültige E-Mail",
+    passwordRequired: "Passwort ist erforderlich",
+    passwordMinLength: "Passwort muss mindestens 6 Zeichen lang sein",
+    loginFailed: "Anmeldung fehlgeschlagen",
+    loginSuccessful: "Anmeldung erfolgreich",
+    invalidAcPass: "Ungültiger Benutzer oder Passwort",
+
+    // for register
+    acceptTermsCondition:
+      "Bitte akzeptieren Sie die allgemeinen Geschäftsbedingungen",
+    acceptPrivacyPolicy: "Bitte akzeptieren Sie die Datenschutzrichtlinie",
   },
 
   en: {
@@ -1916,6 +1930,19 @@ const translations = {
     interestingForSeniorsDescription:
       "Ways out of loneliness eV is an association that works nationwide to improve the living conditions of old people and their position in society.",
     interestingForSeniorsLinkText: "Ways out of loneliness eV",
+
+    // for login
+    emailRequired: "Email is required",
+    invalidEmail: "Invalid email",
+    passwordRequired: "Password is required",
+    passwordMinLength: "Password min 6 length",
+    loginFailed: "Login failed",
+    loginSuccessful: "Login successful",
+    invalidAcPass: "Invalid user or password",
+
+    // for register
+    acceptTermsCondition: "Please accept terms and conditions",
+    acceptPrivacyPolicy: "Please accept privacy policy",
   },
 } as const;
 

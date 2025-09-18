@@ -1,12 +1,10 @@
-import { KeyboardSpacer } from "@/components/keyboard/KeyboardSpacer";
 import useGetTranslation from "@/hooks/useGetTranslation";
-import { useLocalSearchParams } from "expo-router";
+import { Link, useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import {
   ActivityIndicator,
   Image,
-  Keyboard,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -254,7 +252,7 @@ export default function Register() {
   };
 
   const renderStepOne = () => (
-    <View className="flex-1 bg-white px-6 py-8 justify-center">
+    <View className="flex-1 bg-white px-6 py-8 justify-center w-full">
       <Text className="text-3xl font-bold text-primary text-center mb-8">
         {trans("register")}
       </Text>
@@ -620,6 +618,7 @@ export default function Register() {
                   onBlur={onBlur}
                   secureTextEntry
                   style={styles.textInput}
+                  autoCapitalize="none"
                   outlineStyle={[
                     styles.inputOutline,
                     errors.password && styles.inputError,
@@ -654,6 +653,7 @@ export default function Register() {
                   onChangeText={onChange}
                   onBlur={onBlur}
                   secureTextEntry
+                  autoCapitalize="none"
                   style={styles.textInput}
                   outlineStyle={[
                     styles.inputOutline,
@@ -675,7 +675,7 @@ export default function Register() {
           <Controller
             control={control}
             name="terms"
-            rules={{ required: "Please accept terms and conditions" }}
+            rules={{ required: trans("acceptTermsCondition") }}
             render={({ field: { onChange, value } }) => (
               <TouchableOpacity
                 onPress={() => onChange(!value)}
@@ -689,17 +689,29 @@ export default function Register() {
                   )}
                 </View>
                 <Text className="text-gray-700 flex-1">
-                  {trans("Ihaveread")} {trans("termsandconditions")}{" "}
-                  {trans("andagree")}
+                  {trans("Ihaveread")}{" "}
+                  <Link
+                    href="/terms-and-conditions"
+                    className="text-primary font-semibold"
+                    replace={false}
+                  >
+                    {trans("termsandconditions")}
+                  </Link>{" "}
+                  {trans("andagree")} <Text className="text-red-500">*</Text>
                 </Text>
               </TouchableOpacity>
             )}
           />
+          {errors.terms && (
+            <Text className="text-red-500 text-sm mt-1 mb-2">
+              {errors.terms.message}
+            </Text>
+          )}
 
           <Controller
             control={control}
             name="privacy"
-            rules={{ required: "Please accept privacy policy" }}
+            rules={{ required: trans("acceptPrivacyPolicy") }}
             render={({ field: { onChange, value } }) => (
               <TouchableOpacity
                 onPress={() => onChange(!value)}
@@ -713,12 +725,24 @@ export default function Register() {
                   )}
                 </View>
                 <Text className="text-gray-700 flex-1">
-                  {trans("Ihaveread")} {trans("privacypolicy")}{" "}
-                  {trans("andagree")}
+                  {trans("Ihaveread")}{" "}
+                  <Link
+                    href="/privacy-statement"
+                    className="text-primary font-semibold"
+                    replace={false}
+                  >
+                    {trans("privacypolicy")}
+                  </Link>{" "}
+                  {trans("andagree")} <Text className="text-red-500">*</Text>
                 </Text>
               </TouchableOpacity>
             )}
           />
+          {errors.privacy && (
+            <Text className="text-red-500 text-sm m-1">
+              {errors.privacy.message}
+            </Text>
+          )}
         </View>
 
         <View className="flex-row gap-4 mb-6">
@@ -768,9 +792,9 @@ export default function Register() {
       <Text className="text-gray-700 text-center mb-6">
         {trans("completeRegistrationInstruction")}
       </Text>
-      <Text className="text-gray-600 text-center text-sm mb-8">
+      {/* <Text className="text-gray-600 text-center text-sm mb-8">
         {trans("forinformation")}
-      </Text>
+      </Text> */}
       <TouchableOpacity
         className={`py-4 px-8 rounded-lg ${isResendAllowed ? "bg-primary" : "bg-gray-400"}`}
         onPress={handleResendLink}
@@ -793,16 +817,14 @@ export default function Register() {
     <KeyboardAvoidingView
       style={[{ flex: 1, backgroundColor: "white" }]}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      keyboardVerticalOffset={
-        Platform.OS === "ios" ? 90 : Keyboard.isVisible?.() ? 40 : -90
-      }
+      keyboardVerticalOffset={Platform.OS === "ios" ? 90 : 0}
     >
-      <View className="flex-1">
+      <View className="flex-1 justify-center items-center">
         {registerState.step === 1 && renderStepOne()}
         {registerState.step === 2 && renderStepTwo()}
         {registerState.step === 3 && renderStepThree()}
       </View>
-      <KeyboardSpacer reduceHeight={60} />
+      {/* <KeyboardSpacer reduceHeight={60} /> */}
     </KeyboardAvoidingView>
   );
 }
