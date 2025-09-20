@@ -969,7 +969,7 @@ const translations = {
 
     // for login
     emailRequired: "E-Mail ist erforderlich",
-    invalidEmail: "Ungültige E-Mail",
+    invalidEmail: "Ungültige E-Mail-Adresse",
     passwordRequired: "Passwort ist erforderlich",
     passwordMinLength: "Passwort muss mindestens 6 Zeichen lang sein",
     loginFailed: "Anmeldung fehlgeschlagen",
@@ -1933,7 +1933,7 @@ const translations = {
 
     // for login
     emailRequired: "Email is required",
-    invalidEmail: "Invalid email",
+    invalidEmail: "Invalid email address",
     passwordRequired: "Password is required",
     passwordMinLength: "Password min 6 length",
     loginFailed: "Login failed",

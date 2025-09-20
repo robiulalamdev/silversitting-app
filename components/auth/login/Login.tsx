@@ -3,7 +3,7 @@ import {
   useLoginMutation,
   useSendResendEmailMutation,
 } from "@/redux/features/user/userApi";
-import { useRouter } from "expo-router";
+import { RelativePathString, useRouter } from "expo-router";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import {
@@ -17,6 +17,7 @@ import { TextInput, TouchableRipple } from "react-native-paper";
 import { useToast } from "react-native-toast-notifications";
 
 // ✅ Import translation hook
+import { useAuth } from "@/hooks/useAuth";
 import useGetTranslation from "@/hooks/useGetTranslation";
 
 interface LoginFormData {
@@ -30,6 +31,7 @@ type IProps = {
 };
 
 export default function Login({ isPopup = false, onHide = () => {} }: IProps) {
+  const { redirectPath, setRedirectPath, setUserData } = useAuth();
   const router = useRouter();
   const toast = useToast();
   const [errors, setErrors] = useState("");
@@ -82,12 +84,23 @@ export default function Login({ isPopup = false, onHide = () => {} }: IProps) {
       });
 
       if (response.data?.accessToken) {
+        setUserData({
+          _id: response.data.user._id,
+          role: response.data.user.role,
+          firstName: response.data.user.firstName,
+          lastName: response.data.user.lastName,
+          email: response.data.user.email,
+          isVerified: response.data.user.isVerified,
+          residance: response.data.user.residance,
+        });
         toast.show(trans("loginSuccessful"), { type: "success" });
         if (isPopup) {
           onHide();
         } else {
-          if (router.canGoBack()) {
-            router.back();
+          if (redirectPath) {
+            const rp = redirectPath;
+            setRedirectPath(null);
+            router.replace(rp as RelativePathString);
           } else {
             router.replace("/(tabs)");
           }

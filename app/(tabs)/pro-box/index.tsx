@@ -3,16 +3,35 @@ import { ActivityIndicator, FlatList, Text, View } from "react-native";
 import ChatItemCard from "@/components/profile/probox/ChatItemCard";
 import NoSms from "@/components/profile/probox/NoSms";
 import { useAuth } from "@/hooks/useAuth";
+import { useRouter, useSegments } from "expo-router";
+import { useEffect } from "react";
 import { useGetConversationByUserQuery } from "../../../redux/features/chat/chatApi";
 
 export default function ProBoxScreen() {
-  const { user } = useAuth();
+  const { user, isAuthenticated, setRedirectPath } = useAuth();
   const { data, isLoading, isSuccess, isError } = useGetConversationByUserQuery(
     user?._id || "",
     {
       skip: !user?._id, // Skip the query if user ID is not available
     }
   );
+
+  const segments = useSegments();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      const fullPath = "/" + segments.join("/");
+      setRedirectPath(fullPath); // store complete path
+      router.replace("/(auth)/login"); // replace with login
+    }
+  }, [isAuthenticated]);
+
+  if (!isAuthenticated) return null;
+
+  // if (!isAuthenticated) {
+  //   return <Redirect href="/(auth)/login" withAnchor={false} />;
+  // }
 
   if (isLoading) {
     return (

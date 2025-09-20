@@ -23,6 +23,7 @@ export default function Banner() {
 
   const [selectedTab, setSelectedTab] = useState<SelectedTab>("caregiver"); // Default to 'Find Caregiver'
   const [careAddress, setCareAddress] = useState("");
+  const [isAddressEmpty, setIsAddressEmpty] = useState<boolean>(false);
 
   const backgroundImage =
     selectedTab === "caregiver"
@@ -54,6 +55,8 @@ export default function Banner() {
           location: careAddress,
         },
       });
+    } else {
+      setIsAddressEmpty(true);
     }
   };
 
@@ -126,7 +129,12 @@ export default function Banner() {
               <TextInput
                 mode="outlined"
                 value={careAddress}
-                onChangeText={setCareAddress}
+                onChangeText={(v) => {
+                  setCareAddress(v);
+                  if (isAddressEmpty) {
+                    setIsAddressEmpty(false);
+                  }
+                }}
                 placeholder={trans("EnterCareAddress")}
                 style={styles.textInput}
                 outlineStyle={styles.inputOutline}
@@ -134,6 +142,9 @@ export default function Banner() {
                 textColor="black"
                 placeholderTextColor="black"
               />
+              <Text className="text-red-500 text-sm mt-1">
+                {isAddressEmpty && !careAddress && trans("PleaseFillOut")}
+              </Text>
             </View>
 
             {/* Find Now Button */}

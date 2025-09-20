@@ -1,13 +1,14 @@
 import useGetTranslation from "@/hooks/useGetTranslation";
+import * as Linking from "expo-linking";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function Known() {
   const trans = useGetTranslation();
 
   const handleLinkPress = (url: string) => {
-    // In a real Expo app, you might use Linking.openURL or a WebView
-    console.log(`Opening URL: ${url}`);
-    // Example: Linking.openURL(url);
+    if (url) {
+      Linking.openURL(url);
+    }
   };
 
   return (

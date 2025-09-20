@@ -25,6 +25,9 @@ const Route: React.FC = () => {
 
       <Stack.Screen name="privacy-statement/index" />
       <Stack.Screen name="terms-and-conditions/index" />
+      <Stack.Screen name="who-we-are/index" />
+      <Stack.Screen name="children-provider-faq/index" />
+      <Stack.Screen name="feedback/index" />
     </Stack>
   );
 };

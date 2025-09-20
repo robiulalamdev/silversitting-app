@@ -9,7 +9,7 @@ import { TouchableRipple } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function TabsLayout() {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, setRedirectPath } = useAuth();
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const colorScheme = useColorScheme(); // 'light' | 'dark'
@@ -67,6 +67,7 @@ export default function TabsLayout() {
                 if (isAuthenticated) {
                   if (props.onPress) props.onPress(); // Go to profile
                 } else {
+                  setRedirectPath("/(tabs)/profile");
                   router.push("/(auth)/login"); // Redirect to login
                 }
               };
