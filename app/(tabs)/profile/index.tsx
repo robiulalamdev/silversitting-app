@@ -3,17 +3,25 @@ import ChildCareProfile from "@/components/profile/ChildCareProfile";
 import ParentProfile from "@/components/profile/ParentProfile";
 import { useAuth } from "@/hooks/useAuth";
 import useGetTranslation from "@/hooks/useGetTranslation";
-import { Redirect } from "expo-router";
-import React from "react";
+import { useRouter, useSegments } from "expo-router";
+import React, { useEffect } from "react";
 import { View } from "react-native";
 
 const ProfileScreen = () => {
   const trans = useGetTranslation();
-  const { user, isAuthenticated } = useAuth();
+  const { user, isAuthenticated, setRedirectPath } = useAuth();
+  const segments = useSegments();
+  const router = useRouter();
 
-  if (!isAuthenticated) {
-    return <Redirect href="/(auth)/login" withAnchor={true} />;
-  }
+  useEffect(() => {
+    if (!isAuthenticated) {
+      const fullPath = "/" + segments.join("/");
+      setRedirectPath(fullPath); // store complete path
+      router.replace("/(auth)/login"); // replace with login
+    }
+  }, [isAuthenticated]);
+
+  if (!isAuthenticated) return null;
 
   return (
     <View className="flex-1">

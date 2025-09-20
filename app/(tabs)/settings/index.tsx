@@ -1,11 +1,27 @@
 import Tabs from "@/components/common/tabs/Tabs";
 import ProfileSettings from "@/components/profile/ProfileSettings";
+import { useAuth } from "@/hooks/useAuth";
 import useGetTranslation from "@/hooks/useGetTranslation";
-import React from "react";
+import { useRouter, useSegments } from "expo-router";
+import React, { useEffect } from "react";
 import { View } from "react-native";
 
 const ProfileSettingsScreen = () => {
   const trans = useGetTranslation();
+  const { isAuthenticated, setRedirectPath } = useAuth();
+
+  const segments = useSegments();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      const fullPath = "/" + segments.join("/");
+      setRedirectPath(fullPath); // store complete path
+      router.replace("/(auth)/login"); // replace with login
+    }
+  }, [isAuthenticated]);
+
+  if (!isAuthenticated) return null;
   return (
     <View className="flex-1">
       <Tabs
