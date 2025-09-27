@@ -39,6 +39,7 @@ const Route: React.FC = () => {
       <Stack.Screen name="contact/index" />
       <Stack.Screen name="faq/index" />
       <Stack.Screen name="guidance/index" />
+      <Stack.Screen name="instructions/index" />
     </Stack>
   );
 };

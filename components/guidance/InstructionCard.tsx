@@ -18,11 +18,11 @@ export default function InstructionCard({
   return (
     <View className="bg-purple-50 rounded-lg mb-6">
       {/* Icon Section */}
-      <View className="bg-primary w-full flex justify-center items-center rounded-t-lg">
+      <View className="bg-primary w-full flex justify-center items-center rounded-t-lg py-3">
         <Image
           source={instruction.image}
           resizeMode="contain"
-          className="w-[50px]"
+          className="w-[50px] h-[50px]"
         />
       </View>
 
