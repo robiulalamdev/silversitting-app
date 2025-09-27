@@ -22,6 +22,7 @@ const HeaderDrawer = () => {
   const drawerAnim = useRef(new Animated.Value(300)).current;
 
   const [companyExpanded, setCompanyExpanded] = useState(false);
+  const [childCareExpanded, setChildCareExpanded] = useState(false);
 
   const router = useRouter();
 
@@ -129,12 +130,44 @@ const HeaderDrawer = () => {
 
                 <TouchableOpacity
                   style={styles.menuItem}
-                  onPress={() => handleNavigation("/")}
+                  onPress={() => setChildCareExpanded((prev: boolean) => !prev)}
+                  activeOpacity={0.7}
                 >
-                  <Text style={styles.menuItemText}>
-                    {trans("forChildCarer")}
-                  </Text>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Text style={styles.sectionTitle}>
+                      {trans("forChildCarer")}
+                    </Text>
+                    <MaterialIcons
+                      name={childCareExpanded ? "expand-less" : "expand-more"}
+                      size={22}
+                      color="#666"
+                    />
+                  </View>
                 </TouchableOpacity>
+                {childCareExpanded && (
+                  <View style={{ marginLeft: 16 }}>
+                    <TouchableOpacity
+                      style={styles.menuItem}
+                      onPress={() => handleNavigation("/guidance")}
+                    >
+                      <Text style={styles.menuItemText}>
+                        {trans("guidanceChildCaregiver")}
+                      </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={styles.menuItem}
+                      onPress={() => handleNavigation("/children-provider-faq")}
+                    >
+                      <Text style={styles.menuItemText}>{trans("faq")}</Text>
+                    </TouchableOpacity>
+                  </View>
+                )}
 
                 <TouchableOpacity
                   style={styles.menuItem}
@@ -271,7 +304,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   menuItem: {
-    paddingVertical: 12,
+    paddingVertical: 8,
     paddingHorizontal: 4,
   },
   menuItemText: {

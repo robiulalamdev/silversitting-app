@@ -37,8 +37,7 @@ export default function Feedback() {
   const handleSubmit = async () => {
     if (!firstName || !lastName || !email || !feedbackMessage) {
       toast.show(
-        trans("pleaseCompleteAllRequiredFields") ||
-          "Please complete all required fields",
+        trans("PleaseFillOut") || "Please complete all required fields",
         { type: "danger" }
       );
       return;
