@@ -1,11 +1,9 @@
 import React from "react";
-import { SafeAreaView, StatusBar, Text, View } from "react-native";
+import { SafeAreaView, Text, View } from "react-native";
 
 export default function ChildrenProviderFaq() {
   return (
     <SafeAreaView className="flex-1 bg-gray-50">
-      <StatusBar barStyle="dark-content" />
-
       <View className="flex-1 items-center justify-center px-6">
         <Text className="text-5xl mb-4">⏳</Text>
         <Text className="text-2xl font-bold text-gray-800 text-center">

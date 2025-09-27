@@ -4,7 +4,7 @@ import useGetTranslation from "@/hooks/useGetTranslation";
 import { useGlobal } from "@/hooks/useGlobal";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Animated,
   StyleSheet,
@@ -20,6 +20,8 @@ const HeaderDrawer = () => {
   const { showMenu, handleShowMenu } = useGlobal();
   const { isAuthenticated, onLogout } = useAuth();
   const drawerAnim = useRef(new Animated.Value(300)).current;
+
+  const [companyExpanded, setCompanyExpanded] = useState(false);
 
   const router = useRouter();
 
@@ -46,7 +48,7 @@ const HeaderDrawer = () => {
   };
 
   const handleLogin = () => {
-    router.push("/(auth)/login");
+    router.push("/auth/login");
     handleCloseDrawer();
   };
 
@@ -78,7 +80,52 @@ const HeaderDrawer = () => {
               </View>
 
               <View style={styles.section}>
-                <Text style={styles.sectionTitle}>{trans("company")}</Text>
+                <TouchableOpacity
+                  style={styles.menuItem}
+                  onPress={() => setCompanyExpanded((prev: boolean) => !prev)}
+                  activeOpacity={0.7}
+                >
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Text style={styles.sectionTitle}>{trans("company")}</Text>
+                    <MaterialIcons
+                      name={companyExpanded ? "expand-less" : "expand-more"}
+                      size={22}
+                      color="#666"
+                    />
+                  </View>
+                </TouchableOpacity>
+                {companyExpanded && (
+                  <View style={{ marginLeft: 16 }}>
+                    <TouchableOpacity
+                      style={styles.menuItem}
+                      onPress={() => handleNavigation("/who-we-are")}
+                    >
+                      <Text style={styles.menuItemText}>
+                        {trans("whoWeAreTitle")}
+                      </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={styles.menuItem}
+                      onPress={() => handleNavigation("/blogs")}
+                    >
+                      <Text style={styles.menuItemText}>{trans("blog")}</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={styles.menuItem}
+                      onPress={() => handleNavigation("/feedback")}
+                    >
+                      <Text style={styles.menuItemText}>
+                        {trans("feedback")}
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                )}
 
                 <TouchableOpacity
                   style={styles.menuItem}
@@ -99,7 +146,7 @@ const HeaderDrawer = () => {
                 {isAuthenticated && (
                   <TouchableOpacity
                     style={styles.menuItem}
-                    onPress={() => handleNavigation("/(tabs)/profile")}
+                    onPress={() => handleNavigation("/profile")}
                   >
                     <Text style={styles.menuItemText}>{trans("profile")}</Text>
                   </TouchableOpacity>
@@ -107,7 +154,7 @@ const HeaderDrawer = () => {
 
                 <TouchableOpacity
                   style={styles.menuItem}
-                  onPress={() => handleNavigation("/(tabs)/insights")}
+                  onPress={() => handleNavigation("/insights")}
                 >
                   <Text style={styles.menuItemText}>{trans("insights")}</Text>
                 </TouchableOpacity>
@@ -123,7 +170,7 @@ const HeaderDrawer = () => {
 
                 <TouchableOpacity
                   style={styles.menuItem}
-                  onPress={() => handleNavigation("/(tabs)/legal")}
+                  onPress={() => handleNavigation("/legal")}
                 >
                   <Text style={styles.menuItemText}>{trans("legal")}</Text>
                 </TouchableOpacity>

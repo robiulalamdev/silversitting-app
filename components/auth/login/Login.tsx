@@ -102,7 +102,7 @@ export default function Login({ isPopup = false, onHide = () => {} }: IProps) {
             setRedirectPath(null);
             router.replace(rp as RelativePathString);
           } else {
-            router.replace("/(tabs)");
+            router.replace("/");
           }
         }
       } else if (response.error) {
@@ -127,7 +127,7 @@ export default function Login({ isPopup = false, onHide = () => {} }: IProps) {
   };
 
   return (
-    <KeyboardAvoidingScrollView>
+    <KeyboardAvoidingScrollView reduceHeight={100}>
       <View className="flex-1 bg-white px-6 py-8 justify-center">
         {/* Title */}
         <Text className="text-3xl font-bold text-primary text-center mb-12">
@@ -223,7 +223,7 @@ export default function Login({ isPopup = false, onHide = () => {} }: IProps) {
         {/* Forgot Password Link */}
         <TouchableOpacity
           onPress={() => {
-            router.push("/(auth)/forgot-password");
+            router.push("/auth/forgot-password");
             onHide();
           }}
           className="mb-8"
@@ -287,7 +287,7 @@ export default function Login({ isPopup = false, onHide = () => {} }: IProps) {
           <Text className="text-gray-700 text-base">{trans("newHere")} </Text>
           <TouchableOpacity
             onPress={() => {
-              router.push("/(auth)/register");
+              router.push("/auth/register");
               onHide();
             }}
           >

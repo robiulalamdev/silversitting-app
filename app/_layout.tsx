@@ -1,5 +1,6 @@
 // RootLayout.tsx
 import HeaderDrawer from "@/components/shared/header/HeaderDrawer";
+import BottomTabs from "@/components/shared/tabs/BottomTabs";
 import { COLORS } from "@/constants/theme";
 import i18n, { initializeI18n } from "@/lib/i18n"; // Import the async initialization function
 import Route from "@/navigations/route";
@@ -82,6 +83,7 @@ export default function RootLayout() {
               <StatusBar style="auto" />
               <Route />
               <HeaderDrawer />
+              <BottomTabs />
             </PaperProvider>
           </I18nextProvider>
         </PersistGate>

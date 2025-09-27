@@ -1,20 +1,63 @@
-import React from "react";
-import { SafeAreaView, StatusBar, Text, View } from "react-native";
+import useGetTranslation from "@/hooks/useGetTranslation"; // Import your actual translation hook
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 
 export default function WhoWeAre() {
-  return (
-    <SafeAreaView className="flex-1 bg-gray-50">
-      <StatusBar barStyle="dark-content" />
+  const trans = useGetTranslation();
 
-      <View className="flex-1 items-center justify-center px-6">
-        <Text className="text-5xl mb-4">⏳</Text>
-        <Text className="text-2xl font-bold text-gray-800 text-center">
-          Coming Soon
-        </Text>
-        <Text className="text-center text-gray-500 mt-2">
-          This page is under construction.
-        </Text>
+  return (
+    <ScrollView className="flex-1 bg-white">
+      <View className="p-6">
+        {/* Family Image */}
+        <View className="mb-8">
+          <Image
+            source={require("../../assets/images/whoWeAre/family.png")}
+            style={styles.familyImage}
+            className="w-full rounded-lg"
+            resizeMode="cover"
+          />
+        </View>
+
+        {/* Content Section */}
+        <View className="space-y-8">
+          {/* Who We Are Section */}
+          <View>
+            <Text className="text-3xl font-bold text-gray-800 mb-4">
+              {trans("whoWeAreTitle")}
+            </Text>
+            <Text className="text-base text-gray-700 leading-relaxed mb-8">
+              {trans("whoWeAreContent")}
+            </Text>
+          </View>
+
+          {/* The Origin of the Idea Section */}
+          <View>
+            <Text className="text-3xl font-bold text-gray-800 mb-4">
+              {trans("originOfIdeaTitle")}
+            </Text>
+            <Text className="text-base text-gray-700 leading-relaxed mb-6">
+              {trans("originOfIdeaContent")}
+            </Text>
+            <Text className="text-base text-gray-700 leading-relaxed">
+              {trans("connectingGenerationsContent")}
+            </Text>
+          </View>
+        </View>
       </View>
-    </SafeAreaView>
+    </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  familyImage: {
+    height: 250, // Adjust height as needed
+    borderRadius: 12,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+});

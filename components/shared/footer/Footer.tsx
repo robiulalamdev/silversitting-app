@@ -12,24 +12,25 @@ export default function Footer() {
     { name: trans("imprint"), path: "/imprint" },
     { name: trans("makeContact"), path: "/contact" },
     { name: trans("team"), path: "/who-we-are" },
-    { name: trans("findNanny"), path: "/(tabs)/search" },
+    { name: trans("findNanny"), path: "/search" },
     {
       name: trans("becomeAChildcareWorker"),
-      path: "/(auth)/register?role=childcarer",
+      path: "/auth/register?role=childcarer",
     },
     { name: trans("faqFromChildcareWorkers"), path: "/children-provider-faq" },
+    { name: trans("faqFromParents"), path: "/faq" },
     { name: trans("feedback"), path: "/feedback" },
     {
       name: trans("howDoesItWork"),
-      path: "/(tabs)/insights?section=how-it-works",
+      path: "/insights?section=how-it-works",
     }, // Updated path
-    { name: trans("loginRegistration"), path: "/login" },
-    { name: trans("toTheBlog"), path: "/(tabs)/blogs" },
+    { name: trans("loginRegistration"), path: "/auth/login" },
+    { name: trans("toTheBlog"), path: "/blogs" },
     {
       name: trans("interestingForSeniors"),
-      path: "/(tabs)/insights?section=known",
+      path: "/insights?section=known",
     }, // Updated path
-    // { name: trans("babysitter"), path: "/(tabs)/search" },
+    // { name: trans("babysitter"), path: "/search" },
     // { name: trans("babysitterBerlin"), path: "/child-care", area: "Berlin" },
     // { name: trans("babysitterBonn"), path: "/child-care", area: "Bonn" },
     // {

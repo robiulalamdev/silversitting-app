@@ -5,7 +5,7 @@ import NoSms from "@/components/profile/probox/NoSms";
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter, useSegments } from "expo-router";
 import { useEffect } from "react";
-import { useGetConversationByUserQuery } from "../../../redux/features/chat/chatApi";
+import { useGetConversationByUserQuery } from "../../redux/features/chat/chatApi";
 
 export default function ProBoxScreen() {
   const { user, isAuthenticated, setRedirectPath } = useAuth();
@@ -23,15 +23,11 @@ export default function ProBoxScreen() {
     if (!isAuthenticated) {
       const fullPath = "/" + segments.join("/");
       setRedirectPath(fullPath); // store complete path
-      router.replace("/(auth)/login"); // replace with login
+      router.replace("/auth/login"); // replace with login
     }
   }, [isAuthenticated]);
 
   if (!isAuthenticated) return null;
-
-  // if (!isAuthenticated) {
-  //   return <Redirect href="/(auth)/login" withAnchor={false} />;
-  // }
 
   if (isLoading) {
     return (

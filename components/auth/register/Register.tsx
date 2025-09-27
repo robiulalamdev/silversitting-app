@@ -806,7 +806,7 @@ export default function Register() {
           <Text className="text-white text-lg font-semibold">
             {isResendAllowed
               ? trans("resendActivationLink")
-              : `${trans("sending")} ${countdown}  ${trans("seconds")}`}
+              : `${countdown}  ${trans("seconds")}`}
           </Text>
         )}
       </TouchableOpacity>

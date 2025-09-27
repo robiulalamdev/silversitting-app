@@ -70,7 +70,7 @@ export default function ChangePassword() {
         onLogout();
         // In React Native, you might clear AsyncStorage or other persistent storage here
         // AsyncStorage.removeItem("silverSittingAuth");
-        router.push("/(auth)/login");
+        router.push("/auth/login");
       } else {
         toast.show(
           response?.error?.data?.message || trans("somethingWentWrong"),

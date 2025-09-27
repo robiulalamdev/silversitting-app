@@ -17,7 +17,7 @@ const ChangePasswordScreen = () => {
     if (!isAuthenticated) {
       const fullPath = "/" + segments.join("/");
       setRedirectPath(fullPath); // store complete path
-      router.replace("/(auth)/login"); // replace with login
+      router.replace("/auth/login"); // replace with login
     }
   }, [isAuthenticated]);
 
@@ -29,26 +29,26 @@ const ChangePasswordScreen = () => {
           {
             id: 1,
             label: trans("poBox"),
-            route: "/(tabs)/pro-box",
+            route: "/pro-box",
             slug: "/pro-box",
           },
           {
             id: 2,
             label: trans("profile"),
-            route: "/(tabs)/profile",
+            route: "/profile",
             slug: "/",
             subSlug: "/profile",
           },
           {
             id: 3,
             label: trans("settings"),
-            route: "/(tabs)/settings",
+            route: "/settings",
             slug: "/settings",
           },
           {
             id: 4,
             label: trans("changePassword"),
-            route: "/(tabs)/change-password",
+            route: "/change-password",
             slug: "/change-password",
           },
         ]}

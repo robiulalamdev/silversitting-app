@@ -1,9 +1,10 @@
 import { ASSETS } from "@/constants/assets";
 import { COLORS } from "@/constants/theme";
+import { useAuth } from "@/hooks/useAuth";
 import { useGlobal } from "@/hooks/useGlobal";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import React from "react";
+import React, { useCallback } from "react";
 import {
   Image,
   Pressable,
@@ -13,8 +14,18 @@ import {
 } from "react-native";
 
 export default function Header() {
+  const { setRedirectPath, isAuthenticated } = useAuth();
   const { handleShowMenu } = useGlobal();
   const router = useRouter();
+
+  const handleProBox = useCallback(() => {
+    if (isAuthenticated) {
+      router.push("/pro-box");
+    } else {
+      setRedirectPath("/pro-box"); // store complete path
+      router.push("/auth/login");
+    }
+  }, [isAuthenticated, router, setRedirectPath]);
 
   // const [showSearch, setShowSearch] = useState(false);
   // const searchWidth = useRef(new Animated.Value(0)).current;
@@ -46,7 +57,7 @@ export default function Header() {
       <View style={styles.header}>
         <View style={styles.leftSection}>
           <Pressable
-            onPress={() => router.push("/(tabs)")}
+            onPress={() => router.push("/")}
             style={styles.logoContainer}
           >
             <Image
@@ -86,10 +97,7 @@ export default function Header() {
             </Animated.View>
           )} */}
 
-          <TouchableOpacity
-            onPress={() => router.push("/(tabs)/pro-box")}
-            style={{ marginRight: 20 }}
-          >
+          <TouchableOpacity onPress={handleProBox} style={{ marginRight: 20 }}>
             <MaterialIcons name="message" size={24} color={COLORS.primary} />
           </TouchableOpacity>
 

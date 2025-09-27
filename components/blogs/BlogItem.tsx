@@ -32,7 +32,7 @@ export default function BlogItem({ blog }: BlogCardProps) {
     <TouchableOpacity
       onPress={() =>
         router.push({
-          pathname: `/(tabs)/blogs/[id]`,
+          pathname: `/blogs/[id]`,
           params: {
             id: blog._id,
           },

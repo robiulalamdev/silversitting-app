@@ -10,9 +10,9 @@ interface InfoCardProps {
   description: string;
   linkText: string;
   linkRoute:
-    | "/(tabs)/children-provider-faq/index"
-    | "/(tabs)/who-we-are/index"
-    | "/(tabs)/blogs/index";
+    | "/children-provider-faq/index"
+    | "/who-we-are/index"
+    | "/blogs/index";
   backgroundColor: string;
   iconColor: string;
 }
@@ -72,7 +72,7 @@ export default function HomeAbout() {
         title={trans("About")}
         description={trans("SilverSittingIdea")}
         linkText={trans("SilverSittingLearnMore")}
-        linkRoute="/(tabs)/who-we-are/index"
+        linkRoute="/who-we-are/index"
         backgroundColor="#FCE7F3" // Light pink
         iconColor="#EC4899" // Pink
       />
@@ -81,7 +81,7 @@ export default function HomeAbout() {
         title={trans("News")}
         description={trans("NewsContent")}
         linkText={trans("ToTheNews")}
-        linkRoute="/(tabs)/blogs/index"
+        linkRoute="/blogs/index"
         backgroundColor="#EDE9FE" // Light purple
         iconColor="#8B5CF6" // Purple
       />
@@ -90,7 +90,7 @@ export default function HomeAbout() {
         title={trans("Security")}
         description={trans("SecurityContent")}
         linkText={trans("SafetyLink")}
-        linkRoute="/(tabs)/children-provider-faq/index"
+        linkRoute="/children-provider-faq/index"
         backgroundColor="#E0F7FA" // Light blue/cyan
         iconColor="#00BCD4" // Cyan
       />

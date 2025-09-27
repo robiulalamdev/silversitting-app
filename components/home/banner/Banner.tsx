@@ -23,7 +23,7 @@ export default function Banner() {
 
   const [selectedTab, setSelectedTab] = useState<SelectedTab>("caregiver"); // Default to 'Find Caregiver'
   const [careAddress, setCareAddress] = useState("");
-  const [isAddressEmpty, setIsAddressEmpty] = useState<boolean>(false);
+  // const [isAddressEmpty, setIsAddressEmpty] = useState<boolean>(false);
 
   const backgroundImage =
     selectedTab === "caregiver"
@@ -40,7 +40,7 @@ export default function Banner() {
 
   const handleRegister = () => {
     router.push({
-      pathname: "/(auth)/register",
+      pathname: "/auth/register",
       params: {
         role: "childcarer",
       },
@@ -48,16 +48,16 @@ export default function Banner() {
   };
 
   const handleFindNow = () => {
-    if (careAddress) {
-      router.push({
-        pathname: "/child-care",
-        params: {
-          location: careAddress,
-        },
-      });
-    } else {
-      setIsAddressEmpty(true);
-    }
+    // if (careAddress) {
+    router.push({
+      pathname: "/child-care",
+      params: {
+        location: careAddress,
+      },
+    });
+    // } else {
+    //   setIsAddressEmpty(true);
+    // }
   };
 
   return (
@@ -131,9 +131,9 @@ export default function Banner() {
                 value={careAddress}
                 onChangeText={(v) => {
                   setCareAddress(v);
-                  if (isAddressEmpty) {
-                    setIsAddressEmpty(false);
-                  }
+                  // if (isAddressEmpty) {
+                  //   setIsAddressEmpty(false);
+                  // }
                 }}
                 placeholder={trans("EnterCareAddress")}
                 style={styles.textInput}
@@ -142,9 +142,9 @@ export default function Banner() {
                 textColor="black"
                 placeholderTextColor="black"
               />
-              <Text className="text-red-500 text-sm mt-1">
+              {/* <Text className="text-red-500 text-sm mt-1">
                 {isAddressEmpty && !careAddress && trans("PleaseFillOut")}
-              </Text>
+              </Text> */}
             </View>
 
             {/* Find Now Button */}
@@ -173,7 +173,10 @@ export default function Banner() {
             </TouchableOpacity>
 
             {/* Learn More Link */}
-            <TouchableOpacity style={styles.learnMoreContainer}>
+            <TouchableOpacity
+              onPress={() => router.push("/guidance")}
+              style={styles.learnMoreContainer}
+            >
               <Text style={styles.learnMoreText}> {trans("learnMore")} </Text>
               <MaterialIcons name="arrow-forward" size={16} color="#666" />
             </TouchableOpacity>

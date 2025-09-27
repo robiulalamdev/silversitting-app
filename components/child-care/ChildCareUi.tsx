@@ -152,6 +152,12 @@ export default function ChildCareUi() {
 
   // Initialize city input from router query on mount
   useEffect(() => {
+    if (!location) {
+      dispatch(setChildCarerFilterData([]));
+      dispatch(setStep(0)); // Assuming step 1 or 2 for results
+      setCityInputValue("");
+      return;
+    }
     if (location && typeof location === "string") {
       setCityInputValue(location);
       triggerSearch({ currentCity: location, maxDistance: 0 });

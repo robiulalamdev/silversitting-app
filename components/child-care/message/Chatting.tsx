@@ -177,7 +177,7 @@ export default function ChattingScreen({ receiverId }: IProps) {
   }, [messages]);
 
   if (!isAuthenticated) {
-    return <Redirect href="/(auth)/login" withAnchor={false} />;
+    return <Redirect href="/auth/login" withAnchor={false} />;
   }
 
   const isReceiverOnline = (id: string) => {

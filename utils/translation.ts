@@ -980,6 +980,12 @@ const translations = {
     acceptTermsCondition:
       "Bitte akzeptieren Sie die allgemeinen Geschäftsbedingungen",
     acceptPrivacyPolicy: "Bitte akzeptieren Sie die Datenschutzrichtlinie",
+
+    // for reset/forgot password
+    resetPasswordMsg:
+      "Ihre Anfrage zum Zurücksetzen des Passworts war erfolgreich! Bitte überprüfen Sie Ihren E-Mail-Posteingang, um Ihr Passwort zu ändern.",
+    goHome: "Nach Hause gehen",
+    resetSuccess: "Erfolgreich zurückgesetzt",
   },
 
   en: {
@@ -1943,6 +1949,12 @@ const translations = {
     // for register
     acceptTermsCondition: "Please accept terms and conditions",
     acceptPrivacyPolicy: "Please accept privacy policy",
+
+    // for reset/forgot password
+    resetPasswordMsg:
+      "Your password reset request was successful! Please check your email to change your password.",
+    goHome: "Go home",
+    resetSuccess: "Reset successfully",
   },
 } as const;
 

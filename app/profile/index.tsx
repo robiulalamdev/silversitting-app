@@ -1,15 +1,15 @@
 import Tabs from "@/components/common/tabs/Tabs";
-import ProfileSettings from "@/components/profile/ProfileSettings";
+import ChildCareProfile from "@/components/profile/ChildCareProfile";
+import ParentProfile from "@/components/profile/ParentProfile";
 import { useAuth } from "@/hooks/useAuth";
 import useGetTranslation from "@/hooks/useGetTranslation";
 import { useRouter, useSegments } from "expo-router";
 import React, { useEffect } from "react";
 import { View } from "react-native";
 
-const ProfileSettingsScreen = () => {
+const ProfileScreen = () => {
   const trans = useGetTranslation();
-  const { isAuthenticated, setRedirectPath } = useAuth();
-
+  const { user, isAuthenticated, setRedirectPath } = useAuth();
   const segments = useSegments();
   const router = useRouter();
 
@@ -17,11 +17,12 @@ const ProfileSettingsScreen = () => {
     if (!isAuthenticated) {
       const fullPath = "/" + segments.join("/");
       setRedirectPath(fullPath); // store complete path
-      router.replace("/(auth)/login"); // replace with login
+      router.replace("/auth/login"); // replace with login
     }
   }, [isAuthenticated]);
 
   if (!isAuthenticated) return null;
+
   return (
     <View className="flex-1">
       <Tabs
@@ -29,33 +30,35 @@ const ProfileSettingsScreen = () => {
           {
             id: 1,
             label: trans("poBox"),
-            route: "/(tabs)/pro-box",
+            route: "/pro-box",
             slug: "/pro-box",
           },
           {
             id: 2,
             label: trans("profile"),
-            route: "/(tabs)/profile",
+            route: "/profile",
             slug: "/",
             subSlug: "/profile",
           },
           {
             id: 3,
             label: trans("settings"),
-            route: "/(tabs)/settings",
+            route: "/settings",
             slug: "/settings",
           },
           {
             id: 4,
             label: trans("changePassword"),
-            route: "/(tabs)/change-password",
+            route: "/change-password",
             slug: "/change-password",
           },
         ]}
       />
-      <ProfileSettings />;
+      {user?.role === "parents" && <ParentProfile user={user} />}
+      {user?.role === "childcarer" && <ChildCareProfile user={user} />}
+      {user?.role === "admin" && <ParentProfile user={user} />}
     </View>
   );
 };
 
-export default ProfileSettingsScreen;
+export default ProfileScreen;
