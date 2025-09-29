@@ -200,12 +200,17 @@ export default function Register() {
         });
       }
     } catch (apiError: any) {
-      console.error(trans("somethingWentWrong"), apiError);
-      const errorMessage =
-        apiError.data?.message ||
-        apiError.message ||
-        trans("somethingWentWrong");
-      toast.show(errorMessage, { type: "danger" });
+      if (apiError?.data?.errorType === "EmailExist") {
+        toast.show(trans("emailExist"), { type: "danger" });
+        return;
+      } else {
+        // if(apiError?.data)
+        const errorMessage =
+          apiError.data?.message ||
+          apiError.message ||
+          trans("somethingWentWrong");
+        toast.show(errorMessage, { type: "danger" });
+      }
     }
   };
 

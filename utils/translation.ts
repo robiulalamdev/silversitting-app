@@ -980,6 +980,7 @@ const translations = {
     acceptTermsCondition:
       "Bitte akzeptieren Sie die allgemeinen Geschäftsbedingungen",
     acceptPrivacyPolicy: "Bitte akzeptieren Sie die Datenschutzrichtlinie",
+    emailExist: "E-Mail wird bereits verwendet.",
 
     // for reset/forgot password
     resetPasswordMsg:
@@ -1949,6 +1950,7 @@ const translations = {
     // for register
     acceptTermsCondition: "Please accept terms and conditions",
     acceptPrivacyPolicy: "Please accept privacy policy",
+    emailExist: "Email is already in use.",
 
     // for reset/forgot password
     resetPasswordMsg:

@@ -59,6 +59,9 @@ export default function Login({ isPopup = false, onHide = () => {} }: IProps) {
   });
 
   const handleResendLink = async () => {
+    if (!resendEmail) {
+      return;
+    }
     try {
       const response: any = await sendResendEmail({ email: resendEmail });
       if (response?.data?.success) {
@@ -107,6 +110,12 @@ export default function Login({ isPopup = false, onHide = () => {} }: IProps) {
         }
       } else if (response.error) {
         const errorMessage = response.error.data?.message;
+        if (response?.error?.data?.errorType === "Unverified" && data.email) {
+          setResendErrors(trans("pleaseVerifyYourEmail") || errorMessage);
+          setResendEmail(data.email);
+          toast.show(trans("pleaseVerifyYourEmail"), { type: "danger" });
+          return;
+        }
 
         if (errorMessage === trans("pleaseVerifyYourEmail")) {
           setResendErrors(errorMessage);
@@ -241,7 +250,7 @@ export default function Login({ isPopup = false, onHide = () => {} }: IProps) {
         )}
 
         {/* Resend Email Section */}
-        {resendErrors && (
+        {resendErrors && resendEmail && (
           <View className="mb-6 p-4 bg-red-50 rounded-lg">
             <Text className="text-red-600 text-sm mb-2">{resendErrors}</Text>
             {isResendAllowed ? (
