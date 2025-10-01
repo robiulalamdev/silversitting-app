@@ -1,7 +1,7 @@
 import Tabs from "@/components/common/tabs/Tabs";
 import ProfileSettings from "@/components/profile/ProfileSettings";
+import useGetTranslation from "@/context/TranslationContext";
 import { useAuth } from "@/hooks/useAuth";
-import useGetTranslation from "@/hooks/useGetTranslation";
 import { useRouter, useSegments } from "expo-router";
 import React, { useEffect } from "react";
 import { View } from "react-native";

@@ -1,4 +1,4 @@
-import useGetTranslation from "@/hooks/useGetTranslation";
+import useGetTranslation from "@/context/TranslationContext";
 import { useMakeContactMutation } from "@/redux/features/common/commonApi";
 import { useRouter } from "expo-router";
 import { Controller, useForm } from "react-hook-form";

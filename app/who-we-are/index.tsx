@@ -1,4 +1,4 @@
-import useGetTranslation from "@/hooks/useGetTranslation"; // Import your actual translation hook
+import useGetTranslation from "@/context/TranslationContext"; // Import your actual translation hook
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 
 export default function WhoWeAre() {

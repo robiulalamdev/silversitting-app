@@ -1,4 +1,4 @@
-import useGetTranslation from "@/hooks/useGetTranslation";
+import useGetTranslation from "@/context/TranslationContext";
 import { formatMessageTime } from "@/utils/format/time";
 import { Image, StyleSheet, Text, View } from "react-native";
 

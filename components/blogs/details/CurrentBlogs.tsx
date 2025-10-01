@@ -8,7 +8,7 @@ import {
   View,
 } from "react-native";
 
-import useGetTranslation from "@/hooks/useGetTranslation";
+import useGetTranslation from "@/context/TranslationContext";
 import { useGetAllBlogsQuery } from "../../../redux/features/blog/blogApi";
 import BlogItem from "../BlogItem";
 

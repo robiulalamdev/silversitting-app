@@ -1,5 +1,5 @@
 import InstructionCard from "@/components/guidance/InstructionCard";
-import useGetTranslation from "@/hooks/useGetTranslation";
+import useGetTranslation from "@/context/TranslationContext";
 import { useRouter } from "expo-router";
 import {
   ScrollView,

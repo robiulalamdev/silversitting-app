@@ -1,6 +1,6 @@
 import LanguageSelector from "@/components/common/languages/LanguageSelector";
+import useGetTranslation from "@/context/TranslationContext";
 import { useAuth } from "@/hooks/useAuth";
-import useGetTranslation from "@/hooks/useGetTranslation";
 import { useGlobal } from "@/hooks/useGlobal";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";

@@ -17,8 +17,8 @@ import { TextInput, TouchableRipple } from "react-native-paper";
 import { useToast } from "react-native-toast-notifications";
 
 // ✅ Import translation hook
+import useGetTranslation from "@/context/TranslationContext";
 import { useAuth } from "@/hooks/useAuth";
-import useGetTranslation from "@/hooks/useGetTranslation";
 
 interface LoginFormData {
   email: string;

@@ -1,4 +1,4 @@
-import useGetTranslation from "@/hooks/useGetTranslation";
+import useGetTranslation from "@/context/TranslationContext";
 import { Image, Linking, Text, TouchableOpacity, View } from "react-native";
 
 interface TermsBulletPointProps {

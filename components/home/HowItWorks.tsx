@@ -1,4 +1,4 @@
-import useGetTranslation from "@/hooks/useGetTranslation";
+import useGetTranslation from "@/context/TranslationContext";
 import { StyleSheet, Text, View } from "react-native";
 
 interface StepCardProps {

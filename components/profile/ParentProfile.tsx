@@ -18,7 +18,7 @@ import { useToast } from "react-native-toast-notifications";
 
 // Redux RTK Query imports
 import { BASE_URL } from "@/config";
-import useGetTranslation from "@/hooks/useGetTranslation";
+import useGetTranslation from "@/context/TranslationContext";
 import { IUser } from "@/lib/types/user.type";
 import {
   useEditUserMutation,
