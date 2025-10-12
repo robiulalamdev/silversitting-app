@@ -92,12 +92,14 @@ export default function TermsContent() {
       <Text className="text-2xl font-bold text-primary mb-6">
         {trans("serviceDescriptionTitle")}{" "}
         <TouchableOpacity onPress={handleWebsitePress}>
-          <Text className="text-primary underline">SilverSitting.eu</Text>
+          <Text className="text-2xl font-bold text-primary underline">
+            SilverSitting.eu
+          </Text>
         </TouchableOpacity>
       </Text>
       <View className="mb-15">
-        {trans("serviceDescriptionItems").map((item: string, index: number) => (
-          <TermsBulletPoint key={index}>
+        {[...trans("serviceDescriptionItems")].map((item: string) => (
+          <TermsBulletPoint key={item}>
             <Text className="text-base text-gray-700 leading-relaxed">
               {item}
             </Text>
@@ -280,21 +282,11 @@ export default function TermsContent() {
         {/* Liability List */}
         <View className="ml-7 mb-6">
           <View className="space-y-2">
-            <Text className="text-base text-gray-700">
-              • {trans("liabilityListItem1")}
-            </Text>
-            <Text className="text-base text-gray-700">
-              • {trans("liabilityListItem2")}
-            </Text>
-            <Text className="text-base text-gray-700">
-              • {trans("liabilityListItem3")}
-            </Text>
-            <Text className="text-base text-gray-700">
-              • {trans("liabilityListItem4")}
-            </Text>
-            <Text className="text-base text-gray-700">
-              • {trans("liabilityListItem5")}
-            </Text>
+            {[...trans("liabilityList")].map((item) => (
+              <Text key={item} className="text-base text-gray-700">
+                • {item}
+              </Text>
+            ))}
           </View>
         </View>
 
@@ -306,18 +298,6 @@ export default function TermsContent() {
         <TermsBulletPoint>
           <Text className="text-base text-gray-700 leading-relaxed">
             {trans("liabilityContent5")}
-          </Text>
-        </TermsBulletPoint>
-      </View>
-
-      {/* Third Parties Section */}
-      <Text className="text-2xl font-bold text-primary mb-6">
-        {trans("thirdPartiesTitle")}
-      </Text>
-      <View className="mb-15">
-        <TermsBulletPoint>
-          <Text className="text-base text-gray-700 leading-relaxed">
-            {trans("thirdPartiesContent")}
           </Text>
         </TermsBulletPoint>
       </View>
@@ -373,75 +353,13 @@ export default function TermsContent() {
         {trans("withdrawalTitle")}
       </Text>
       <View className="mb-15">
-        {trans("withdrawalItems").map((item: string, index: number) => (
+        {[...trans("withdrawalItems")].map((item: string, index: number) => (
           <TermsBulletPoint key={index}>
             <Text className="text-base text-gray-700 leading-relaxed">
               {item}
             </Text>
           </TermsBulletPoint>
         ))}
-
-        {/* Cancellation Form Template */}
-        <View className="bg-gray-50 rounded-lg p-4 mt-6">
-          <Text className="text-lg font-semibold text-gray-800 mb-4">
-            {trans("cancellationFormTitle")}
-          </Text>
-          <Text className="text-sm text-gray-600 mb-4">
-            {trans("cancellationFormInstructions")}
-          </Text>
-
-          <View className="space-y-3">
-            <Text className="text-base text-gray-700">-</Text>
-            <Text className="text-base text-gray-700">
-              {trans("cancellationFormAt")}
-            </Text>
-            <Text className="text-base text-gray-700">
-              {trans("cancellationFormCompany")}
-            </Text>
-            <Text className="text-base text-gray-700">
-              {trans("cancellationFormAddress1")}
-            </Text>
-            <Text className="text-base text-gray-700">
-              {trans("cancellationFormAddress2")}
-            </Text>
-            <Text className="text-base text-gray-700">
-              {trans("cancellationFormEmail")}{" "}
-              <TouchableOpacity onPress={handleEmailPress}>
-                <Text className="text-primary underline">
-                  info@silversitting.com
-                </Text>
-              </TouchableOpacity>
-            </Text>
-            <Text className="text-base text-gray-700">-</Text>
-            <Text className="text-base text-gray-700">
-              {trans("cancellationFormRevocation")}
-            </Text>
-            <Text className="text-base text-gray-700">-</Text>
-            <Text className="text-base text-gray-700">
-              {trans("cancellationFormOrdered")}
-            </Text>
-            <Text className="text-base text-gray-700">-</Text>
-            <Text className="text-base text-gray-700">
-              {trans("cancellationFormConsumerName")}
-            </Text>
-            <Text className="text-base text-gray-700">-</Text>
-            <Text className="text-base text-gray-700">
-              {trans("cancellationFormConsumerAddress")}
-            </Text>
-            <Text className="text-base text-gray-700">-</Text>
-            <Text className="text-base text-gray-700">
-              {trans("cancellationFormSignature")}
-            </Text>
-            <Text className="text-base text-gray-700">-</Text>
-            <Text className="text-base text-gray-700">
-              {trans("cancellationFormDate")}
-            </Text>
-            <Text className="text-base text-gray-700">-</Text>
-            <Text className="text-sm text-gray-500 italic mt-4">
-              {trans("cancellationFormNote")}
-            </Text>
-          </View>
-        </View>
 
         <Text className="text-lg font-semibold text-gray-800 mt-8 mb-4">
           {trans("registrationDescription")}

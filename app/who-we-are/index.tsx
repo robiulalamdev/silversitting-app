@@ -10,7 +10,7 @@ export default function WhoWeAre() {
         {/* Family Image */}
         <View className="mb-8">
           <Image
-            source={require("../../assets/images/whoWeAre/family.png")}
+            source={require("../../assets/images/who-we-are/family.png")}
             style={styles.familyImage}
             className="w-full rounded-lg"
             resizeMode="cover"
