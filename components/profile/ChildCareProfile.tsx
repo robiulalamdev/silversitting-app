@@ -230,7 +230,7 @@ export default function ChildCareProfile({ user }: IProps) {
           {/* Image Input */}
           <View className="items-center mb-8">
             <TouchableOpacity
-              onLongPress={handleImagePick}
+              onPress={handleImagePick}
               className="relative w-32 h-32 rounded-full border-2 border-primary justify-center items-center overflow-hidden"
             >
               <Image
@@ -243,7 +243,7 @@ export default function ChildCareProfile({ user }: IProps) {
                 alt="User Profile"
               />
               <TouchableOpacity
-                onLongPress={handleImagePick}
+                onPress={handleImagePick}
                 className="absolute bottom-0 right-0 bg-primary rounded-full p-2"
                 style={styles.cameraIconContainer}
               >

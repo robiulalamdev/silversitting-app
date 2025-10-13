@@ -1,4 +1,4 @@
-import { usePathname, useRouter } from "expo-router";
+import { RelativePathString, usePathname, useRouter } from "expo-router";
 import {
   ScrollView,
   StyleSheet,
@@ -10,9 +10,10 @@ import {
 interface TabItem {
   id: number;
   label: string;
-  route: string;
+  route: RelativePathString;
   slug: string;
   subSlug?: string;
+  isShouldVisible?: boolean;
 }
 
 interface TabsProps {
@@ -23,7 +24,7 @@ export default function Tabs({ tabs }: TabsProps) {
   const router = useRouter();
   const pathname = usePathname();
 
-  const handleTabPress = (route: string) => {
+  const handleTabPress = (route: RelativePathString) => {
     router.push(route);
   };
 
@@ -36,24 +37,26 @@ export default function Tabs({ tabs }: TabsProps) {
       >
         {tabs.map((tab) => {
           const isActive = pathname === tab.slug || pathname === tab?.subSlug;
-          return (
-            <TouchableOpacity
-              key={tab.id}
-              onPress={() => handleTabPress(tab.route)}
-              className={`px-4 py-3 items-center justify-center ${
-                isActive ? "bg-primary" : "bg-white"
-              }`}
-              style={isActive ? styles.activeTab : styles.inactiveTab}
-            >
-              <Text
-                className={`text-base font-semibold ${
-                  isActive ? "text-white" : "text-primary"
+          if (tab?.isShouldVisible) {
+            return (
+              <TouchableOpacity
+                key={tab.id}
+                onPress={() => handleTabPress(tab.route)}
+                className={`px-4 py-3 items-center justify-center ${
+                  isActive ? "bg-primary" : "bg-white"
                 }`}
+                style={isActive ? styles.activeTab : styles.inactiveTab}
               >
-                {tab.label}
-              </Text>
-            </TouchableOpacity>
-          );
+                <Text
+                  className={`text-base font-semibold ${
+                    isActive ? "text-white" : "text-primary"
+                  }`}
+                >
+                  {tab.label}
+                </Text>
+              </TouchableOpacity>
+            );
+          }
         })}
       </ScrollView>
     </View>

@@ -30,8 +30,6 @@ export function formatMessageTime(
   const currentTime = new Date();
   const timeDifference = currentTime.getTime() - parsedTimestamp.getTime();
 
-  // console.log("Time difference in ms:", timeDifference);
-
   const seconds = Math.floor(timeDifference / 1000);
   if (seconds < 60) {
     if (seconds === 1) {
@@ -39,7 +37,6 @@ export function formatMessageTime(
     } else {
       time = trans("secondsAgo", { count: seconds });
     }
-    // console.log("Formatted time (seconds):", time);
     return time;
   }
 
@@ -50,7 +47,6 @@ export function formatMessageTime(
     } else {
       time = trans("minutesAgo", { count: minutes });
     }
-    // console.log("Formatted time (minutes):", time);
     return time;
   }
 
@@ -61,7 +57,6 @@ export function formatMessageTime(
     } else {
       time = trans("hoursAgo", { count: hours });
     }
-    // console.log("Formatted time (hours):", time);
     return time;
   }
 
@@ -72,7 +67,6 @@ export function formatMessageTime(
     } else {
       time = trans("daysAgo", { count: days });
     }
-    // console.log("Formatted time (days):", time);
     return time;
   }
 
@@ -83,7 +77,6 @@ export function formatMessageTime(
     } else {
       time = trans("monthsAgo", { count: months });
     }
-    // console.log("Formatted time (months):", time);
     return time;
   }
 
@@ -93,7 +86,6 @@ export function formatMessageTime(
   } else {
     time = trans("yearsAgo", { count: years });
   }
-  // console.log("Formatted time (years):", time);
 
   return time;
 }

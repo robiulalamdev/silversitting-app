@@ -3,7 +3,7 @@ import ChildCareProfile from "@/components/profile/ChildCareProfile";
 import ParentProfile from "@/components/profile/ParentProfile";
 import useGetTranslation from "@/context/TranslationContext";
 import { useAuth } from "@/hooks/useAuth";
-import { useRouter, useSegments } from "expo-router";
+import { RelativePathString, useRouter, useSegments } from "expo-router";
 import React, { useEffect } from "react";
 import { View } from "react-native";
 
@@ -19,7 +19,7 @@ const ProfileScreen = () => {
       setRedirectPath(fullPath); // store complete path
       router.replace("/auth/login"); // replace with login
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, router, segments, setRedirectPath]);
 
   if (!isAuthenticated) return null;
 
@@ -29,28 +29,32 @@ const ProfileScreen = () => {
         tabs={[
           {
             id: 1,
-            label: trans("poBox"),
-            route: "/pro-box",
+            label: trans("poBox") as string,
+            route: "/pro-box" as RelativePathString,
             slug: "/pro-box",
+            isShouldVisible: true,
           },
           {
             id: 2,
-            label: trans("profile"),
-            route: "/profile",
+            label: trans("profile") as string,
+            route: "/profile" as RelativePathString,
             slug: "/",
             subSlug: "/profile",
+            isShouldVisible: true,
           },
           {
             id: 3,
-            label: trans("settings"),
-            route: "/settings",
+            label: trans("settings") as string,
+            route: "/settings" as RelativePathString,
             slug: "/settings",
+            isShouldVisible: user?.role === "childcarer",
           },
           {
             id: 4,
-            label: trans("changePassword"),
-            route: "/change-password",
+            label: trans("changePassword") as string,
+            route: "/change-password" as RelativePathString,
             slug: "/change-password",
+            isShouldVisible: true,
           },
         ]}
       />

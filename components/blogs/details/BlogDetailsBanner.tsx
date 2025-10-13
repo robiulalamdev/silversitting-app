@@ -52,7 +52,7 @@ export default function BlogDetailsBanner({
             </Text>
           </View>
           <TouchableOpacity
-            onPress={() => console.log("Share pressed")}
+            // onPress={() => console.log("Share pressed")}
             className="flex-row items-center"
           >
             <MaterialIcons

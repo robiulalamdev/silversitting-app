@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 
 export default function GuidanceBanner() {
   const trans = useGetTranslation();
-  const { currentLanguage } = trans;
+  const { currentLanguage }: any = trans;
 
   return (
     <View
@@ -13,7 +13,7 @@ export default function GuidanceBanner() {
       <Text className="text-3xl font-bold text-white text-center mb-6">
         {trans("guidanceBannerTitle")}
         {currentLanguage === "en" && "\n"}
-        {currentLanguage === "de" && " um Kinder kümmern?\n"}
+        {/* {currentLanguage === "de" && " um Kinder kümmern?\n"} */}
         {trans("readHowToBecome")}
       </Text>
       <Text className="text-lg text-purple-200 text-center italic mb-4">
