@@ -7,6 +7,7 @@ interface IInitialState {
     step: number;
     heading: boolean;
   };
+  redirectPath: string;
 }
 
 const initialState: IInitialState = {
@@ -15,13 +16,14 @@ const initialState: IInitialState = {
     step: 1,
     heading: false,
   },
+  redirectPath: "",
 };
 
 const userSlice = createSlice({
   name: "user slice",
   initialState,
   reducers: {
-    setUser: (state, action: { payload: IUser }) => {
+    setUser: (state, action: { payload: IUser | null }) => {
       state.user = action.payload;
     },
 
@@ -42,9 +44,12 @@ const userSlice = createSlice({
         state.registerPage.step = state.registerPage.step + 1;
       }
     },
+    setRedirectPath: (state, action: { payload: string }) => {
+      state.redirectPath = action.payload;
+    },
   },
 });
 
-export const { setUser, setStepControl } = userSlice.actions;
+export const { setUser, setStepControl, setRedirectPath } = userSlice.actions;
 
 export default userSlice.reducer;

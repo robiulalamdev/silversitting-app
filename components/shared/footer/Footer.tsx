@@ -1,5 +1,5 @@
 import useGetTranslation from "@/hooks/useGetTranslation";
-import { useRouter } from "expo-router";
+import { RelativePathString, useRouter } from "expo-router";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 
 export default function Footer() {
@@ -11,29 +11,38 @@ export default function Footer() {
     { name: trans("dataProtection"), path: "/privacy-statement" },
     { name: trans("imprint"), path: "/imprint" },
     { name: trans("makeContact"), path: "/contact" },
-    { name: trans("team"), path: "/whoWeAre" },
-    { name: trans("findNanny"), path: "/child-care" },
-    { name: trans("becomeAChildcareWorker"), path: "#" },
-    { name: trans("faqFromChildcareWorkers"), path: "/ChildrenProviderFaq" },
+    { name: trans("team"), path: "/who-we-are" },
+    { name: trans("findNanny"), path: "/search" },
+    {
+      name: trans("becomeAChildcareWorker"),
+      path: "/auth/register?role=childcarer",
+    },
+    { name: trans("faqFromChildcareWorkers"), path: "/children-provider-faq" },
     { name: trans("faqFromParents"), path: "/faq" },
     { name: trans("feedback"), path: "/feedback" },
-    { name: trans("howDoesItWork"), path: "/#how-it-works" }, // Updated path
-    { name: trans("loginRegistration"), path: "/login" },
+    {
+      name: trans("howDoesItWork"),
+      path: "/insights?section=how-it-works",
+    }, // Updated path
+    { name: trans("loginRegistration"), path: "/auth/login" },
     { name: trans("toTheBlog"), path: "/blogs" },
-    { name: trans("interestingForSeniors"), path: "/#known" }, // Updated path
-    { name: trans("babysitter"), path: "/child-care" },
-    { name: trans("babysitterBerlin"), path: "/child-care", area: "Berlin" },
-    { name: trans("babysitterBonn"), path: "/child-care", area: "Bonn" },
     {
-      name: trans("babysitterDusseldorf"),
-      path: "/child-care",
-      area: "Duesseldorf",
-    },
-    {
-      name: trans("babysitterFrankfurt"),
-      path: "/child-care",
-      area: "Frankfurt",
-    },
+      name: trans("interestingForSeniors"),
+      path: "/insights?section=known",
+    }, // Updated path
+    // { name: trans("babysitter"), path: "/search" },
+    // { name: trans("babysitterBerlin"), path: "/child-care", area: "Berlin" },
+    // { name: trans("babysitterBonn"), path: "/child-care", area: "Bonn" },
+    // {
+    //   name: trans("babysitterDusseldorf"),
+    //   path: "/child-care",
+    //   area: "Duesseldorf",
+    // },
+    // {
+    //   name: trans("babysitterFrankfurt"),
+    //   path: "/child-care",
+    //   area: "Frankfurt",
+    // },
     // { name: trans("babysitterHamburg"), path: "/child-care", area: "Hamburg" },
     // { name: trans("moreCities"), path: "/child-care" },
     // { name: trans("childcare"), path: "/child-care" },
@@ -83,7 +92,7 @@ export default function Footer() {
   ];
 
   const handleLinkPress = (route: string) => {
-    router.push(route);
+    router.push(route as RelativePathString);
   };
 
   const handleCityLinkClick = (city?: string) => {
@@ -108,7 +117,7 @@ export default function Footer() {
     links,
   }: {
     title?: string;
-    links: { name: string; route?: string; area?: string }[];
+    links: { name: string; path?: string; area?: string }[];
   }) => (
     <View className="mb-8 w-full md:w-1/4">
       {title && (
@@ -120,7 +129,7 @@ export default function Footer() {
           onPress={() =>
             link.area
               ? handleCityLinkClick(link.area)
-              : handleLinkPress(link.route || "/")
+              : handleLinkPress(link.path || "/")
           }
           className="py-1"
         >
@@ -155,7 +164,7 @@ export default function Footer() {
           links={routes.slice(8, 12)} // Adjusted slice to match web code's 9-13 (index 8 to 11)
         />
         <LinkSection
-          links={routes.slice(12, 15)} // Adjusted slice to match web code's 13-15 (index 12 to 14)
+          links={routes.slice(12, 14)} // Adjusted slice to match web code's 13-15 (index 12 to 14)
         />
       </View>
 

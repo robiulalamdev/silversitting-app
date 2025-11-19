@@ -1,8 +1,8 @@
-"use client";
-
+import useGetTranslation from "@/hooks/useGetTranslation";
 import { Image, StyleSheet, Text, View } from "react-native";
 
 export default function NoSms() {
+  const trans = useGetTranslation();
   return (
     <View
       className="flex-1 justify-center items-center p-6 bg-white rounded-lg shadow-md"
@@ -13,12 +13,11 @@ export default function NoSms() {
         style={styles.smsIcon}
         resizeMode="contain"
       />
-      <Text className="text-xl font-bold text-gray-800 mt-6 mb-2 text-center">
+      {/* <Text className="text-xl font-bold text-gray-800 mt-6 mb-2 text-center">
         No Messages Yet
-      </Text>
+      </Text> */}
       <Text className="text-gray-600 text-base text-center">
-        You don't have any conversations in your inbox. Start a new chat to
-        connect with others!
+        {trans("Nomessage")}
       </Text>
     </View>
   );

@@ -43,7 +43,7 @@ export default function Pagination({
           key={page}
           onPress={() => setCurrentPage(page)}
           className={`w-8 h-8 rounded-md justify-center items-center ${
-            currentPage === page ? "bg-purple-600" : "bg-gray-200"
+            currentPage === page ? "bg-primary" : "bg-gray-200"
           }`}
         >
           <Text

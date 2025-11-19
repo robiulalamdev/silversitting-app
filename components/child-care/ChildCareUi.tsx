@@ -1,4 +1,4 @@
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
@@ -17,6 +17,7 @@ import ChildCareSearchError from "@/components/child-care/ChildCareSearchError";
 import SearchResult from "@/components/child-care/SearchResult";
 
 import { useAuth } from "@/hooks/useAuth";
+import useGetTranslation from "@/hooks/useGetTranslation";
 import { useGetSearchedChildCarerMutation } from "@/redux/features/childCareSearch/childCareSearchApi";
 import {
   setChildCarerFilterData,
@@ -28,6 +29,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function ChildCareUi() {
+  const trans = useGetTranslation();
   const { location = "" } = useLocalSearchParams();
   const toast = useToast();
   const dispatch = useDispatch();
@@ -47,7 +49,6 @@ export default function ChildCareUi() {
 
   const [getSearchedChildCarer, { isLoading }] =
     useGetSearchedChildCarerMutation();
-  const router = useRouter();
 
   const handleLookFor = (value: "Female" | "Male") => {
     setLookfor((prev) =>
@@ -73,36 +74,28 @@ export default function ChildCareUi() {
 
     if (!currentCity) {
       if (user?.residance) {
-        Alert.alert(
-          "Use Current Location?",
-          "Do you want to use your registered address as the search location?",
-          [
-            {
-              text: "No",
-              style: "cancel",
-              onPress: () => {
-                setSearchError(
-                  "Please enter an address or allow using your registered location."
-                );
-              },
+        Alert.alert("Use Current Location?", trans("useLocationPrompt"), [
+          {
+            text: "No",
+            style: "cancel",
+            onPress: () => {
+              setSearchError(trans("addressPrompt"));
             },
-            {
-              text: "Yes",
-              onPress: () => {
-                dispatch(setCity(user.residance));
-                setCityInputValue(user.residance);
-                currentCity = user.residance;
-                // Re-run search with updated city
-                triggerSearch({ currentCity, maxDistance });
-              },
+          },
+          {
+            text: "Yes",
+            onPress: () => {
+              dispatch(setCity(user.residance));
+              setCityInputValue(user.residance);
+              currentCity = user.residance;
+              // Re-run search with updated city
+              triggerSearch({ currentCity, maxDistance });
             },
-          ]
-        );
+          },
+        ]);
         return; // Exit to wait for user confirmation
       } else {
-        setSearchError(
-          "Please enter an address or log in to use your registered location."
-        );
+        setSearchError(trans("addressLoginPrompt"));
         return;
       }
     }
@@ -140,10 +133,10 @@ export default function ChildCareUi() {
         dispatch(setStep(1)); // Assuming step 1 or 2 for results
       } else if (res?.data?.length === 0) {
         dispatch(setStep("error"));
-      } else if (res?.error?.data?.message === "Distance Exceed") {
+      } else if (res?.error?.data?.message === trans("distanceExceed")) {
         setWarning(true); // This warning is for the input field, not a step change
         toast.show("Search distance cannot exceed 30km.", { type: "warning" });
-      } else if (res?.error?.data?.message === "No matched users") {
+      } else if (res?.error?.data?.message === trans("noMatchedUsers")) {
         dispatch(setStep("error"));
       } else {
         dispatch(setStep("error"));
@@ -159,6 +152,12 @@ export default function ChildCareUi() {
 
   // Initialize city input from router query on mount
   useEffect(() => {
+    if (!location) {
+      dispatch(setChildCarerFilterData([]));
+      dispatch(setStep(0)); // Assuming step 1 or 2 for results
+      setCityInputValue("");
+      return;
+    }
     if (location && typeof location === "string") {
       setCityInputValue(location);
       triggerSearch({ currentCity: location, maxDistance: 0 });
@@ -199,17 +198,17 @@ export default function ChildCareUi() {
       <View className="bg-[#faf6fb] py-12 items-center justify-center mt-5">
         {step === 0 && (
           <Text className="text-3xl font-bold text-primary text-center">
-            Find childcare for your child here
+            {trans("findChildcareTitle")}
           </Text>
         )}
         {(step === 1 || step === 2) && (
           <Text className="text-3xl font-bold text-primary text-center">
-            Search Result
+            {trans("searchResultTitle")}
           </Text>
         )}
         {step === "error" && (
           <Text className="text-3xl font-bold text-primary text-center">
-            Find childcare for your child here
+            {trans("findChildcareTitle")}
           </Text>
         )}
       </View>
@@ -219,7 +218,7 @@ export default function ChildCareUi() {
         <View className="flex-1 p-6">
           <View className="bg-[#fcf9fc] rounded-lg p-6 relative">
             <Text className="text-lg font-semibold text-gray-800 mb-4">
-              I&apos;m looking for
+              {trans("lookingForTitle")}
             </Text>
             <View className="flex-row justify-around mb-6">
               <TouchableOpacity
@@ -237,7 +236,9 @@ export default function ChildCareUi() {
                     <Text className="text-white text-xs text-center">✓</Text>
                   )}
                 </View>
-                <Text className="text-gray-700 text-base">Granny</Text>
+                <Text className="text-gray-700 text-base">
+                  {trans("grannyLabel")}
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => handleLookFor("Male")}
@@ -254,25 +255,30 @@ export default function ChildCareUi() {
                     <Text className="text-white text-xs text-center">✓</Text>
                   )}
                 </View>
-                <Text className="text-gray-700 text-base">Grandpa</Text>
+                <Text className="text-gray-700 text-base">
+                  {trans("grandpaLabel")}
+                </Text>
               </TouchableOpacity>
             </View>
 
             <Text className="text-lg font-semibold text-gray-800 mb-4">
-              Near
+              {trans("nearLabel")}
             </Text>
             <TextInput
               mode="outlined"
               value={cityInputValue}
               onChangeText={setCityInputValue}
-              placeholder="Malchow"
+              // placeholder="Malchow"
               style={styles.textInput}
               outlineStyle={styles.inputOutline}
               contentStyle={styles.inputContent}
               textColor="#000000"
             />
             <View className="flex-row items-center justify-center my-4">
-              <Text className="text-gray-700 text-base">Up to max.</Text>
+              <Text className="text-gray-700 text-base">
+                {" "}
+                {trans("maxDistanceLabel")}{" "}
+              </Text>
               <TextInput
                 mode="outlined"
                 value={distanceInputValue}
@@ -284,49 +290,71 @@ export default function ChildCareUi() {
                 contentStyle={styles.inputContent}
                 textColor="#000000"
               />
-              <Text className="text-gray-700 text-base">km distance</Text>
+              <Text className="text-gray-700 text-base">
+                {" "}
+                {trans("kmDistanceLabel")}
+              </Text>
             </View>
 
             {warning && (
               <View className="mb-4">
                 <Text className="text-red-500 text-sm text-center">
-                  Distance limitation: The maximum search distance is 30km.
+                  {trans("distanceLimitationMessage")}
                 </Text>
                 <Text className="text-red-500 text-sm text-center">
-                  We ask for your understanding.
+                  {trans("understandingMessage")}
                 </Text>
               </View>
             )}
 
             <Text className="text-lg font-semibold text-gray-800 mb-4">
-              I need the following types of care
+              {trans("careTypesTitle")}
             </Text>
+
             <View className="mb-6">
               {[
-                "Babysitting for children from 1 year",
-                "Child care (children from 4 years)",
-                "Homework help classes 1 - 4",
-                "Homework help classes 5 - 7",
-                "Cooking for the child",
-                "Pick-up and delivery services",
+                {
+                  label: trans("classicBabysittingLabel"),
+                  text: trans("classicBabysittingText"),
+                },
+                {
+                  label: trans("childCareLabel1"),
+                  text: trans("childCareText1"),
+                },
+                {
+                  label: trans("homeworkHelpLabel1"),
+                  text: trans("homeworkHelpText1"),
+                },
+                {
+                  label: trans("homeworkHelpLabel2"),
+                  text: trans("homeworkHelpText2"),
+                },
+                {
+                  label: trans("bakingCookingLabel"),
+                  text: trans("bakingCookingText"),
+                },
+                {
+                  label: trans("pickupDeliveryLabel"),
+                  text: trans("pickupDeliveryText"),
+                },
               ].map((offer, index) => (
                 <TouchableOpacity
                   key={index}
-                  onPress={() => handleOfferProvideValue(offer)}
+                  onPress={() => handleOfferProvideValue(offer.label)}
                   className="flex-row items-center py-2"
                 >
                   <View
                     className={`w-5 h-5 border-2 rounded mr-2 ${
-                      offers.includes(offer)
+                      offers.includes(offer.label)
                         ? "bg-primary border-primary"
                         : "border-gray-400"
                     }`}
                   >
-                    {offers.includes(offer) && (
+                    {offers.includes(offer.label) && (
                       <Text className="text-white text-xs text-center">✓</Text>
                     )}
                   </View>
-                  <Text className="text-gray-700 text-base">{offer}</Text>
+                  <Text className="text-gray-700 text-base">{offer.text}</Text>
                 </TouchableOpacity>
               ))}
             </View>
@@ -347,12 +375,12 @@ export default function ChildCareUi() {
                 <View className="flex-row items-center justify-center">
                   <ActivityIndicator color="white" size="small" />
                   <Text className="text-white text-lg font-semibold ml-2">
-                    Searching...
+                    {trans("searchingText")}
                   </Text>
                 </View>
               ) : (
                 <Text className="text-white text-lg font-semibold text-center">
-                  Start search
+                  {trans("startSearch")}
                 </Text>
               )}
             </TouchableOpacity>
@@ -386,19 +414,19 @@ export default function ChildCareUi() {
             // style={styles.formCardShadow}
           >
             <Text className="text-gray-700 text-base text-center pt-5 mb-4">
-              Unfortunately, no childcare providers were found for your current
-              search criteria.
+              {trans("noMatchedUsersMessage")}
             </Text>
             <Text className="text-lg font-semibold text-gray-800 mb-2">
-              Tip:
+              {trans("tipTitle")}
             </Text>
             <Text className="text-gray-600 text-base text-center pb-5 mb-6">
-              Increase your search area or adjust your criteria.{" "}
+              {trans("increaseAreaMessage")}{" "}
               <TouchableOpacity onPress={openModal}>
-                <Text className="text-blue-500 underline">Click here</Text>
+                <Text className="text-blue-500 underline">
+                  {trans("clickHereText")}
+                </Text>
               </TouchableOpacity>{" "}
-              to notify us if you&apos;d like to be informed when new providers
-              become available.
+              {trans("notifyMessage")}
             </Text>
             <TouchableOpacity
               onPress={handleSearchAgain}
@@ -406,7 +434,7 @@ export default function ChildCareUi() {
               style={styles.searchButton}
             >
               <Text className="text-white text-lg font-semibold text-center">
-                Search Again
+                {trans("searchAgainButton")}
               </Text>
             </TouchableOpacity>
           </View>

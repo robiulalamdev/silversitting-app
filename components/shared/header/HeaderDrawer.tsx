@@ -1,9 +1,10 @@
 import LanguageSelector from "@/components/common/languages/LanguageSelector";
 import { useAuth } from "@/hooks/useAuth";
+import useGetTranslation from "@/hooks/useGetTranslation";
 import { useGlobal } from "@/hooks/useGlobal";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Animated,
   StyleSheet,
@@ -14,9 +15,14 @@ import {
 import { Button, Divider } from "react-native-paper";
 
 const HeaderDrawer = () => {
+  const trans = useGetTranslation();
+
   const { showMenu, handleShowMenu } = useGlobal();
   const { isAuthenticated, onLogout } = useAuth();
   const drawerAnim = useRef(new Animated.Value(300)).current;
+
+  const [companyExpanded, setCompanyExpanded] = useState(false);
+  const [childCareExpanded, setChildCareExpanded] = useState(false);
 
   const router = useRouter();
 
@@ -43,7 +49,7 @@ const HeaderDrawer = () => {
   };
 
   const handleLogin = () => {
-    router.push("/(auth)/login");
+    router.push("/auth/login");
     handleCloseDrawer();
   };
 
@@ -75,28 +81,107 @@ const HeaderDrawer = () => {
               </View>
 
               <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Company</Text>
-
                 <TouchableOpacity
                   style={styles.menuItem}
-                  onPress={() => handleNavigation("/")}
+                  onPress={() => setCompanyExpanded((prev: boolean) => !prev)}
+                  activeOpacity={0.7}
                 >
-                  <Text style={styles.menuItemText}>For Child Carer</Text>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Text style={styles.sectionTitle}>{trans("company")}</Text>
+                    <MaterialIcons
+                      name={companyExpanded ? "expand-less" : "expand-more"}
+                      size={22}
+                      color="#666"
+                    />
+                  </View>
                 </TouchableOpacity>
+                {companyExpanded && (
+                  <View style={{ marginLeft: 16 }}>
+                    <TouchableOpacity
+                      style={styles.menuItem}
+                      onPress={() => handleNavigation("/who-we-are")}
+                    >
+                      <Text style={styles.menuItemText}>
+                        {trans("whoWeAreTitle")}
+                      </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={styles.menuItem}
+                      onPress={() => handleNavigation("/blogs")}
+                    >
+                      <Text style={styles.menuItemText}>{trans("blog")}</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={styles.menuItem}
+                      onPress={() => handleNavigation("/feedback")}
+                    >
+                      <Text style={styles.menuItemText}>
+                        {trans("feedback")}
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                )}
+
+                <TouchableOpacity
+                  style={styles.menuItem}
+                  onPress={() => setChildCareExpanded((prev: boolean) => !prev)}
+                  activeOpacity={0.7}
+                >
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Text style={styles.sectionTitle}>
+                      {trans("forChildCarer")}
+                    </Text>
+                    <MaterialIcons
+                      name={childCareExpanded ? "expand-less" : "expand-more"}
+                      size={22}
+                      color="#666"
+                    />
+                  </View>
+                </TouchableOpacity>
+                {childCareExpanded && (
+                  <View style={{ marginLeft: 16 }}>
+                    <TouchableOpacity
+                      style={styles.menuItem}
+                      onPress={() => handleNavigation("/guidance")}
+                    >
+                      <Text style={styles.menuItemText}>
+                        {trans("guidanceChildCaregiver")}
+                      </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={styles.menuItem}
+                      onPress={() => handleNavigation("/children-provider-faq")}
+                    >
+                      <Text style={styles.menuItemText}>{trans("faq")}</Text>
+                    </TouchableOpacity>
+                  </View>
+                )}
 
                 <TouchableOpacity
                   style={styles.menuItem}
                   onPress={() => handleNavigation("/")}
                 >
-                  <Text style={styles.menuItemText}>For Parents</Text>
+                  <Text style={styles.menuItemText}>{trans("forParents")}</Text>
                 </TouchableOpacity>
 
                 {isAuthenticated && (
                   <TouchableOpacity
                     style={styles.menuItem}
-                    onPress={() => handleNavigation("/(profile)")}
+                    onPress={() => handleNavigation("/profile")}
                   >
-                    <Text style={styles.menuItemText}>Profile</Text>
+                    <Text style={styles.menuItemText}>{trans("profile")}</Text>
                   </TouchableOpacity>
                 )}
 
@@ -104,7 +189,7 @@ const HeaderDrawer = () => {
                   style={styles.menuItem}
                   onPress={() => handleNavigation("/insights")}
                 >
-                  <Text style={styles.menuItemText}>Insights</Text>
+                  <Text style={styles.menuItemText}>{trans("insights")}</Text>
                 </TouchableOpacity>
 
                 {isAuthenticated && (
@@ -112,7 +197,7 @@ const HeaderDrawer = () => {
                     style={styles.menuItem}
                     onPress={() => handleNavigation("/settings")}
                   >
-                    <Text style={styles.menuItemText}>Settings</Text>
+                    <Text style={styles.menuItemText}>{trans("settings")}</Text>
                   </TouchableOpacity>
                 )}
 
@@ -120,7 +205,7 @@ const HeaderDrawer = () => {
                   style={styles.menuItem}
                   onPress={() => handleNavigation("/legal")}
                 >
-                  <Text style={styles.menuItemText}>Legal</Text>
+                  <Text style={styles.menuItemText}>{trans("legal")}</Text>
                 </TouchableOpacity>
               </View>
 
@@ -141,7 +226,7 @@ const HeaderDrawer = () => {
                       <MaterialIcons name="logout" size={size} color={color} />
                     )}
                   >
-                    Logout
+                    {trans("logout")}
                   </Button>
                 ) : (
                   <Button
@@ -153,7 +238,7 @@ const HeaderDrawer = () => {
                       <MaterialIcons name="login" size={size} color={color} />
                     )}
                   >
-                    Login
+                    {trans("login")}
                   </Button>
                 )}
               </View>
@@ -219,7 +304,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   menuItem: {
-    paddingVertical: 12,
+    paddingVertical: 8,
     paddingHorizontal: 4,
   },
   menuItemText: {

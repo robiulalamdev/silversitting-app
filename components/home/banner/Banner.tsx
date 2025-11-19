@@ -1,4 +1,5 @@
 import { COLORS } from "@/constants/theme";
+import useGetTranslation from "@/hooks/useGetTranslation";
 import { DIMENSIONS } from "@/utils/getDimensions";
 import { MaterialIcons } from "@expo/vector-icons"; // Using for placeholder icons
 import { BlurView } from "expo-blur";
@@ -18,8 +19,11 @@ type SelectedTab = "caregiver" | "children";
 
 export default function Banner() {
   const router = useRouter();
+  const trans = useGetTranslation();
+
   const [selectedTab, setSelectedTab] = useState<SelectedTab>("caregiver"); // Default to 'Find Caregiver'
   const [careAddress, setCareAddress] = useState("");
+  // const [isAddressEmpty, setIsAddressEmpty] = useState<boolean>(false);
 
   const backgroundImage =
     selectedTab === "caregiver"
@@ -36,7 +40,7 @@ export default function Banner() {
 
   const handleRegister = () => {
     router.push({
-      pathname: "/(auth)/register",
+      pathname: "/auth/register",
       params: {
         role: "childcarer",
       },
@@ -44,14 +48,16 @@ export default function Banner() {
   };
 
   const handleFindNow = () => {
-    if (careAddress) {
-      router.push({
-        pathname: "/child-care",
-        params: {
-          location: careAddress,
-        },
-      });
-    }
+    // if (careAddress) {
+    router.push({
+      pathname: "/child-care",
+      params: {
+        location: careAddress,
+      },
+    });
+    // } else {
+    //   setIsAddressEmpty(true);
+    // }
   };
 
   return (
@@ -72,7 +78,9 @@ export default function Banner() {
         className="border border-primary"
       >
         {/* Title */}
-        <Text style={styles.title}>Seniors take care of children</Text>
+        <Text style={styles.title}>
+          {trans("seniorsTakeCareOf")} {trans("children")}
+        </Text>
 
         {/* Action Buttons */}
         <View style={styles.actionButtonsContainer}>
@@ -90,7 +98,9 @@ export default function Banner() {
                 resizeMode="contain"
               />
             </View>
-            <Text style={styles.actionButtonText}>Find{"\n"}Caregiver</Text>
+            <Text style={styles.actionButtonText}>
+              {trans("findCaregiver")}
+            </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -107,7 +117,7 @@ export default function Banner() {
                 resizeMode="contain"
               />
             </View>
-            <Text style={styles.actionButtonText}>Care{"\n"}children</Text>
+            <Text style={styles.actionButtonText}>{trans("CareChildren")}</Text>
           </TouchableOpacity>
         </View>
 
@@ -119,14 +129,22 @@ export default function Banner() {
               <TextInput
                 mode="outlined"
                 value={careAddress}
-                onChangeText={setCareAddress}
-                placeholder="Enter care address"
+                onChangeText={(v) => {
+                  setCareAddress(v);
+                  // if (isAddressEmpty) {
+                  //   setIsAddressEmpty(false);
+                  // }
+                }}
+                placeholder={trans("EnterCareAddress")}
                 style={styles.textInput}
                 outlineStyle={styles.inputOutline}
                 contentStyle={styles.inputContent}
                 textColor="black"
                 placeholderTextColor="black"
               />
+              {/* <Text className="text-red-500 text-sm mt-1">
+                {isAddressEmpty && !careAddress && trans("PleaseFillOut")}
+              </Text> */}
             </View>
 
             {/* Find Now Button */}
@@ -134,15 +152,14 @@ export default function Banner() {
               style={styles.primaryButton}
               onPress={handleFindNow}
             >
-              <Text style={styles.primaryButtonText}>Find now</Text>
+              <Text style={styles.primaryButtonText}> {trans("findNow")}</Text>
             </TouchableOpacity>
           </>
         ) : (
           <>
             {/* Description Text */}
             <Text style={styles.description}>
-              Take care of children and get compensation from parents if you
-              want.
+              {trans("takeCareAndGetCompensation")}
             </Text>
 
             {/* Register Button */}
@@ -151,13 +168,16 @@ export default function Banner() {
               onPress={handleRegister}
             >
               <Text style={styles.primaryButtonText}>
-                Register as a child carer
+                {trans("registerasChildCarer")}
               </Text>
             </TouchableOpacity>
 
             {/* Learn More Link */}
-            <TouchableOpacity style={styles.learnMoreContainer}>
-              <Text style={styles.learnMoreText}>Learn more</Text>
+            <TouchableOpacity
+              onPress={() => router.push("/guidance")}
+              style={styles.learnMoreContainer}
+            >
+              <Text style={styles.learnMoreText}> {trans("learnMore")} </Text>
               <MaterialIcons name="arrow-forward" size={16} color="#666" />
             </TouchableOpacity>
           </>

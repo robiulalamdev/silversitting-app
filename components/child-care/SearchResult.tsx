@@ -1,5 +1,4 @@
-"use client";
-
+import useGetTranslation from "@/hooks/useGetTranslation";
 import { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useSelector } from "react-redux"; // Assuming Redux setup
@@ -11,6 +10,8 @@ interface SearchResultProps {
 }
 
 export default function SearchResult({ handleSearchAgain }: SearchResultProps) {
+  const trans = useGetTranslation();
+
   // Assuming filterData is available from Redux store
   const { filterData } = useSelector(
     (state: any) => state.childCarerFilter || { filterData: [] }
@@ -34,7 +35,7 @@ export default function SearchResult({ handleSearchAgain }: SearchResultProps) {
           style={styles.searchAgainButton}
         >
           <Text className="text-white text-base font-semibold">
-            Search Again
+            {trans("searchAgainButton")}
           </Text>
         </TouchableOpacity>
       </View>
@@ -45,7 +46,7 @@ export default function SearchResult({ handleSearchAgain }: SearchResultProps) {
         ))
       ) : (
         <Text className="text-center text-gray-600 text-base mt-8">
-          No results found.
+          {trans("saveErrorMessage")}
         </Text>
       )}
 

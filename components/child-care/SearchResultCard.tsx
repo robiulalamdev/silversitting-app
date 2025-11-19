@@ -1,6 +1,7 @@
 "use client";
 
 import { useAuth } from "@/hooks/useAuth";
+import useGetTranslation from "@/hooks/useGetTranslation";
 import { useRouter } from "expo-router";
 import { useCallback, useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -23,6 +24,8 @@ interface SearchResultCardProps {
 export default function SearchResultCard({ item }: SearchResultCardProps) {
   const router = useRouter();
   const { isAuthenticated } = useAuth();
+
+  const trans = useGetTranslation();
 
   const [showLogin, setShowLogin] = useState<boolean>(false);
 
@@ -68,7 +71,7 @@ export default function SearchResultCard({ item }: SearchResultCardProps) {
 
       <View className="">
         <Text className="text-base font-semibold text-primary text-center">
-          Distance
+          {trans("Distance")}
         </Text>
         <Text className="text-gray-600 text-sm text-center">
           {Math.round(item?.measuredDistance)}km
@@ -80,7 +83,9 @@ export default function SearchResultCard({ item }: SearchResultCardProps) {
           onPress={() => handleContact(item?._id)}
           className="bg-primary rounded-lg py-3 px-6 mx-auto mt-4"
         >
-          <Text className="text-white text-base font-semibold">Contact</Text>
+          <Text className="text-white text-base font-semibold">
+            {trans("Contact")}
+          </Text>
         </TouchableOpacity>
 
         <View className="flex-row items-center justify-center gap-2 mt-4">

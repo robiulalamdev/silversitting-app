@@ -1,8 +1,9 @@
 import { Feather, MaterialIcons } from "@expo/vector-icons"; // Using Feather for FiPlus
 import axios from "axios";
 import * as DocumentPicker from "expo-document-picker"; // For PDF selection
-import * as Linking from "expo-linking"; // For opening PDFs
+import * as FileSystem from "expo-file-system";
 import * as Notifications from "expo-notifications"; // For notifications
+import * as Sharing from "expo-sharing";
 import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
@@ -20,6 +21,7 @@ import { useToast } from "react-native-toast-notifications";
 // Redux RTK Query imports
 import { BASE_URL } from "@/config";
 import { useAuth } from "@/hooks/useAuth";
+import useGetTranslation from "@/hooks/useGetTranslation";
 import {
   useChangeSearchStatusMutation,
   useChangeVolunteerStatusMutation,
@@ -27,6 +29,7 @@ import {
 } from "../../redux/features/user/userApi";
 
 export default function ProfileSettings() {
+  const trans = useGetTranslation();
   const toast = useToast();
   const { user } = useAuth();
 
@@ -102,7 +105,7 @@ export default function ProfileSettings() {
 
     // File size check (15 MB limit)
     if (selectedFile.size && selectedFile.size > 15 * 1024 * 1024) {
-      toast.show("File size exceeds 15MB limit!", { type: "danger" });
+      toast.show(trans("fileSizeExceeds"), { type: "danger" });
       return;
     }
 
@@ -142,7 +145,7 @@ export default function ProfileSettings() {
             const percentCompleted = Math.round(
               (progressEvent.loaded * 100) / (progressEvent.total || 1)
             );
-            console.log(`Upload progress: ${percentCompleted}%`);
+            // console.log(`Upload progress: ${percentCompleted}%`);
 
             // Update notification with progress
             if (uploadNotificationId) {
@@ -162,7 +165,7 @@ export default function ProfileSettings() {
       );
 
       if (response.data?.success) {
-        toast.show("Certificate uploaded successfully!", { type: "success" });
+        toast.show(trans("searchStatusUpdated"), { type: "success" });
         refetch();
         setSelectedFile(null); // Clear selected file after successful upload
 
@@ -179,7 +182,7 @@ export default function ProfileSettings() {
           });
         }
       } else {
-        toast.show(response.data?.message || "An error occurred.", {
+        toast.show(response.data?.message || trans("errorOccurred"), {
           type: "danger",
         });
         // Final failure notification
@@ -187,7 +190,7 @@ export default function ProfileSettings() {
           await Notifications.scheduleNotificationAsync({
             content: {
               title: "Upload Failed",
-              body: response.data?.message || "Failed to upload document.",
+              body: response.data?.message || trans("errorOccurred"),
               data: { type: "upload_failed" },
             },
             trigger: null,
@@ -227,13 +230,12 @@ export default function ProfileSettings() {
       data: { parentSearch: !parentSearch }, // If parentSearch is true (checkbox checked), send false (don't want to be found)
     });
     if (res?.data?.success) {
-      toast.show("Search status updated successfully!", { type: "success" });
+      toast.show(trans("searchStatusUpdated"), { type: "success" });
       refetch();
     } else {
-      toast.show(
-        res?.error?.data?.message || "An error occurred. Please try again.",
-        { type: "danger" }
-      );
+      toast.show(res?.error?.data?.message || trans("errorOccurred"), {
+        type: "danger",
+      });
     }
   };
 
@@ -243,32 +245,57 @@ export default function ProfileSettings() {
       data: { isVolunteer: !volunteerStatus }, // Toggle the status
     });
     if (res?.data?.success) {
-      toast.show("Search status updated successfully!", { type: "success" });
+      toast.show(trans("searchStatusUpdated"), { type: "success" });
       refetch();
     } else {
-      toast.show(
-        res?.error?.data?.message || "An error occurred. Please try again.",
-        { type: "danger" }
-      );
+      toast.show(res?.error?.data?.message || trans("errorOccurred"), {
+        type: "danger",
+      });
     }
   };
 
+  // const handleViewPdf = async () => {
+  // if (
+  //   userInfo?.documentStatus === "accepted" ||
+  //   userInfo?.documentStatus === "uploaded"
+  // ) {
+  //   const pdfUrl = `${BASE_URL}/76699e85-918e-4a6e-b135-5b7ffbfa08e3`; // Example URL to fetch the PDF
+  //   try {
+  //     await Linking.openURL(pdfUrl);
+  //   } catch (error) {
+  //     toast.show("Could not open document. Please try again.", {
+  //       type: "danger",
+  //     });
+  //   }
+  // } else {
+  //   toast.show("No document uploaded yet.", { type: "info" });
+  // }
+  // };
+
   const handleViewPdf = async () => {
-    if (
-      userInfo?.documentStatus === "accepted" ||
-      userInfo?.documentStatus === "uploaded"
-    ) {
-      const pdfUrl = `${BASE_URL}/${user?._id}`; // Example URL to fetch the PDF
-      try {
-        await Linking.openURL(pdfUrl);
-      } catch (error) {
-        console.error("Error opening PDF:", error);
-        toast.show("Could not open document. Please try again.", {
-          type: "danger",
-        });
+    try {
+      if (
+        userInfo?.documentStatus === "accepted" ||
+        userInfo?.documentStatus === "uploaded"
+      ) {
+        const pdfUrl = `${BASE_URL}/76699e85-918e-4a6e-b135-5b7ffbfa08e3`;
+        const fileUri = FileSystem.documentDirectory + "myFile.pdf";
+
+        // Download the PDF
+        const { uri } = await FileSystem.downloadAsync(pdfUrl, fileUri);
+
+        // Open with system viewer (Google Drive, iBooks, etc.)
+        if (await Sharing.isAvailableAsync()) {
+          await Sharing.shareAsync(uri);
+        } else {
+          alert("No app available to open PDF on this device.");
+        }
+      } else {
+        toast.show("No document uploaded yet.", { type: "info" });
       }
-    } else {
-      toast.show("No document uploaded yet.", { type: "info" });
+    } catch (error) {
+      console.error("Error opening PDF:", error);
+      alert("Could not open PDF. Please try again.");
     }
   };
 
@@ -294,7 +321,7 @@ export default function ProfileSettings() {
       >
         <View className="rounded-lg p-6 shadow" style={styles.sectionCard}>
           <Text className="text-3xl font-bold text-primary text-center mb-8">
-            Settings
+            {trans("settings")}
           </Text>
 
           {/* File Upload Section */}
@@ -326,7 +353,7 @@ export default function ProfileSettings() {
             {userInfo?.documentStatus === "accepted" && (
               <>
                 <Text className="text-green-600 font-semibold mb-1">
-                  Certificate accepted!
+                  {trans("certificateAccepted")}
                 </Text>
                 {selectedFile ? (
                   <Text className="text-gray-500 text-sm">
@@ -342,7 +369,7 @@ export default function ProfileSettings() {
             {userInfo?.documentStatus === "rejected" && (
               <>
                 <Text className="text-red-600 font-semibold mb-1">
-                  Certificate rejected!
+                  {trans("certificateRejected")}
                 </Text>
                 {selectedFile ? (
                   <Text className="text-gray-500 text-sm">
@@ -372,7 +399,7 @@ export default function ProfileSettings() {
                       className="mr-2"
                     />
                     <Text className="text-white text-base font-semibold">
-                      Select Extended Certificate
+                      {trans("selectExtendedCertificate")}
                     </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
@@ -390,7 +417,7 @@ export default function ProfileSettings() {
                       />
                     ) : (
                       <Text className="text-white text-base font-semibold">
-                        Upload PDF
+                        {trans("uploadPdf")}
                       </Text>
                     )}
                   </TouchableOpacity>
@@ -401,7 +428,7 @@ export default function ProfileSettings() {
                   </Text>
                 ) : (
                   <Text className="text-gray-600 text-sm mb-2">
-                    Only PDF documents are allowed (max 15MB)
+                    {trans("documentsOnly")}
                   </Text>
                 )}
               </>
@@ -420,7 +447,7 @@ export default function ProfileSettings() {
                   className="mr-2"
                 />
                 <Text className="text-primary text-base font-semibold">
-                  View Document
+                  Download
                 </Text>
               </TouchableOpacity>
             )}
@@ -446,7 +473,7 @@ export default function ProfileSettings() {
                   )}
                 </TouchableOpacity>
                 <Text className="text-gray-700 text-base flex-1 leading-snug">
-                  I want to be found by parents
+                  {trans("iDoWantToBeFound")}
                 </Text>
                 <TouchableOpacity
                   onPress={() => setWarningShow(!warningShow)}
@@ -467,7 +494,7 @@ export default function ProfileSettings() {
                   className="mr-2"
                 />
                 <Text className="text-primary text-lg font-semibold">
-                  Saving...
+                  {trans("saving")}
                 </Text>
               </View>
             ) : (
@@ -475,14 +502,15 @@ export default function ProfileSettings() {
                 onPress={handleChangeSearchStatus}
                 className="bg-primary rounded-lg py-4 px-6 flex-row items-center justify-center"
               >
-                <Text className="text-white text-lg font-semibold">Save</Text>
+                <Text className="text-white text-lg font-semibold">
+                  {trans("save")}
+                </Text>
               </TouchableOpacity>
             )}
             {warningShow && (
               <View className="mt-4 p-3 bg-blue-50 rounded-lg">
                 <Text className="text-blue-700 text-sm">
-                  Note: If you deactivate this, your profile will no longer be
-                  displayed in the search results.
+                  {trans("noteNotToBeFound")}
                 </Text>
               </View>
             )}
@@ -508,7 +536,7 @@ export default function ProfileSettings() {
                   )}
                 </TouchableOpacity>
                 <Text className="text-gray-700 text-base flex-1 leading-snug">
-                  I work as a volunteer (without compensation)
+                  {trans("iWorkAsVolunteer")}
                 </Text>
               </View>
             </View>
@@ -520,7 +548,7 @@ export default function ProfileSettings() {
                   className="mr-2"
                 />
                 <Text className="text-primary text-lg font-semibold">
-                  Saving...
+                  {trans("saving")}
                 </Text>
               </View>
             ) : (
@@ -528,7 +556,9 @@ export default function ProfileSettings() {
                 onPress={handleVolunteerStatusChange}
                 className="bg-primary rounded-lg py-4 px-6 flex-row items-center justify-center"
               >
-                <Text className="text-white text-lg font-semibold">Save</Text>
+                <Text className="text-white text-lg font-semibold">
+                  {trans("save")}
+                </Text>
               </TouchableOpacity>
             )}
           </View>

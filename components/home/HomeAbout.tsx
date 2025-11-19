@@ -1,5 +1,6 @@
 "use client";
 
+import useGetTranslation from "@/hooks/useGetTranslation";
 import { useRouter } from "expo-router";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
@@ -63,31 +64,32 @@ function InfoCard({
 }
 
 export default function HomeAbout() {
+  const trans = useGetTranslation();
   return (
     <View className="flex-1 bg-white p-4">
       <InfoCard
         iconSource={require("../../assets/images/home/about/about.png")} // Placeholder for About Us icon
-        title="About us"
-        description="Find out where the idea for Silver Sitting came from and what drives us."
-        linkText="Learn more..."
+        title={trans("About")}
+        description={trans("SilverSittingIdea")}
+        linkText={trans("SilverSittingLearnMore")}
         linkRoute="/who-we-are/index"
         backgroundColor="#FCE7F3" // Light pink
         iconColor="#EC4899" // Pink
       />
       <InfoCard
         iconSource={require("../../assets/images/home/about/news.png")} // Placeholder for About Us icon
-        title="News"
-        description="News, information about childcare, and more."
-        linkText="To the news"
+        title={trans("News")}
+        description={trans("NewsContent")}
+        linkText={trans("ToTheNews")}
         linkRoute="/blogs/index"
         backgroundColor="#EDE9FE" // Light purple
         iconColor="#8B5CF6" // Purple
       />
       <InfoCard
         iconSource={require("../../assets/images/home/about/security.png")} // Placeholder for About Us icon
-        title="Security"
-        description="Your safety is important to us!"
-        linkText="Take care of children safely"
+        title={trans("Security")}
+        description={trans("SecurityContent")}
+        linkText={trans("SafetyLink")}
         linkRoute="/children-provider-faq/index"
         backgroundColor="#E0F7FA" // Light blue/cyan
         iconColor="#00BCD4" // Cyan

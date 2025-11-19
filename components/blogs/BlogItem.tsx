@@ -1,28 +1,8 @@
 import { COLORS } from "@/constants/theme";
+import useGetTranslation from "@/hooks/useGetTranslation";
 import { formatDate } from "@/utils/format/time";
 import { useRouter } from "expo-router";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-
-// Placeholder for translation hook
-const useGetTranslation = () => {
-  const translations: { [key: string]: string } = {
-    ReadMore: "Read More",
-    // Add month translations here if formatDate uses them
-    January: "January",
-    February: "February",
-    March: "March",
-    April: "April",
-    May: "May",
-    June: "June",
-    July: "July",
-    August: "August",
-    September: "September",
-    October: "October",
-    November: "November",
-    December: "December",
-  };
-  return (key: string) => translations[key] || key;
-};
 
 interface BlogCardProps {
   blog: {
@@ -40,7 +20,7 @@ interface BlogCardProps {
 
 export default function BlogItem({ blog }: BlogCardProps) {
   const router = useRouter();
-  const trans = useGetTranslation();
+  const trans: any = useGetTranslation();
   const [day, monthYear] = formatDate(blog.createdAt, trans);
 
   // Function to strip HTML tags from a string

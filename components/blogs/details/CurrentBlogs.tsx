@@ -8,17 +8,9 @@ import {
   View,
 } from "react-native";
 
+import useGetTranslation from "@/hooks/useGetTranslation";
 import { useGetAllBlogsQuery } from "../../../redux/features/blog/blogApi";
 import BlogItem from "../BlogItem";
-
-// Placeholder for translation hook
-const useGetTranslation = () => {
-  const translations: { [key: string]: string } = {
-    Viewall: "View all",
-    CurrentPosts: "Current Posts",
-  };
-  return (key: string) => translations[key] || key;
-};
 
 interface IProps {
   blogDetails: any; // Can be more specific if needed, but not directly used for filtering here

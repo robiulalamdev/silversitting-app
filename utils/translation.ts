@@ -1,23 +1,29 @@
 const translations = {
   de: {
+    startTab: "Start",
+    profileTab: "Profil",
+    searchTab: "suchen",
+    blogTab: "Blogs",
     unknownError: "Es ist ein unbekannter Fehler aufgetreten",
     registering: "Registrierung",
     successMessage:
       "Erfolgreich Suchauftrag angelegt - Sie werden per E-Mail benachrichtigt, sobald es einen Treffer gibt",
     saveErrorMessage: "Fehler beim Speichern des Suchauftrags",
     sendMsg: "Nachricht senden",
+    send: "senden",
     typeMessage: "Nachricht senden an",
     changePassword: "Passwort ändern",
     poBox: "Postfach",
     profile: "Profil",
     settings: "Einstellungen",
+    legal: "Legal",
+    insights: "Einblicke",
     changePassword: "Passwort ändern",
     allUsers: "Alle Benutzer",
     allBlogs: "Alle Blogs",
     allFeedbacks: "Alle Feedbacks",
     contactMessages: "Nachrichten",
     allDocuments: "Alle Dokumente",
-    settings: "Einstellungen",
     selectExtendedCertificate: "Erweitertes Führungszeugnis auswählen",
     uploadPdf: "PDF hochladen",
     uploading: "Hochladen...",
@@ -960,26 +966,52 @@ const translations = {
     interestingForSeniorsDescription:
       "Wege aus der Einsamkeit eV ist ein bundesweit tätiger Verein, der sich für die Verbesserung der Lebensbedingungen älterer Menschen und ihrer Stellung in der Gesellschaft einsetzt.",
     interestingForSeniorsLinkText: "Wege aus der Einsamkeit eV",
+
+    // for login
+    emailRequired: "E-Mail ist erforderlich",
+    invalidEmail: "Ungültige E-Mail-Adresse",
+    passwordRequired: "Passwort ist erforderlich",
+    passwordMinLength: "Passwort muss mindestens 6 Zeichen lang sein",
+    loginFailed: "Anmeldung fehlgeschlagen",
+    loginSuccessful: "Anmeldung erfolgreich",
+    invalidAcPass: "Ungültiger Benutzer oder Passwort",
+
+    // for register
+    acceptTermsCondition:
+      "Bitte akzeptieren Sie die allgemeinen Geschäftsbedingungen",
+    acceptPrivacyPolicy: "Bitte akzeptieren Sie die Datenschutzrichtlinie",
+
+    // for reset/forgot password
+    resetPasswordMsg:
+      "Ihre Anfrage zum Zurücksetzen des Passworts war erfolgreich! Bitte überprüfen Sie Ihren E-Mail-Posteingang, um Ihr Passwort zu ändern.",
+    goHome: "Nach Hause gehen",
+    resetSuccess: "Erfolgreich zurückgesetzt",
   },
 
   en: {
+    startTab: "Start",
+    profileTab: "Profile",
+    searchTab: "Search",
+    blogTab: "Blogs",
+
     unknownError: "An unknown error has occurred",
     registering: "registering",
     successMessage: "Search request created successfully",
     saveErrorMessage: "Error saving search request",
     sendMsg: "Send message",
+    send: "Send",
     typeMessage: "Type a message to",
     changePassword: "Change password",
     poBox: "P.O. Box",
     profile: "Profile",
     settings: "Settings",
-    changePassword: "Change password",
+    legal: "Legal",
+    insights: "Insights",
     allUsers: "All Users",
     allBlogs: "All Blogs",
     allFeedbacks: "All Feedbacks",
     contactMessages: "Contact Messages",
     allDocuments: "All Documents",
-    settings: "Settings",
     selectExtendedCertificate: "Select Extended certificate of good conduct",
     uploadPdf: "Upload PDF",
     uploading: "Uploading...",
@@ -1004,7 +1036,6 @@ const translations = {
     errorUploadingFile: "Error uploading file:",
     viewPdf: "View PDF",
     fetchingPdfs: "Error fetching PDFs",
-    changePassword: "Change password",
     enterNewPassword: "Enter your new password",
     reEnterPassword: "Re-enter password",
     changing: "Changing...",
@@ -1905,6 +1936,25 @@ const translations = {
     interestingForSeniorsDescription:
       "Ways out of loneliness eV is an association that works nationwide to improve the living conditions of old people and their position in society.",
     interestingForSeniorsLinkText: "Ways out of loneliness eV",
+
+    // for login
+    emailRequired: "Email is required",
+    invalidEmail: "Invalid email address",
+    passwordRequired: "Password is required",
+    passwordMinLength: "Password min 6 length",
+    loginFailed: "Login failed",
+    loginSuccessful: "Login successful",
+    invalidAcPass: "Invalid user or password",
+
+    // for register
+    acceptTermsCondition: "Please accept terms and conditions",
+    acceptPrivacyPolicy: "Please accept privacy policy",
+
+    // for reset/forgot password
+    resetPasswordMsg:
+      "Your password reset request was successful! Please check your email to change your password.",
+    goHome: "Go home",
+    resetSuccess: "Reset successfully",
   },
 } as const;
 

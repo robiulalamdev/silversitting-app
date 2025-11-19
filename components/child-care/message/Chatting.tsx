@@ -23,8 +23,10 @@ import {
 import { setConversationId } from "@/redux/features/chat/chatSlice";
 
 // Local components and utilities
+import { KeyboardSpacer } from "@/components/keyboard/KeyboardSpacer";
 import { BASE_URL } from "@/config";
 import { useAuth } from "@/hooks/useAuth";
+import useGetTranslation from "@/hooks/useGetTranslation";
 import { useGetSingleUserQuery } from "@/redux/features/user/userApi";
 import { RootState } from "@/redux/store";
 import { skipToken } from "@reduxjs/toolkit/query";
@@ -38,6 +40,8 @@ interface IProps {
 }
 
 export default function ChattingScreen({ receiverId }: IProps) {
+  const trans = useGetTranslation();
+
   const dispatch = useDispatch();
   const { user, isAuthenticated } = useAuth();
   const { conversationId = "" } = useSelector((state: RootState) => state.chat);
@@ -173,7 +177,7 @@ export default function ChattingScreen({ receiverId }: IProps) {
   }, [messages]);
 
   if (!isAuthenticated) {
-    return <Redirect href="/(auth)/login" withAnchor={false} />;
+    return <Redirect href="/auth/login" withAnchor={false} />;
   }
 
   const isReceiverOnline = (id: string) => {
@@ -337,7 +341,7 @@ export default function ChattingScreen({ receiverId }: IProps) {
         <View className="flex-1 rounded-xl border border-gray-300">
           <TextInput
             multiline
-            placeholder={`Type a message to ${senderInfo?.firstName || ""} ${senderInfo?.lastName || ""}...`}
+            placeholder={`${trans("typeMessage")} ${senderInfo?.firstName || ""} ${senderInfo?.lastName || ""}...`}
             value={inputMessage}
             onChangeText={setInputMessage}
             textColor="#000"
@@ -365,10 +369,13 @@ export default function ChattingScreen({ receiverId }: IProps) {
           {messageLoading ? (
             <ActivityIndicator color="#fff" size="small" />
           ) : (
-            <Text className="text-white font-semibold text-sm">Send</Text>
+            <Text className="text-white font-semibold text-sm">
+              {trans("send")}
+            </Text>
           )}
         </TouchableOpacity>
       </View>
+      <KeyboardSpacer reduceHeight={60} />
     </View>
   );
 }

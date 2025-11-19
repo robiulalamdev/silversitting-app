@@ -1,12 +1,14 @@
 // hooks/useAuth.ts
 import { USER_CONFIG } from "@/config";
-import { setUser } from "@/redux/features/user/userSlice";
+import { IUser } from "@/lib/types/user.type";
+import { setRedirectPath, setUser } from "@/redux/features/user/userSlice";
 import { RootState } from "@/redux/store";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export const useAuth = () => {
-  const user = useSelector((state: RootState) => state.user.user);
+  const { user, redirectPath } = useSelector((state: RootState) => state.user);
+
   const dispatch = useDispatch();
   // You can add more helper functions or derived states here
   const isAuthenticated = !!user;
@@ -16,10 +18,26 @@ export const useAuth = () => {
     dispatch(setUser(null));
   }, [dispatch]);
 
+  const setUserData = useCallback(
+    (user: IUser) => {
+      dispatch(setUser(user));
+    },
+    [dispatch]
+  );
+
+  const setRp = (path: string | null) => {
+    if (path) {
+      dispatch(setRedirectPath(path));
+    }
+  };
+
   return {
     user,
+    setUserData,
     isAuthenticated,
     onLogout,
+    setRedirectPath: setRp,
+    redirectPath,
     // future functions like logout(), refreshToken(), etc.
   };
 };

@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const TOKEN_NAME = "silversitting";
 export const BASE_URL = "https://silversitting.eu";
+// export const BASE_URL = "http://192.168.0.157:8443";
 
 /**
  * Save data to AsyncStorage

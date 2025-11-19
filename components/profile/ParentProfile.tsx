@@ -18,11 +18,13 @@ import { useToast } from "react-native-toast-notifications";
 
 // Redux RTK Query imports
 import { BASE_URL } from "@/config";
+import useGetTranslation from "@/hooks/useGetTranslation";
 import { IUser } from "@/lib/types/user.type";
 import {
   useEditUserMutation,
   useGetSingleUserQuery,
 } from "../../redux/features/user/userApi";
+import { KeyboardSpacer } from "../keyboard/KeyboardSpacer";
 
 // Define types for Redux state
 interface IProps {
@@ -30,6 +32,8 @@ interface IProps {
 }
 
 export default function ParentProfile({ user }: IProps) {
+  const trans = useGetTranslation();
+
   const toast = useToast();
 
   const {
@@ -178,22 +182,25 @@ export default function ParentProfile({ user }: IProps) {
           style={styles.cardShadow}
         >
           <Text className="text-2xl font-bold text-primary text-center mb-4">
-            My Account
+            {trans("myAccount")}
           </Text>
           <Text className="text-gray-700 text-base text-center mb-6">
-            Review and edit your personal information
+            {trans("reviewEditInfo")}
           </Text>
 
           <View className="bg-purple-100 rounded-lg p-4 mb-6">
             <Text className="text-gray-700 text-base">
-              Email For Registration:{" "}
+              {trans("emailForRegistration")}:{" "}
               <Text className="font-semibold">{user?.email}</Text>
             </Text>
           </View>
 
           {/* Image Input */}
           <View className="items-center mb-8">
-            <View className="relative w-32 h-32 rounded-full border-2 border-primary justify-center items-center overflow-hidden">
+            <TouchableOpacity
+              onLongPress={handleImagePick}
+              className="relative w-32 h-32 rounded-full border-2 border-primary justify-center items-center overflow-hidden"
+            >
               <Image
                 className="w-full h-full object-cover"
                 source={
@@ -204,7 +211,7 @@ export default function ParentProfile({ user }: IProps) {
                 alt="User Profile"
               />
               <TouchableOpacity
-                onPress={handleImagePick}
+                onLongPress={handleImagePick}
                 className="absolute bottom-0 right-0 bg-primary rounded-full p-2"
                 style={styles.cameraIconContainer}
               >
@@ -213,14 +220,14 @@ export default function ParentProfile({ user }: IProps) {
                   style={styles.cameraIcon}
                 />
               </TouchableOpacity>
-            </View>
+            </TouchableOpacity>
           </View>
 
           {/* Input Fields */}
-          <View className="space-y-6">
+          <View className="grid grid-cols-1 gap-y-6">
             <View>
               <Text className="text-gray-700 text-base mb-2">
-                First Name <Text className="text-red-500">*</Text>
+                {trans("firstName")} <Text className="text-red-500">*</Text>
               </Text>
               <TextInput
                 mode="outlined"
@@ -235,7 +242,7 @@ export default function ParentProfile({ user }: IProps) {
 
             <View>
               <Text className="text-gray-700 text-base mb-2">
-                Last Name <Text className="text-red-500">*</Text>
+                {trans("lastName")} <Text className="text-red-500">*</Text>
               </Text>
               <TextInput
                 mode="outlined"
@@ -249,7 +256,9 @@ export default function ParentProfile({ user }: IProps) {
             </View>
 
             <View>
-              <Text className="text-gray-700 text-base mb-2">Phone Number</Text>
+              <Text className="text-gray-700 text-base mb-2">
+                {trans("phoneNumber")}
+              </Text>
               <TextInput
                 mode="outlined"
                 value={phoneNumber}
@@ -263,7 +272,9 @@ export default function ParentProfile({ user }: IProps) {
             </View>
 
             <View>
-              <Text className="text-gray-700 text-base mb-2">Street, No</Text>
+              <Text className="text-gray-700 text-base mb-2">
+                {trans("streetNo")}
+              </Text>
               <TextInput
                 mode="outlined"
                 value={streetOrHouseNumber}
@@ -277,7 +288,7 @@ export default function ParentProfile({ user }: IProps) {
 
             <View>
               <Text className="text-gray-700 text-base mb-2">
-                Post Code <Text className="text-red-500">*</Text>
+                {trans("postCode")} <Text className="text-red-500">*</Text>
               </Text>
               <TextInput
                 mode="outlined"
@@ -293,7 +304,7 @@ export default function ParentProfile({ user }: IProps) {
 
             <View>
               <Text className="text-gray-700 text-base mb-2">
-                Location <Text className="text-red-500">*</Text>
+                {trans("location")} <Text className="text-red-500">*</Text>
               </Text>
               <TextInput
                 mode="outlined"
@@ -323,11 +334,12 @@ export default function ParentProfile({ user }: IProps) {
               </View>
             ) : (
               <Text className="text-white text-lg font-semibold text-center">
-                Update
+                {trans("update")}
               </Text>
             )}
           </TouchableOpacity>
         </View>
+        <KeyboardSpacer reduceHeight={220} />
       </ScrollView>
     </KeyboardAvoidingView>
   ) : (

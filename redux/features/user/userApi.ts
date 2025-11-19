@@ -32,17 +32,19 @@ const usersApi = api.injectEndpoints({
             USER_CONFIG.TOKEN_NAME,
             result.data.accessToken
           );
-          dispatch(
-            setUser({
-              _id: result.data.user._id,
-              role: result.data.user.role,
-              firstName: result.data.user.firstName,
-              lastName: result.data.user.lastName,
-              email: result.data.user.email,
-              isVerified: result.data.user.isVerified,
-              residance: result.data.user.residance,
-            })
-          );
+          if (result.data.user) {
+            dispatch(
+              setUser({
+                _id: result.data.user._id,
+                role: result.data.user.role,
+                firstName: result.data.user.firstName,
+                lastName: result.data.user.lastName,
+                email: result.data.user.email,
+                isVerified: result.data.user.isVerified,
+                residance: result.data.user.residance,
+              })
+            );
+          }
         } catch (error) {}
       },
     }),

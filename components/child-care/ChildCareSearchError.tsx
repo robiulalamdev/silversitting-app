@@ -1,5 +1,6 @@
 "use client";
 
+import useGetTranslation from "@/hooks/useGetTranslation";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
@@ -19,6 +20,7 @@ export default function ChildCareSearchError({
   onHide,
   searchOptions,
 }: ChildCareSearchErrorProps) {
+  const trans = useGetTranslation();
   return (
     <Modal
       animationType="fade"
@@ -33,11 +35,10 @@ export default function ChildCareSearchError({
           </TouchableOpacity>
 
           <Text className="text-lg font-bold text-gray-800 mb-4 text-center">
-            No Matched Users
+            {trans("noMatchedUsers")}
           </Text>
           <Text className="text-gray-600 text-base text-center mb-6">
-            Unfortunately, no childcare providers were found for your current
-            search criteria.
+            {trans("searchErrorExplanation1")}
           </Text>
 
           <Text className="text-base font-semibold text-gray-800 mb-2">
