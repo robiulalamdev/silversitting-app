@@ -13,7 +13,7 @@ import {
 import { TextInput } from "react-native-paper";
 import { useToast } from "react-native-toast-notifications";
 
-import useGetTranslation from "@/hooks/useGetTranslation";
+import useGetTranslation from "@/context/TranslationContext";
 import { useResetPasswordMutation } from "@/redux/features/register/registerApi";
 
 export default function ForgotPasswordScreen() {

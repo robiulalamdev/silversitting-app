@@ -1,5 +1,5 @@
 import BlogItem from "@/components/blogs/BlogItem";
-import useGetTranslation from "@/hooks/useGetTranslation";
+import useGetTranslation from "@/context/TranslationContext";
 import { useGetAllBlogsQuery } from "@/redux/features/blog/blogApi";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next"; // Assuming you have react-i18next setup

@@ -1,6 +1,7 @@
 import { COLORS } from "@/constants/theme";
+import useGetTranslation from "@/context/TranslationContext";
 import { useAuth } from "@/hooks/useAuth";
-import useGetTranslation from "@/hooks/useGetTranslation";
+// import useGetTranslation from "@/hooks/useGetTranslation";
 import { Feather, MaterialIcons } from "@expo/vector-icons";
 import { usePathname, useRouter } from "expo-router";
 import React, { memo } from "react";
@@ -27,26 +28,26 @@ const BottomTabs = () => {
       name: "index",
       route: "/",
       icon: <MaterialIcons name="home" size={24} />,
-      label: trans("startTab"),
+      label: trans("startTab") as string,
     },
     {
       name: "profile",
       route: "/profile",
       icon: <MaterialIcons name="person" size={24} />,
-      label: trans("profileTab"),
+      label: trans("profileTab") as string,
       requiresAuth: true,
     },
     {
       name: "search",
       route: "/search",
       icon: <Feather name="search" size={22} />,
-      label: trans("searchTab"),
+      label: trans("searchTab") as string,
     },
     {
       name: "blogs",
       route: "/blogs",
       icon: <MaterialIcons name="article" size={24} />,
-      label: trans("blogTab"),
+      label: trans("blogTab") as string,
     },
   ];
 

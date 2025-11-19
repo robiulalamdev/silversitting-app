@@ -16,8 +16,8 @@ import { useToast } from "react-native-toast-notifications";
 import ChildCareSearchError from "@/components/child-care/ChildCareSearchError";
 import SearchResult from "@/components/child-care/SearchResult";
 
+import useGetTranslation from "@/context/TranslationContext";
 import { useAuth } from "@/hooks/useAuth";
-import useGetTranslation from "@/hooks/useGetTranslation";
 import { useGetSearchedChildCarerMutation } from "@/redux/features/childCareSearch/childCareSearchApi";
 import {
   setChildCarerFilterData,

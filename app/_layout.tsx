@@ -2,6 +2,7 @@
 import HeaderDrawer from "@/components/shared/header/HeaderDrawer";
 import BottomTabs from "@/components/shared/tabs/BottomTabs";
 import { COLORS } from "@/constants/theme";
+import { TranslationProvider } from "@/context/TranslationContext";
 import i18n, { initializeI18n } from "@/lib/i18n"; // Import the async initialization function
 import Route from "@/navigations/route";
 import { useFonts } from "expo-font";
@@ -79,12 +80,14 @@ export default function RootLayout() {
           {/* I18nextProvider is not strictly needed here if i18n is initialized globally,
               but it doesn't hurt and ensures context is available. */}
           <I18nextProvider i18n={i18n}>
-            <PaperProvider>
-              <StatusBar style="auto" />
-              <Route />
-              <HeaderDrawer />
-              <BottomTabs />
-            </PaperProvider>
+            <TranslationProvider>
+              <PaperProvider>
+                <StatusBar style="auto" />
+                <Route />
+                <HeaderDrawer />
+                <BottomTabs />
+              </PaperProvider>
+            </TranslationProvider>
           </I18nextProvider>
         </PersistGate>
       </ToastProvider>

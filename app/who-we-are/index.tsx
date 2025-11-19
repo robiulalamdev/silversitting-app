@@ -1,4 +1,4 @@
-import useGetTranslation from "@/hooks/useGetTranslation"; // Import your actual translation hook
+import useGetTranslation from "@/context/TranslationContext"; // Import your actual translation hook
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 
 export default function WhoWeAre() {
@@ -10,7 +10,7 @@ export default function WhoWeAre() {
         {/* Family Image */}
         <View className="mb-8">
           <Image
-            source={require("../../assets/images/whoWeAre/family.png")}
+            source={require("../../assets/images/who-we-are/family.png")}
             style={styles.familyImage}
             className="w-full rounded-lg"
             resizeMode="cover"

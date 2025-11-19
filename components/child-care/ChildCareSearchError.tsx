@@ -1,6 +1,6 @@
 "use client";
 
-import useGetTranslation from "@/hooks/useGetTranslation";
+import useGetTranslation from "@/context/TranslationContext";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 

@@ -1,7 +1,7 @@
 "use client";
 
+import useGetTranslation from "@/context/TranslationContext";
 import { useAuth } from "@/hooks/useAuth";
-import useGetTranslation from "@/hooks/useGetTranslation";
 import { useRouter } from "expo-router";
 import { useCallback, useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";

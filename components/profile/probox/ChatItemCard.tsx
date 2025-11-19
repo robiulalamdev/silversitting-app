@@ -9,12 +9,9 @@ import {
   View,
 } from "react-native";
 
+import useGetTranslation from "@/context/TranslationContext";
 import { useAuth } from "@/hooks/useAuth";
-import useGetTranslation from "@/hooks/useGetTranslation";
-import {
-  useGetMessageByConversationQuery,
-  usePutMessageSeenMutation,
-} from "@/redux/features/chat/chatApi";
+import { usePutMessageSeenMutation } from "@/redux/features/chat/chatApi";
 import { useGetSingleUserQuery } from "@/redux/features/user/userApi";
 
 interface ChatItemCardProps {
@@ -41,17 +38,20 @@ export default function ChatItemCard({
       skip: !otherUserId,
     });
 
-  const { data: messages, isLoading: messagesLoading } =
-    useGetMessageByConversationQuery(conversationId, {
-      skip: !conversationId,
-      pollingInterval: 5000, // Poll for new messages every 5 seconds for unread count
-    });
+  // const { data: messages } = useGetMessageByConversationQuery(conversationId, {
+  //   skip: !conversationId,
+  //   pollingInterval: 5000, // Poll for new messages every 5 seconds for unread count
+  // });
 
   useEffect(() => {
     if (otherUserInfo) {
       setUserInfo(otherUserInfo);
     }
   }, [otherUserInfo]);
+
+  if (!userInfo?.firstName) {
+    return null;
+  }
 
   const handleSeenMessage = () => {
     if (otherUserId && conversationId) {
@@ -69,9 +69,9 @@ export default function ChatItemCard({
     }
   };
 
-  const unreadMessagesCount =
-    messages?.filter((msg: any) => msg.sender !== user?._id && !msg.seen)
-      .length || 0;
+  // const unreadMessagesCount =
+  //   messages?.filter((msg: any) => msg.sender !== user?._id && !msg.seen)
+  //     .length || 0;
 
   if (otherUserInfoLoading) {
     return (
@@ -85,21 +85,27 @@ export default function ChatItemCard({
     );
   }
 
+  const isImg = userInfo?.image ? true : false;
   return (
     <TouchableOpacity
       onPress={handleChatPress}
       className="p-6 bg-purple-50 rounded-lg shadow-md items-center"
       style={styles.cardShadow}
     >
-      <Image
-        source={
-          userInfo?.image
-            ? { uri: userInfo.image }
-            : require("../../../assets/icons/profile/sms.png")
-        }
-        style={styles.profileImage}
-        className="rounded-full mb-4"
-      />
+      <View
+        style={styles.profileContainer}
+        className="justify-center items-center mb-4 bg-gray-50 border border-gray-200 overflow-hidden"
+      >
+        <Image
+          source={
+            isImg
+              ? { uri: userInfo.image }
+              : require("../../../assets/icons/profile/sms.png")
+          }
+          resizeMode={isImg ? "cover" : "contain"}
+          style={{ ...(isImg && { width: "100%", height: "100%" }) }}
+        />
+      </View>
       <Text className="text-base font-semibold text-primary mb-1">
         {trans("Conversationwith")}
       </Text>
@@ -114,13 +120,13 @@ export default function ChatItemCard({
           style={styles.smsIcon}
           resizeMode="contain"
         />
-        {unreadMessagesCount > 0 && (
+        {/* {unreadMessagesCount > 0 && (
           <View className="absolute -top-2 -right-2 bg-red-500 rounded-full w-6 h-6 justify-center items-center">
             <Text className="text-white text-xs font-bold">
               {unreadMessagesCount} {trans("unreadmessages")}
             </Text>
           </View>
-        )}
+        )} */}
       </View>
     </TouchableOpacity>
   );
@@ -137,10 +143,10 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-  profileImage: {
+  profileContainer: {
     width: 100,
     height: 100,
-    borderRadius: 50, // Make it circular
+    borderRadius: "100%", // Make it circular
   },
   smsIcon: {
     width: 40,

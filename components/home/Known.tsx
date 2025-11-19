@@ -1,4 +1,4 @@
-import useGetTranslation from "@/hooks/useGetTranslation";
+import useGetTranslation from "@/context/TranslationContext";
 import * as Linking from "expo-linking";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 

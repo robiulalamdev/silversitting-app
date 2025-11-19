@@ -18,7 +18,7 @@ import { useToast } from "react-native-toast-notifications";
 
 // Redux RTK Query imports
 import { BASE_URL } from "@/config"; // Assuming BASE_URL is defined here
-import useGetTranslation from "@/hooks/useGetTranslation";
+import useGetTranslation from "@/context/TranslationContext";
 import { IUser } from "@/lib/types/user.type";
 import {
   useEditUserMutation,
@@ -230,7 +230,7 @@ export default function ChildCareProfile({ user }: IProps) {
           {/* Image Input */}
           <View className="items-center mb-8">
             <TouchableOpacity
-              onLongPress={handleImagePick}
+              onPress={handleImagePick}
               className="relative w-32 h-32 rounded-full border-2 border-primary justify-center items-center overflow-hidden"
             >
               <Image
@@ -243,7 +243,7 @@ export default function ChildCareProfile({ user }: IProps) {
                 alt="User Profile"
               />
               <TouchableOpacity
-                onLongPress={handleImagePick}
+                onPress={handleImagePick}
                 className="absolute bottom-0 right-0 bg-primary rounded-full p-2"
                 style={styles.cameraIconContainer}
               >

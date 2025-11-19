@@ -1,4 +1,4 @@
-import useGetTranslation from "@/hooks/useGetTranslation";
+import useGetTranslation from "@/context/TranslationContext";
 import { Stack, useRouter } from "expo-router";
 import { Pressable, Text, View } from "react-native";
 

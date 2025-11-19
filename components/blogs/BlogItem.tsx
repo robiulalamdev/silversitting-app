@@ -1,5 +1,5 @@
 import { COLORS } from "@/constants/theme";
-import useGetTranslation from "@/hooks/useGetTranslation";
+import useGetTranslation from "@/context/TranslationContext";
 import { formatDate } from "@/utils/format/time";
 import { useRouter } from "expo-router";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";

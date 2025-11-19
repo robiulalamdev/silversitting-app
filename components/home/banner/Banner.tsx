@@ -1,5 +1,5 @@
 import { COLORS } from "@/constants/theme";
-import useGetTranslation from "@/hooks/useGetTranslation";
+import useGetTranslation from "@/context/TranslationContext";
 import { DIMENSIONS } from "@/utils/getDimensions";
 import { MaterialIcons } from "@expo/vector-icons"; // Using for placeholder icons
 import { BlurView } from "expo-blur";

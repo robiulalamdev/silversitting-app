@@ -1,11 +1,11 @@
 {
   "expo": {
     "name": "SilverSitting",
-    "slug": "SSapplication",
+    "slug": "ssapp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/brand/icon.png",
-    "scheme": "SSapplication",
+    "scheme": "ssapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -28,7 +28,7 @@
       "permissions": [
         "android.permission.RECORD_AUDIO"
       ],
-      "package": "com.robiulalamdx.SSapplication"
+      "package": "com.robiulalamdx.ssapp"
     },
     "web": {
       "bundler": "metro",
@@ -71,7 +71,7 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "c4cf4aa1-b903-44e0-a67c-c620e2a287af"
+        "projectId": "6fc4b8f3-44fa-4ca7-926b-ac21399d0e8c"
       }
     },
     "runtimeVersion": {

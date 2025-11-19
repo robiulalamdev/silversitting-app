@@ -1,4 +1,4 @@
-import useGetTranslation from "@/hooks/useGetTranslation";
+import useGetTranslation from "@/context/TranslationContext";
 import { MaterialIcons } from "@expo/vector-icons"; // For share icon
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
@@ -52,7 +52,7 @@ export default function BlogDetailsBanner({
             </Text>
           </View>
           <TouchableOpacity
-            onPress={() => console.log("Share pressed")}
+            // onPress={() => console.log("Share pressed")}
             className="flex-row items-center"
           >
             <MaterialIcons

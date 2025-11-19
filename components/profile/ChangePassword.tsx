@@ -13,8 +13,8 @@ import {
 import { TextInput } from "react-native-paper";
 import { useToast } from "react-native-toast-notifications";
 
+import useGetTranslation from "@/context/TranslationContext";
 import { useAuth } from "@/hooks/useAuth";
-import useGetTranslation from "@/hooks/useGetTranslation";
 import { useChangePasswordMutation } from "../../redux/features/user/userApi";
 
 export default function ChangePassword() {
