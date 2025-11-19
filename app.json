@@ -1,0 +1,76 @@
+{
+  "expo": {
+    "name": "SilverSitting",
+    "slug": "ssapp",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/brand/icon.png",
+    "scheme": "ssapp",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/brand/icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "icon": "./assets/brand/icon.png",
+      "edgeToEdgeEnabled": true,
+      "build": {
+        "minify": true,
+        "shrinkResources": true
+      },
+      "permissions": [],
+      "package": "com.robiulalamdx.ssapp"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/brand/icon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-image-picker",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#FFFFFF",
+          "image": "./assets/brand/splash.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "dark": {
+            "backgroundColor": "#FFFFFF",
+            "image": "./assets/brand/splash.png",
+            "resizeMode": "contain"
+          },
+          "android": {
+            "backgroundColor": "#FFFFFF"
+          }
+        }
+      ],
+      "expo-font",
+      "expo-web-browser"
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "6fc4b8f3-44fa-4ca7-926b-ac21399d0e8c"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/6fc4b8f3-44fa-4ca7-926b-ac21399d0e8c"
+    }
+  }
+}
