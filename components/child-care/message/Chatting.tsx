@@ -325,7 +325,9 @@ export default function ChattingScreen({ receiverId }: IProps) {
       {conversationLoading || messagesLoading ? (
         <View className="flex-1 justify-center items-center">
           <ActivityIndicator size="large" color="#8b3888" />
-          <Text className="text-gray-600 mt-2">Loading messages...</Text>
+          <Text className="text-gray-600 mt-2">
+            {trans("loadingMessages") as string}
+          </Text>
         </View>
       ) : (
         <FlatList

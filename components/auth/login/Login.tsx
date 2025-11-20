@@ -58,16 +58,21 @@ export default function Login({ isPopup = false, onHide = () => {} }: IProps) {
     },
   });
 
-  const handleResendLink = async () => {
-    if (!resendEmail) {
+  const handleResendLink = async (email: string = "") => {
+    const emailToUse = email || resendEmail;
+
+    if (!emailToUse) {
       return;
     }
+
     try {
-      const response: any = await sendResendEmail({ email: resendEmail });
+      const response: any = await sendResendEmail({ email: emailToUse });
       if (response?.data?.success) {
-        toast.show(trans("activationLinkSent"), { type: "success" });
-        setIsResendAllowed(false);
-        setResendErrors("");
+        if (!email) {
+          toast.show(trans("activationLinkSent"), { type: "success" });
+          setIsResendAllowed(false);
+          setResendErrors("");
+        }
       } else {
         toast.show(trans("somethingWentWrong"), { type: "danger" });
       }
@@ -112,7 +117,9 @@ export default function Login({ isPopup = false, onHide = () => {} }: IProps) {
         const errorMessage = response.error.data?.message;
         if (response?.error?.data?.errorType === "Unverified" && data.email) {
           setResendErrors(trans("pleaseVerifyYourEmail") || errorMessage);
+          setIsResendAllowed(true);
           setResendEmail(data.email);
+          handleResendLink(data.email);
           toast.show(trans("pleaseVerifyYourEmail"), { type: "danger" });
           return;
         }
@@ -120,6 +127,8 @@ export default function Login({ isPopup = false, onHide = () => {} }: IProps) {
         if (errorMessage === trans("pleaseVerifyYourEmail")) {
           setResendErrors(errorMessage);
           setResendEmail(data.email);
+          setIsResendAllowed(true);
+          handleResendLink(data.email);
         } else if (errorMessage === "Ungültiger Benutzer oder Passwort") {
           setErrors(trans("invalidAcPass"));
         } else {
@@ -255,7 +264,7 @@ export default function Login({ isPopup = false, onHide = () => {} }: IProps) {
             <Text className="text-red-600 text-sm mb-2">{resendErrors}</Text>
             {isResendAllowed ? (
               <TouchableOpacity
-                onPress={handleResendLink}
+                onPress={() => handleResendLink()}
                 disabled={sendingEmail}
               >
                 <Text className="text-primary font-semibold">

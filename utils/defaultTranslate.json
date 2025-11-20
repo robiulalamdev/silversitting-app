@@ -731,7 +731,8 @@
         "checkEmailToResetPassword": "Bitte überprüfe deine E-Mails und folge dem Link, um dein Passwort zurückzusetzen.",
         "payloadInvalid": "Ungültige Anfragedaten.",
         "serverError": "Serverfehler. Bitte versuche es später erneut.",
-        "operationFailed": "Vorgang fehlgeschlagen. Bitte versuche es erneut!"
+        "operationFailed": "Vorgang fehlgeschlagen. Bitte versuche es erneut!",
+        "loadingMessages": "Nachrichten werden geladen..."
     },
     "en": {
         "startTab": "Start",
@@ -1465,6 +1466,7 @@
         "checkEmailToResetPassword": "Please check your email and follow the link to reset your password.",
         "payloadInvalid": "Invalid request data.",
         "serverError": "Server error. Please try again later.",
-        "operationFailed": "Operation failed. Please try again!"
+        "operationFailed": "Operation failed. Please try again!",
+        "loadingMessages": "Loading messages..."
     }
 }
